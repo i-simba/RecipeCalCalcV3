@@ -24,6 +24,9 @@ namespace RecipeCalCalcV3.Models
         private int calories;    // Calories contained within the set weight.
         private int weight;      // Weight of ingredient related to calories.
 
+        private double calculatedCal;    // The total calculated calories for an ingredient based on its entered weight.
+        private double enteredWeight;    // The entered weight of a given ingredient and will be used to calculate 'calculatedCal'.
+
         /**
          * Constructor - String, String, Int, Int.
          * 
@@ -38,6 +41,9 @@ namespace RecipeCalCalcV3.Models
             this.type = t;
             this.calories = c;
             this.weight = w;
+
+            this.calculatedCal = 0;
+            this.enteredWeight = 0;
         }
 
         /**
@@ -131,6 +137,46 @@ namespace RecipeCalCalcV3.Models
         public void setWeight(int w)
         {
             this.weight = w;
+        }
+
+        /**
+         * Getter for 'calculatedCal'.
+         * 
+         * @return 'calculatedCal'.
+         */
+        public double getCalculatedCal()
+        {
+            return this.calculatedCal;
+        }
+
+        /**
+         * Setter for 'calculatedCal'.
+         * 
+         * @param c assigned to 'calculatedCal'.
+         */
+        public void setCalculatedCal(double c)
+        {
+            this.calculatedCal = c;
+        }
+
+        /**
+         * Getter for 'enteredWeight'.
+         * 
+         * @return 'enteredWeight'.
+         */
+        public double getEnteredWeight()
+        {
+            return this.enteredWeight;
+        }
+
+        /**
+         * Setter for 'enteredWeight'.
+         * 
+         * @param e assigned to 'enteredWeight'.
+         */
+        public void setEnteredWeight(double e)
+        {
+            this.enteredWeight = e;
         }
     }
 }
