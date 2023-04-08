@@ -19,10 +19,10 @@ namespace RecipeCalCalcV3.Models
 {
     internal class Ingredient
     {
-        private String name;     // Name of ingredient.
-        private String type;     // Type of ingredient - Protein, Vegetable, etc.
-        private int calories;    // Calories contained within the set weight.
-        private int weight;      // Weight of ingredient related to calories.
+        private String name;             // Name of ingredient.
+        private String type;             // Type of ingredient - Protein, Vegetable, etc.
+        private int calories;            // Calories contained within the set weight.
+        private int weight;              // Weight of ingredient related to calories.
 
         private double calculatedCal;    // The total calculated calories for an ingredient based on its entered weight.
         private double enteredWeight;    // The entered weight of a given ingredient and will be used to calculate 'calculatedCal'.
@@ -42,8 +42,8 @@ namespace RecipeCalCalcV3.Models
             this.calories = c;
             this.weight = w;
 
-            this.calculatedCal = 0;
-            this.enteredWeight = 0;
+            this.calculatedCal = 0.0;
+            this.enteredWeight = 0.0;
         }
 
         /**
