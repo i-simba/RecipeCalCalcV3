@@ -1,4 +1,14 @@
-﻿using System;
+﻿/**
+ * Log is a class that contains information about a recipe's ingredients.
+ * Each ingredient will contain an entered weight and the corresponding calorie count.
+ * Totals will also be contianed within this class, totals include:
+ * Raw Weight, Entre Calories, Base Calories, etc.
+ * 
+ * @author Ivan Simbulan
+ * Recipe Calculator v3 - April 2023
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
