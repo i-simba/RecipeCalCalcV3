@@ -118,5 +118,209 @@ namespace RecipeCalCalcV3.Models
             this.portionWeight = pW;
             this.portionCalories = pC;
         }
+
+        /**
+         * TODO: toString().
+         */
+
+        /**
+         * Getter for 'name'.
+         * 
+         * @return 'name'.
+         */
+        public String getName()
+        {
+            return this.name;
+        }
+
+        /**
+         * Setter for 'name'.
+         * 
+         * @param n assigned to 'name'.
+         */
+        public void setName(String n)
+        {
+            this.name = n;
+        }
+
+        /**
+         * Getter for 'recipeName'.
+         * 
+         * @return 'recipeName'.
+         */
+        public String getRecipeName()
+        {
+            return this.recipeName;
+        }
+
+        /**
+         * Setter for 'recipeName'.
+         * 
+         * @param rN assigned to 'recipeName'.
+         */
+        public void setRecipeName(String rN)
+        {
+            this.recipeName = rN;
+        }
+
+        /**
+         * Getter for 'rawEntreWeight'.
+         * 
+         * @return 'rawEntreWeight'.
+         */
+        public double getRawEntreWeight()
+        {
+            return this.rawEntreWeight;
+        }
+
+        /**
+         * Setter for 'rawEntreWeight'.
+         * 
+         * @param eW assigned to 'rawEntreWeight'.
+         */
+        public void setRawEntreWeight(double eW)
+        {
+            this.rawEntreWeight = eW;
+        }
+
+        /**
+         * Getter for 'baseIngWeight'.
+         * 
+         * @return 'baseIngWeight'.
+         */
+        public double getBaseIngWeight()
+        {
+            return this.baseIngWeight;
+        }
+
+        /**
+         * Setter for 'baseIngWeight'.
+         * 
+         * @param bW assigned to 'baseIngWeight'.
+         */
+        public void setBaseIngWeight(double bW)
+        {
+            this.baseIngWeight = bW;
+        }
+
+        /**
+         * Getter for 'entreCalories'.
+         * 
+         * @return 'entreCalories'.
+         */
+        public double getEntreCalories()
+        {
+            return this.entreCalories;
+        }
+
+        /**
+         * Setter for 'entreCalories'.
+         * 
+         * @param eC assigned to 'entreCalories'.
+         */
+        public void setEntreCalories(double eC)
+        {
+            this.entreCalories = eC;
+        }
+
+        /**
+         * Getter for 'baseCalories'.
+         * 
+         * @return 'baseCalories'.
+         */
+        public double getBaseCalories()
+        {
+            return this.baseCalories;
+        }
+
+        /**
+         * Setter for 'baseCalories'.
+         * 
+         * @param bC assigned to 'baseCalories'.
+         */
+        public void setBaseCalories(double bC)
+        {
+            this.baseCalories = bC;
+        }
+
+        /**
+         * Getter for 'totalCalories'.
+         * 
+         * @return 'totalCalories'.
+         */
+        public double getTotalCalories()
+        {
+            return this.totalCalories;
+        }
+
+        /**
+         * Setter for 'totalCalories'.
+         * 
+         * @param tC assigned to 'totalCalories'.
+         */
+        public void setTotalCalories(double tC)
+        {
+            this.totalCalories = tC;
+        }
+
+        /**
+         * Getter for 'cookedWeight'.
+         * 
+         * @return 'cookedWeight'.
+         */
+        public double getCookedWeight()
+        {
+            return this.cookedWeight;
+        }
+
+        /**
+         * Setter for 'cookedWeight'.
+         * 
+         * @param cW assigned to 'cookedWeight'.
+         */
+        public void setCookedWeight(double cW)
+        {
+            this.cookedWeight = cW;
+        }
+
+        /**
+         * Getter for 'portionWeight'.
+         * 
+         * @return 'portionWeight'.
+         */
+        public double getPortionWeight()
+        {
+            return this.portionWeight;
+        }
+
+        /**
+         * Setter for 'portionWeight'.
+         * 
+         * @param pW assigned to 'portionWeight'.
+         */
+        public void setPortionWeight(double pW)
+        {
+            this.portionWeight = pW;
+        }
+
+        /**
+         * Getter for 'portionCalories'.
+         * 
+         * @return 'portionCalories'.
+         */
+        public double getPortionCalories()
+        {
+            return this.portionCalories;
+        }
+
+        /**
+         * Setter for 'portionCalories'.
+         * 
+         * @param pC assigned to 'portionCalories'.
+         */
+        public void setPortionCalories(double pC)
+        {
+            this.portionCalories = pC;
+        }
     }
 }
