@@ -1,8 +1,11 @@
 ﻿using RecipeCalCalcV3.Models;
+using RecipeCalCalcV3.Properties;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Management.Instrumentation;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,6 +18,7 @@ namespace RecipeCalCalcV3
         /************************************************/
         public static List<Ingredient> ingredients = null;                   // Ingredient List that holds added ingredients.
         public const String ingredientPath = ".\\Ingredients\\";             // Path to the directory 'Ingredients'.
+        public const String ingredientImgPath = ".\\Images\\";               // Path to the directory 'Images'.
         public const String proteinPath = ingredientPath + "protein.csv";    // Path to the csv file 'protein.csv'.
         public const String veggiePath = ingredientPath + "veggie.csv";      // Path to the csv file 'veggie.csv'.
         public const String liquidPath = ingredientPath + "liquids.csv";     // Path to the csv file 'liquids.csv'.
@@ -73,6 +77,8 @@ namespace RecipeCalCalcV3
                     Convert.ToInt32(ingDetails[1]),     // Calories.
                     Convert.ToInt32(ingDetails[2]));    // Weight.
                 ingredients.Add(temp);
+                Image pic = Image.FromFile(ingredientImgPath + temp.getName() + ".png");
+                temp.setImage(pic);
             }
             reader.Close();
         }
@@ -87,6 +93,10 @@ namespace RecipeCalCalcV3
             if (!Directory.Exists(ingredientPath))
             {
                 Directory.CreateDirectory(ingredientPath);
+            }
+            if (!Directory.Exists(ingredientImgPath))
+            {
+                Directory.CreateDirectory (ingredientImgPath);
             }
             if (!File.Exists(proteinPath))
             {
