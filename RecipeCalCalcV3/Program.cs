@@ -66,16 +66,17 @@ namespace RecipeCalCalcV3
             reader = new StreamReader(path);
             while (!reader.EndOfStream)
             {
-                // CSV file format is as follows - Name, Calories, Weight.
+                // CSV file format is as follows - Name, Tool Tip Name, Calories, Weight.
                 line = reader.ReadLine();        // Read line from csv.
                 ingDetails = line.Split(',');    // Tokenize line.
                 
                 // Create Ingredient object and add to appropriate List.
                 Ingredient temp = new Ingredient(
                     ingDetails[0],                      // Name.
+                    ingDetails[1],                      // Tool Tip Name.
                     type,                               // Type.
-                    Convert.ToInt32(ingDetails[1]),     // Calories.
-                    Convert.ToInt32(ingDetails[2]));    // Weight.
+                    Convert.ToInt32(ingDetails[2]),     // Calories.
+                    Convert.ToInt32(ingDetails[3]));    // Weight.
                 ingredients.Add(temp);
                 Image pic = Image.FromFile(ingredientImgPath + temp.getName() + ".png");
                 temp.setImage(pic);

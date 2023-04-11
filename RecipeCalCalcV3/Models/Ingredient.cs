@@ -20,7 +20,8 @@ namespace RecipeCalCalcV3.Models
 {
     internal class Ingredient
     {
-        private String name;             // Name of ingredient.
+        private String name;             // Name of ingredient - Used to match with corresponding image file's name.
+        private String tipName;          // Name displayed on the tooltip as the mouse hovers over an ingredient button.
         private String type;             // Type of ingredient - Protein, Vegetable, etc.
         private int calories;            // Calories contained within the set weight.
         private int weight;              // Weight of ingredient related to calories.
@@ -34,13 +35,15 @@ namespace RecipeCalCalcV3.Models
          * Constructor - String, String, Int, Int.
          * 
          * @param n assigned to 'name'.
+         * @param tn assigned to 'tipName'.
          * @param t assigned to 'type'.
          * @param c assigned to 'calories'.
          * @param w assigned to 'weight'.
          */
-        public Ingredient(String n, String t, int c, int w)
+        public Ingredient(String n, String tn, String t, int c, int w)
         {
             this.name = n;
+            this.tipName = tn;
             this.type = t;
             this.calories = c;
             this.weight = w;
@@ -81,6 +84,26 @@ namespace RecipeCalCalcV3.Models
         {
             this.name = n;
         }
+                
+        /**
+         * Getter for 'tipName'.
+         * 
+         * @return 'tipName'.
+         */
+        public String getTipName()
+        {
+            return this.tipName;
+        }
+
+        /**
+         * Setter for 'tipName'.
+         * 
+         * @param tn assigned to 'tipName'.
+         */
+        public void setTipName(String tn)
+        {
+            this.tipName = tn;
+        }
 
         /**
          * Getter for 'type'.
@@ -107,6 +130,7 @@ namespace RecipeCalCalcV3.Models
          * 
          * @return 'calories'.
          */
+
         public int getCalories()
         {
             return this.calories;
@@ -127,6 +151,7 @@ namespace RecipeCalCalcV3.Models
          * 
          * @return 'weight'.
          */
+
         public int getWeight()
         {
             return this.weight;
@@ -137,6 +162,7 @@ namespace RecipeCalCalcV3.Models
          * 
          * @param w assigned to 'weight'.
          */
+
         public void setWeight(int w)
         {
             this.weight = w;
@@ -147,6 +173,7 @@ namespace RecipeCalCalcV3.Models
          * 
          * @return 'calculatedCal'.
          */
+
         public double getCalculatedCal()
         {
             return this.calculatedCal;
@@ -157,6 +184,7 @@ namespace RecipeCalCalcV3.Models
          * 
          * @param c assigned to 'calculatedCal'.
          */
+
         public void setCalculatedCal(double c)
         {
             this.calculatedCal = c;
@@ -167,6 +195,7 @@ namespace RecipeCalCalcV3.Models
          * 
          * @return 'enteredWeight'.
          */
+
         public double getEnteredWeight()
         {
             return this.enteredWeight;
@@ -177,6 +206,7 @@ namespace RecipeCalCalcV3.Models
          * 
          * @param e assigned to 'enteredWeight'.
          */
+
         public void setEnteredWeight(double e)
         {
             this.enteredWeight = e;
