@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,8 @@ namespace RecipeCalCalcV3.Models
 
         private double calculatedCal;    // The total calculated calories for an ingredient based on its entered weight.
         private double enteredWeight;    // The entered weight of a given ingredient and will be used to calculate 'calculatedCal'.
+
+        private Image img;               // Associated image file for ingredient.
 
         /**
          * Constructor - String, String, Int, Int.
@@ -177,6 +180,26 @@ namespace RecipeCalCalcV3.Models
         public void setEnteredWeight(double e)
         {
             this.enteredWeight = e;
+        }
+
+        /**
+         * Getter for 'img'.
+         * 
+         * @return 'img'.
+         */
+        public Image getImage()
+        {
+            return this.img;
+        }
+
+        /*
+         * Setter for 'img'.
+         * 
+         * @param i assigned to 'img'.
+         */
+        public void setImage(Image i)
+        {
+            this.img = i;
         }
     }
 }

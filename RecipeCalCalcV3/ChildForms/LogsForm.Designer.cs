@@ -35,7 +35,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(221)))), ((int)(((byte)(217)))));
-            this.ClientSize = new System.Drawing.Size(1134, 811);
+            this.ClientSize = new System.Drawing.Size(1150, 850);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "LogsForm";
             this.Text = "LogsForm";

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RecipeCalCalcV3.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,6 +22,37 @@ namespace RecipeCalCalcV3.ChildForms
 
             // Setting 'main' to passed in MainForm 'm'.
             main = m;
+            
+            initButts();
+        }
+
+        // test
+        private void initButts()
+        {
+            foreach (Ingredient ing in Program.ingredients)
+            {
+                Button temp = new Button();
+                temp.Width = 64;
+                temp.Height = 64;
+                temp.Image = ing.getImage();
+
+                if (ing.getType().Equals("protein"))
+                {
+                    proteinPanel.Controls.Add(temp);
+                }
+                else if (ing.getType().Equals("veggie"))
+                {
+                    veggiePanel.Controls.Add(temp);
+                }
+                else if (ing.getType().Equals("liquid"))
+                {
+                    liquidPanel.Controls.Add(temp);
+                }
+                else if (ing.getType().Equals("misc"))
+                {
+                    miscPanel.Controls.Add(temp);
+                }
+            }
         }
     }
 }

@@ -112,6 +112,5 @@
   <ItemGroup>
     <None Include="Resources\calories.png" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
