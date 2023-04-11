@@ -23,11 +23,15 @@ namespace RecipeCalCalcV3.ChildForms
             // Setting 'main' to passed in MainForm 'm'.
             main = m;
             
-            initButts();
+            initButtons();
         }
 
-        // test
-        private void initButts()
+        /**
+         * initButtons() function initializes ingredient buttons by dynamically creating
+         * buttons and adding each to a panel based on the ingredient type.
+         * Ingredient images will also be displayed on the button.
+         */
+        private void initButtons()
         {
             foreach (Ingredient ing in Program.ingredients)
             {
@@ -35,6 +39,9 @@ namespace RecipeCalCalcV3.ChildForms
                 temp.Width = 64;
                 temp.Height = 64;
                 temp.Image = ing.getImage();
+
+                ToolTip tip = new ToolTip();
+                tip.SetToolTip(temp, ing.getTipName());
 
                 if (ing.getType().Equals("protein"))
                 {
@@ -53,6 +60,6 @@ namespace RecipeCalCalcV3.ChildForms
                     miscPanel.Controls.Add(temp);
                 }
             }
-        }
+        }        
     }
 }
