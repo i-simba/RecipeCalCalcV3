@@ -29,21 +29,21 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.mainButtonPanel = new System.Windows.Forms.Panel();
+            this.savedButton = new System.Windows.Forms.Button();
+            this.builderButton = new System.Windows.Forms.Button();
+            this.viewLogsButton = new System.Windows.Forms.Button();
+            this.homeButton = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.mainPanel = new System.Windows.Forms.Panel();
-            this.mainButtonPanel = new System.Windows.Forms.Panel();
-            this.homeButton = new System.Windows.Forms.Button();
-            this.viewLogsButton = new System.Windows.Forms.Button();
-            this.builderButton = new System.Windows.Forms.Button();
-            this.savedButton = new System.Windows.Forms.Button();
             this.titleTextBox = new System.Windows.Forms.Label();
+            this.mainPanel = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
+            this.mainButtonPanel.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
-            this.mainButtonPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -56,6 +56,85 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(150, 1000);
             this.panel1.TabIndex = 0;
+            // 
+            // mainButtonPanel
+            // 
+            this.mainButtonPanel.Controls.Add(this.savedButton);
+            this.mainButtonPanel.Controls.Add(this.builderButton);
+            this.mainButtonPanel.Controls.Add(this.viewLogsButton);
+            this.mainButtonPanel.Controls.Add(this.homeButton);
+            this.mainButtonPanel.Location = new System.Drawing.Point(5, 155);
+            this.mainButtonPanel.Name = "mainButtonPanel";
+            this.mainButtonPanel.Size = new System.Drawing.Size(140, 635);
+            this.mainButtonPanel.TabIndex = 1;
+            // 
+            // savedButton
+            // 
+            this.savedButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(85)))), ((int)(((byte)(71)))));
+            this.savedButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.savedButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(121)))), ((int)(((byte)(102)))));
+            this.savedButton.FlatAppearance.BorderSize = 3;
+            this.savedButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.savedButton.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.savedButton.ForeColor = System.Drawing.SystemColors.Control;
+            this.savedButton.Location = new System.Drawing.Point(0, 150);
+            this.savedButton.Name = "savedButton";
+            this.savedButton.Size = new System.Drawing.Size(140, 50);
+            this.savedButton.TabIndex = 3;
+            this.savedButton.Text = "SAVED";
+            this.savedButton.UseVisualStyleBackColor = false;
+            this.savedButton.Click += new System.EventHandler(this.savedButton_Click);
+            // 
+            // builderButton
+            // 
+            this.builderButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(85)))), ((int)(((byte)(71)))));
+            this.builderButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.builderButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(121)))), ((int)(((byte)(102)))));
+            this.builderButton.FlatAppearance.BorderSize = 3;
+            this.builderButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.builderButton.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.builderButton.ForeColor = System.Drawing.SystemColors.Control;
+            this.builderButton.Location = new System.Drawing.Point(0, 100);
+            this.builderButton.Name = "builderButton";
+            this.builderButton.Size = new System.Drawing.Size(140, 50);
+            this.builderButton.TabIndex = 2;
+            this.builderButton.Text = "BUILDER";
+            this.builderButton.UseVisualStyleBackColor = false;
+            this.builderButton.Click += new System.EventHandler(this.builderButton_Click);
+            // 
+            // viewLogsButton
+            // 
+            this.viewLogsButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(85)))), ((int)(((byte)(71)))));
+            this.viewLogsButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.viewLogsButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(121)))), ((int)(((byte)(102)))));
+            this.viewLogsButton.FlatAppearance.BorderSize = 3;
+            this.viewLogsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.viewLogsButton.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.viewLogsButton.ForeColor = System.Drawing.SystemColors.Control;
+            this.viewLogsButton.Location = new System.Drawing.Point(0, 50);
+            this.viewLogsButton.Name = "viewLogsButton";
+            this.viewLogsButton.Size = new System.Drawing.Size(140, 50);
+            this.viewLogsButton.TabIndex = 1;
+            this.viewLogsButton.Text = "VIEW LOGS";
+            this.viewLogsButton.UseVisualStyleBackColor = false;
+            this.viewLogsButton.Click += new System.EventHandler(this.viewLogsButton_Click);
+            // 
+            // homeButton
+            // 
+            this.homeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(85)))), ((int)(((byte)(71)))));
+            this.homeButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.homeButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(121)))), ((int)(((byte)(102)))));
+            this.homeButton.FlatAppearance.BorderSize = 3;
+            this.homeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.homeButton.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.homeButton.ForeColor = System.Drawing.SystemColors.Control;
+            this.homeButton.Location = new System.Drawing.Point(0, 0);
+            this.homeButton.Name = "homeButton";
+            this.homeButton.Size = new System.Drawing.Size(140, 50);
+            this.homeButton.TabIndex = 0;
+            this.homeButton.Text = "HOME";
+            this.homeButton.UseVisualStyleBackColor = false;
+            this.homeButton.Click += new System.EventHandler(this.homeButton_Click);
             // 
             // panel3
             // 
@@ -85,93 +164,6 @@
             this.panel2.Size = new System.Drawing.Size(1150, 150);
             this.panel2.TabIndex = 1;
             // 
-            // mainPanel
-            // 
-            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainPanel.Location = new System.Drawing.Point(150, 150);
-            this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(1150, 850);
-            this.mainPanel.TabIndex = 2;
-            // 
-            // mainButtonPanel
-            // 
-            this.mainButtonPanel.Controls.Add(this.savedButton);
-            this.mainButtonPanel.Controls.Add(this.builderButton);
-            this.mainButtonPanel.Controls.Add(this.viewLogsButton);
-            this.mainButtonPanel.Controls.Add(this.homeButton);
-            this.mainButtonPanel.Location = new System.Drawing.Point(5, 155);
-            this.mainButtonPanel.Name = "mainButtonPanel";
-            this.mainButtonPanel.Size = new System.Drawing.Size(140, 635);
-            this.mainButtonPanel.TabIndex = 1;
-            // 
-            // homeButton
-            // 
-            this.homeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(85)))), ((int)(((byte)(71)))));
-            this.homeButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.homeButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(121)))), ((int)(((byte)(102)))));
-            this.homeButton.FlatAppearance.BorderSize = 3;
-            this.homeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.homeButton.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.homeButton.ForeColor = System.Drawing.SystemColors.Control;
-            this.homeButton.Location = new System.Drawing.Point(0, 0);
-            this.homeButton.Name = "homeButton";
-            this.homeButton.Size = new System.Drawing.Size(140, 50);
-            this.homeButton.TabIndex = 0;
-            this.homeButton.Text = "HOME";
-            this.homeButton.UseVisualStyleBackColor = false;
-            this.homeButton.Click += new System.EventHandler(this.homeButton_Click);
-            // 
-            // viewLogsButton
-            // 
-            this.viewLogsButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(85)))), ((int)(((byte)(71)))));
-            this.viewLogsButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.viewLogsButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(121)))), ((int)(((byte)(102)))));
-            this.viewLogsButton.FlatAppearance.BorderSize = 3;
-            this.viewLogsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.viewLogsButton.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.viewLogsButton.ForeColor = System.Drawing.SystemColors.Control;
-            this.viewLogsButton.Location = new System.Drawing.Point(0, 50);
-            this.viewLogsButton.Name = "viewLogsButton";
-            this.viewLogsButton.Size = new System.Drawing.Size(140, 50);
-            this.viewLogsButton.TabIndex = 1;
-            this.viewLogsButton.Text = "VIEW LOGS";
-            this.viewLogsButton.UseVisualStyleBackColor = false;
-            this.viewLogsButton.Click += new System.EventHandler(this.viewLogsButton_Click);
-            // 
-            // builderButton
-            // 
-            this.builderButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(85)))), ((int)(((byte)(71)))));
-            this.builderButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.builderButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(121)))), ((int)(((byte)(102)))));
-            this.builderButton.FlatAppearance.BorderSize = 3;
-            this.builderButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.builderButton.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.builderButton.ForeColor = System.Drawing.SystemColors.Control;
-            this.builderButton.Location = new System.Drawing.Point(0, 100);
-            this.builderButton.Name = "builderButton";
-            this.builderButton.Size = new System.Drawing.Size(140, 50);
-            this.builderButton.TabIndex = 2;
-            this.builderButton.Text = "BUILDER";
-            this.builderButton.UseVisualStyleBackColor = false;
-            this.builderButton.Click += new System.EventHandler(this.builderButton_Click);
-            // 
-            // savedButton
-            // 
-            this.savedButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(85)))), ((int)(((byte)(71)))));
-            this.savedButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.savedButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(121)))), ((int)(((byte)(102)))));
-            this.savedButton.FlatAppearance.BorderSize = 3;
-            this.savedButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.savedButton.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.savedButton.ForeColor = System.Drawing.SystemColors.Control;
-            this.savedButton.Location = new System.Drawing.Point(0, 150);
-            this.savedButton.Name = "savedButton";
-            this.savedButton.Size = new System.Drawing.Size(140, 50);
-            this.savedButton.TabIndex = 3;
-            this.savedButton.Text = "SAVED";
-            this.savedButton.UseVisualStyleBackColor = false;
-            this.savedButton.Click += new System.EventHandler(this.savedButton_Click);
-            // 
             // titleTextBox
             // 
             this.titleTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -183,6 +175,14 @@
             this.titleTextBox.TabIndex = 0;
             this.titleTextBox.Text = "TITLE";
             this.titleTextBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // mainPanel
+            // 
+            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainPanel.Location = new System.Drawing.Point(150, 150);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(1150, 850);
+            this.mainPanel.TabIndex = 2;
             // 
             // MainForm
             // 
@@ -196,12 +196,13 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.panel1.ResumeLayout(false);
+            this.mainButtonPanel.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
-            this.mainButtonPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
