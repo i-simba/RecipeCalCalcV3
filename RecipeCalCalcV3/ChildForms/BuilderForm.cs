@@ -240,6 +240,11 @@ namespace RecipeCalCalcV3.ChildForms
         
         /**
          * calculateButton_Click function listens to the calculateButton.
+         * This function takes in user entered values for each ingredient weight (grams)
+         * The total weight is calculated, as well as the total for each course.
+         * Calories are calculated for each ingredient, totaled up for each course, and 
+         * all courses are summed up to get the total calories for the meal.
+         * All information mentioned above will also be displayed.
          */
         private void calculateButton_Click(object sender, EventArgs e)
         {

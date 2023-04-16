@@ -258,5 +258,7 @@ namespace RecipeCalCalcV3.Models
         {
             this.img = i;
         }
+
+        // TODO reset data values for each ingredient.
     }
 }

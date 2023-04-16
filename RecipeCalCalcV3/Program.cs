@@ -117,5 +117,7 @@ namespace RecipeCalCalcV3
                 File.Create(miscPath).Close();
             }
         }
+
+        // TODO reset values for each ingredient present in the list.
     }
 }
