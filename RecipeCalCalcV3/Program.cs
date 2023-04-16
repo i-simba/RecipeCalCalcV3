@@ -76,7 +76,8 @@ namespace RecipeCalCalcV3
                     ingDetails[1],                      // Tool Tip Name.
                     type,                               // Type.
                     Convert.ToInt32(ingDetails[2]),     // Calories.
-                    Convert.ToInt32(ingDetails[3]));    // Weight.
+                    Convert.ToInt32(ingDetails[3]),     // Weight.
+                    Convert.ToInt32(ingDetails[4]));    // Course.
                 ingredients.Add(temp);
                 Image pic = Image.FromFile(ingredientImgPath + temp.getName() + ".png");
                 temp.setImage(pic);
@@ -116,5 +117,7 @@ namespace RecipeCalCalcV3
                 File.Create(miscPath).Close();
             }
         }
+
+        // TODO reset values for each ingredient present in the list.
     }
 }

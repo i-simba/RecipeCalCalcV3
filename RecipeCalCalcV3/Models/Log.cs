@@ -23,6 +23,7 @@ namespace RecipeCalCalcV3.Models
 
         private List<Ingredient> entreIng;          // Ingredients used in making the entre.
         private List<Ingredient> baseIng;           // Ingredients not used in the entre. i.e. rice, pasta, etc.
+        private List<Ingredient> snackIng;          // Ingredients that are also not used in the entre. i.e. chips, desserts, etc.
 
         private double rawEntreWeight;              // Total weight of uncooked entre ingredients.
         private double baseIngWeight;               // Total weight of base ingredients.
@@ -331,6 +332,120 @@ namespace RecipeCalCalcV3.Models
         public void setPortionCalories(double pC)
         {
             this.portionCalories = pC;
+        }
+
+        /**
+         * Getter for 'entreIng'
+         * 
+         * @return 'entreIng'.
+         */
+        public List<Ingredient> getEntreList()
+        {
+            return this.entreIng;
+        }
+
+        /**
+         * Setter for 'entreIng'.
+         * 
+         * @param e assigned to 'entreIng'.
+         */
+        public void setEntreList(List<Ingredient> e)
+        {
+            this.entreIng = e;
+        }
+
+        /**
+         * addEntre() function adds an ingredient to the entre list.
+         */
+        public void addEntre(Ingredient e)
+        {
+            this.entreIng.Add(e);
+        }
+
+        /**
+         * getEntreAt() function returns the ingredient indexed at i.
+         * 
+         * @param i index.
+         */
+        public Ingredient getEntreAt(int i)
+        {
+            return this.entreIng[i];
+        }
+
+        /**
+         * Getter for 'baseIng'.
+         * 
+         * @return 'baseIng'.
+         */
+        public List<Ingredient> getBaseList()
+        {
+            return this.baseIng;
+        }
+
+        /**
+         * Setter for 'baseIng'.
+         * 
+         * @param b assigned to 'baseIng'.
+         */
+        public void setBaseList(List<Ingredient> b)
+        {
+            this.baseIng = b;
+        }
+
+        /**
+         * addBase() function adds an ingredient to the entre list.
+         */
+        public void addBase(Ingredient b)
+        {
+            this.baseIng.Add(b);
+        }
+
+        /**
+         * getBaseAt() function returns the ingredient indexed at i.
+         * 
+         * @param i index.
+         */
+        public Ingredient getBaseAt(int i)
+        {
+            return this.baseIng[i];
+        }
+
+        /**
+         * Getter for 'SnackIng'.
+         * 
+         * @return 'snackIng'.
+         */
+        public List<Ingredient> getSnackList()
+        {
+            return this.snackIng;
+        }
+
+        /**
+         * Setter for 'snackIng'.
+         * 
+         * @param s assigned to 'snackIng'.
+         */
+        public void setSnackList(List<Ingredient> s)
+        {
+            this.snackIng = s;
+        }
+
+        /**
+         * addSnack() function adds an ingredient to the snack list.
+         */
+        public void addSnack(Ingredient s)
+        {
+            this.snackIng.Add(s);
+        }
+
+        /**
+         * getSnackAt() function returns ingredient indexed at i.
+         * 
+         * @param i index.
+         */
+        public Ingredient getSnackAt(int i)
+        {
+            return this.snackIng[i];
         }
     }
 }

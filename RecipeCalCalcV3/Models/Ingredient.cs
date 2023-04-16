@@ -10,6 +10,7 @@
  */
 
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -20,14 +21,19 @@ namespace RecipeCalCalcV3.Models
 {
     internal class Ingredient
     {
+        public const int ENTRE = 1;      // Denotes ingredient as an entre.
+        public const int BASE = 2;       // Denotes ingredient as a base.
+        public const int SNACK = 3;      // Denotes ingredient as a snack.
+
         private String name;             // Name of ingredient - Used to match with corresponding image file's name.
         private String tipName;          // Name displayed on the tooltip as the mouse hovers over an ingredient button.
         private String type;             // Type of ingredient - Protein, Vegetable, etc.
         private int calories;            // Calories contained within the set weight.
         private int weight;              // Weight of ingredient related to calories.
+        private int course;              // Category of food, i.e., Entre/Base/Snack.
 
         private double calculatedCal;    // The total calculated calories for an ingredient based on its entered weight.
-        private double enteredWeight;    // The entered weight of a given ingredient and will be used to calculate 'calculatedCal'.
+        private int enteredWeight;       // The entered weight of a given ingredient and will be used to calculate 'calculatedCal'.
 
         private Image img;               // Associated image file for ingredient.
 
@@ -40,16 +46,17 @@ namespace RecipeCalCalcV3.Models
          * @param c assigned to 'calories'.
          * @param w assigned to 'weight'.
          */
-        public Ingredient(String n, String tn, String t, int c, int w)
+        public Ingredient(String n, String tn, String t, int c, int w, int cr)
         {
             this.name = n;
             this.tipName = tn;
             this.type = t;
             this.calories = c;
             this.weight = w;
+            this.course = cr;
 
             this.calculatedCal = 0.0;
-            this.enteredWeight = 0.0;
+            this.enteredWeight = 0;
         }
 
         /**
@@ -169,6 +176,26 @@ namespace RecipeCalCalcV3.Models
         }
 
         /**
+         * Getter for 'course'.
+         * 
+         * @return 'course'.
+         */
+        public int getCourse()
+        {
+            return this.course;
+        }
+
+        /**
+         * Setter for 'course'.
+         * 
+         * @param cr assigned to 'course'.
+         */
+        public void setCourse(int cr)
+        {
+            this.course = cr;
+        }
+
+        /**
          * Getter for 'calculatedCal'.
          * 
          * @return 'calculatedCal'.
@@ -196,7 +223,7 @@ namespace RecipeCalCalcV3.Models
          * @return 'enteredWeight'.
          */
 
-        public double getEnteredWeight()
+        public int getEnteredWeight()
         {
             return this.enteredWeight;
         }
@@ -207,7 +234,7 @@ namespace RecipeCalCalcV3.Models
          * @param e assigned to 'enteredWeight'.
          */
 
-        public void setEnteredWeight(double e)
+        public void setEnteredWeight(int e)
         {
             this.enteredWeight = e;
         }
@@ -231,5 +258,7 @@ namespace RecipeCalCalcV3.Models
         {
             this.img = i;
         }
+
+        // TODO reset data values for each ingredient.
     }
 }
