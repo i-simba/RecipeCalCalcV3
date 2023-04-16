@@ -33,7 +33,7 @@ namespace RecipeCalCalcV3.Models
         private int course;              // Category of food, i.e., Entre/Base/Snack.
 
         private double calculatedCal;    // The total calculated calories for an ingredient based on its entered weight.
-        private double enteredWeight;    // The entered weight of a given ingredient and will be used to calculate 'calculatedCal'.
+        private int enteredWeight;       // The entered weight of a given ingredient and will be used to calculate 'calculatedCal'.
 
         private Image img;               // Associated image file for ingredient.
 
@@ -56,7 +56,7 @@ namespace RecipeCalCalcV3.Models
             this.course = cr;
 
             this.calculatedCal = 0.0;
-            this.enteredWeight = 0.0;
+            this.enteredWeight = 0;
         }
 
         /**
@@ -223,7 +223,7 @@ namespace RecipeCalCalcV3.Models
          * @return 'enteredWeight'.
          */
 
-        public double getEnteredWeight()
+        public int getEnteredWeight()
         {
             return this.enteredWeight;
         }
@@ -234,7 +234,7 @@ namespace RecipeCalCalcV3.Models
          * @param e assigned to 'enteredWeight'.
          */
 
-        public void setEnteredWeight(double e)
+        public void setEnteredWeight(int e)
         {
             this.enteredWeight = e;
         }

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace RecipeCalCalcV3.ChildForms
 {
@@ -16,9 +17,23 @@ namespace RecipeCalCalcV3.ChildForms
     {
         MainForm main = null;                             // MainForm object.
 
-        private List<Button> ingredientButtons = null;    // List of buttons for each ingredient.
         private List<Boolean> isAdded = null;             // List Booleans corresponding to each button.
-        private List<Panel> ingPanels = null;             // List of Panels wich displays added ingredients.
+        
+        private List<Button> ingredientButtons = null;    // List of buttons for each ingredient.
+        private List<Panel> ingPanels = null;             // List of Panels which displays all added ingredients.
+        private List<Panel> entrePanels = null;           // List of Panels which displays added entre ingredients.
+        private List<Panel> basePanels = null;            // List of Panels which displays added base ingredients.
+        private List<Panel> snackPanels = null;           // List of Panels which displays added snack ingredients.
+
+        private int entreRW = 0;                          // 
+        private int baseRW = 0;                           // 
+        private int snackRW = 0;                          // 
+        private int totalRW = 0;                          // 
+
+        private double entreCalculatedCal = 0.0;          // 
+        private double baseCalculatedCal = 0.0;           // 
+        private double snackCalculatedCal = 0.0;          // 
+        private double totalCalculatedCal = 0.0;          // 
 
         public BuilderForm(MainForm m)
         {
@@ -31,6 +46,9 @@ namespace RecipeCalCalcV3.ChildForms
             ingredientButtons = new List<Button>();
             isAdded = new List<Boolean>();
             ingPanels = new List<Panel>();
+            entrePanels = new List<Panel>();
+            basePanels = new List<Panel>();
+            snackPanels = new List<Panel>();
             initButtons();
         }
 
@@ -47,6 +65,27 @@ namespace RecipeCalCalcV3.ChildForms
             {
                 isAdded[i] = false;
             }
+            foreach (Panel panel in totalsPanel.Controls)
+            {
+                foreach (Control control in panel.Controls)
+                {
+                    if (control is TextBox)
+                    {
+                        control.Text = "";
+                    }
+                }
+            }
+            entreRW = 0;
+            baseRW = 0;
+            snackRW = 0;
+            totalRW = 0;
+
+            entreCalculatedCal = 0.0;
+            baseCalculatedCal = 0.0;
+            snackCalculatedCal = 0.0;
+            totalCalculatedCal = 0.0;
+
+            // TODO reset ingredient values in program.
         }
 
         /**
@@ -149,6 +188,7 @@ namespace RecipeCalCalcV3.ChildForms
                 if (sender == button && isAdded[i] == false)
                 {
                     // Set ingredient's name and image.
+                    container.Name = button.Name;
                     pic.Image = button.Image;
                     text.Name = button.Name + "TB";
                     isAdded[i] = true;
@@ -159,18 +199,21 @@ namespace RecipeCalCalcV3.ChildForms
                     container.Controls.Add(text);
                     container.Controls.Add(calPanel);
 
-                    // Add container to correct panel to be displayed.
+                    // Add container to correct panel and list to be displayed.
                     switch (Program.ingredients[i].getCourse())
                     {
                         case 1:
                             container.Padding = new Padding(15, 15, 0, 0);
                             entreIngredientPanel.Controls.Add(container); Console.WriteLine("\nENTRE\n");
+                            entrePanels.Add(container);
                             break;
                         case 2: 
                             baseIngredientPanel.Controls.Add(container); Console.WriteLine("\nBASE\n");
+                            basePanels.Add(container);
                             break;
                         case 3: 
                             snacksIngredientPanel.Controls.Add(container); Console.WriteLine("\nSNACK\n");
+                            snackPanels.Add(container);
                             break;
                         default: Console.WriteLine("\nERROR! BuilderForm.cs -> button_Click() -> switch!");
                             break;
@@ -183,9 +226,171 @@ namespace RecipeCalCalcV3.ChildForms
             }
         }
 
+        /**********************************************************************************/
+        /*                                 BUTTON EVENTS                                  */
+        /**********************************************************************************/
+
+        /**
+         * resetButton_Click() function listens to the resetButton and executes reset().
+         */
         private void resetButton_Click(object sender, EventArgs e)
         {
             reset();
+        }
+        
+        /**
+         * calculateButton_Click function listens to the calculateButton.
+         */
+        private void calculateButton_Click(object sender, EventArgs e)
+        {
+            // Calculate and add each entre weight to find the sum.
+            foreach (Panel panel in entrePanels)
+            {
+                double temp = 0.0;
+                foreach (Control con in panel.Controls)
+                {
+                    if (con is TextBox)
+                    {
+                        entreRW += Convert.ToInt32(con.Text);
+
+                        foreach (Ingredient ing in Program.ingredients)
+                        {
+                            if (panel.Name.Equals(ing.getName()))
+                            {
+                                ing.setEnteredWeight(Convert.ToInt32(con.Text));
+                                temp = (ing.getEnteredWeight() * ing.getCalories()) / (double)ing.getWeight();
+                                ing.setCalculatedCal(temp);
+                            }
+                        }
+                    }
+                    if (con is Panel)
+                    {
+                        foreach (Control lab in con.Controls)
+                        {
+                            if (lab is Label)
+                            {
+                                foreach (Ingredient ing in Program.ingredients)
+                                {
+                                    if (panel.Name.Equals(ing.getName()))
+                                    {
+                                        lab.Text = ing.getCalculatedCal().ToString();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Calculate and add each base weight to find the sum.
+            foreach (Panel panel in basePanels)
+            {
+                double temp = 0.0;
+                foreach (Control con in panel.Controls)
+                {
+                    if (con is TextBox)
+                    {
+                        baseRW += Convert.ToInt32(con.Text);
+
+                        foreach (Ingredient ing in Program.ingredients)
+                        {
+                            if (panel.Name.Equals(ing.getName()))
+                            {
+                                ing.setEnteredWeight(Convert.ToInt32(con.Text));
+                                temp = (ing.getEnteredWeight() * ing.getCalories()) / (double)ing.getWeight();
+                                ing.setCalculatedCal(temp);
+                            }
+                        }
+                    }
+                    if (con is Panel)
+                    {
+                        foreach (Control lab in con.Controls)
+                        {
+                            if (lab is Label)
+                            {
+                                foreach (Ingredient ing in Program.ingredients)
+                                {
+                                    if (panel.Name.Equals(ing.getName()))
+                                    {
+                                        lab.Text = ing.getCalculatedCal().ToString();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Calculate and add each snack weight to find the sum.
+            foreach (Panel panel in snackPanels)
+            {
+                double temp = 0.0;
+                foreach (Control con in panel.Controls)
+                {
+                    if (con is TextBox)
+                    {
+                        snackRW += Convert.ToInt32(con.Text);
+
+                        foreach (Ingredient ing in Program.ingredients)
+                        {
+                            if (panel.Name.Equals(ing.getName()))
+                            {
+                                ing.setEnteredWeight(Convert.ToInt32(con.Text));
+                                temp = (ing.getEnteredWeight() * ing.getCalories()) / (double)ing.getWeight();
+                                ing.setCalculatedCal(temp);
+                            }
+                        }
+                    }
+                    if (con is Panel)
+                    {
+                        foreach (Control lab in con.Controls)
+                        {
+                            if (lab is Label)
+                            {
+                                foreach (Ingredient ing in Program.ingredients)
+                                {
+                                    if (panel.Name.Equals(ing.getName()))
+                                    {
+                                        lab.Text = ing.getCalculatedCal().ToString();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            foreach (Ingredient ing in Program.ingredients)
+            {
+                switch (ing.getCourse())
+                {
+                    case 1:
+                        entreCalculatedCal += ing.getCalculatedCal();
+                        break;
+                    case 2:
+                        baseCalculatedCal += ing.getCalculatedCal();
+                        break;
+                    case 3:
+                        snackCalculatedCal += ing.getCalculatedCal();
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            // Display each sum to the corresponding TextBox.
+            entreRWTotalTB.Text = entreRW.ToString();
+            baseRWTotalTB.Text = baseRW.ToString();
+            snackRWTotalTB.Text = snackRW.ToString();
+            totalRW += entreRW + baseRW + snackRW;
+            totalRWTB.Text = totalRW.ToString();
+
+            //
+            entreCalTotalTB.Text = entreCalculatedCal.ToString();
+            baseCalTotalTB.Text = baseCalculatedCal.ToString();
+            snackCalTotalTB.Text = snackCalculatedCal.ToString();
+            totalCalculatedCal += entreCalculatedCal + baseCalculatedCal + snackCalculatedCal;
+            totalCalTB.Text = totalCalculatedCal.ToString();
         }
     }
 }

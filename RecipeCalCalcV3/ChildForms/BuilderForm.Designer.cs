@@ -42,9 +42,33 @@
             this.label4 = new System.Windows.Forms.Label();
             this.entreIngredientPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.resetButton = new System.Windows.Forms.Button();
-            this.panel6 = new System.Windows.Forms.Panel();
             this.calculateButton = new System.Windows.Forms.Button();
+            this.resetButton = new System.Windows.Forms.Button();
+            this.totalsPanel = new System.Windows.Forms.Panel();
+            this.panel14 = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
+            this.totalCalTB = new System.Windows.Forms.TextBox();
+            this.panel15 = new System.Windows.Forms.Panel();
+            this.label15 = new System.Windows.Forms.Label();
+            this.totalRWTB = new System.Windows.Forms.TextBox();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.label12 = new System.Windows.Forms.Label();
+            this.snackCalTotalTB = new System.Windows.Forms.TextBox();
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.snackRWTotalTB = new System.Windows.Forms.TextBox();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.baseCalTotalTB = new System.Windows.Forms.TextBox();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.baseRWTotalTB = new System.Windows.Forms.TextBox();
+            this.entreCalTotalPanel = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.entreCalTotalTB = new System.Windows.Forms.TextBox();
+            this.entreRWTotalPanel = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.entreRWTotalTB = new System.Windows.Forms.TextBox();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -53,14 +77,31 @@
             this.label7 = new System.Windows.Forms.Label();
             this.baseIngredientPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.snacksIngredientPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.label16 = new System.Windows.Forms.Label();
+            this.portionlCalTB = new System.Windows.Forms.TextBox();
+            this.panel16 = new System.Windows.Forms.Panel();
+            this.label17 = new System.Windows.Forms.Label();
+            this.portionWTB = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.totalsPanel.SuspendLayout();
+            this.panel14.SuspendLayout();
+            this.panel15.SuspendLayout();
+            this.panel12.SuspendLayout();
+            this.panel13.SuspendLayout();
+            this.panel10.SuspendLayout();
+            this.panel11.SuspendLayout();
+            this.entreCalTotalPanel.SuspendLayout();
+            this.entreRWTotalPanel.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel9.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.panel16.SuspendLayout();
             this.SuspendLayout();
             // 
             // miscPanel
@@ -202,6 +243,20 @@
             this.panel5.Size = new System.Drawing.Size(810, 50);
             this.panel5.TabIndex = 13;
             // 
+            // calculateButton
+            // 
+            this.calculateButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(132)))), ((int)(((byte)(89)))));
+            this.calculateButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.calculateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.calculateButton.ForeColor = System.Drawing.SystemColors.Control;
+            this.calculateButton.Location = new System.Drawing.Point(690, 5);
+            this.calculateButton.Name = "calculateButton";
+            this.calculateButton.Size = new System.Drawing.Size(115, 40);
+            this.calculateButton.TabIndex = 1;
+            this.calculateButton.Text = "CALCULATE";
+            this.calculateButton.UseVisualStyleBackColor = false;
+            this.calculateButton.Click += new System.EventHandler(this.calculateButton_Click);
+            // 
             // resetButton
             // 
             this.resetButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(82)))), ((int)(((byte)(51)))));
@@ -216,26 +271,263 @@
             this.resetButton.UseVisualStyleBackColor = false;
             this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
             // 
-            // panel6
+            // totalsPanel
             // 
-            this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(134)))), ((int)(((byte)(130)))), ((int)(((byte)(126)))));
-            this.panel6.Location = new System.Drawing.Point(10, 690);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(810, 150);
-            this.panel6.TabIndex = 14;
+            this.totalsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(134)))), ((int)(((byte)(130)))), ((int)(((byte)(126)))));
+            this.totalsPanel.Controls.Add(this.panel6);
+            this.totalsPanel.Controls.Add(this.panel16);
+            this.totalsPanel.Controls.Add(this.panel14);
+            this.totalsPanel.Controls.Add(this.panel15);
+            this.totalsPanel.Controls.Add(this.panel12);
+            this.totalsPanel.Controls.Add(this.panel13);
+            this.totalsPanel.Controls.Add(this.panel10);
+            this.totalsPanel.Controls.Add(this.panel11);
+            this.totalsPanel.Controls.Add(this.entreCalTotalPanel);
+            this.totalsPanel.Controls.Add(this.entreRWTotalPanel);
+            this.totalsPanel.Location = new System.Drawing.Point(10, 690);
+            this.totalsPanel.Name = "totalsPanel";
+            this.totalsPanel.Size = new System.Drawing.Size(810, 150);
+            this.totalsPanel.TabIndex = 14;
             // 
-            // calculateButton
+            // panel14
             // 
-            this.calculateButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(132)))), ((int)(((byte)(89)))));
-            this.calculateButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.calculateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.calculateButton.ForeColor = System.Drawing.SystemColors.Control;
-            this.calculateButton.Location = new System.Drawing.Point(690, 5);
-            this.calculateButton.Name = "calculateButton";
-            this.calculateButton.Size = new System.Drawing.Size(115, 40);
-            this.calculateButton.TabIndex = 1;
-            this.calculateButton.Text = "CALCULATE";
-            this.calculateButton.UseVisualStyleBackColor = false;
+            this.panel14.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel14.Controls.Add(this.label14);
+            this.panel14.Controls.Add(this.totalCalTB);
+            this.panel14.Location = new System.Drawing.Point(425, 78);
+            this.panel14.Name = "panel14";
+            this.panel14.Size = new System.Drawing.Size(135, 58);
+            this.panel14.TabIndex = 7;
+            // 
+            // label14
+            // 
+            this.label14.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.SystemColors.Control;
+            this.label14.Location = new System.Drawing.Point(0, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(135, 20);
+            this.label14.TabIndex = 1;
+            this.label14.Text = "TOTAL CALORIES";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // totalCalTB
+            // 
+            this.totalCalTB.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalCalTB.Location = new System.Drawing.Point(5, 25);
+            this.totalCalTB.Name = "totalCalTB";
+            this.totalCalTB.ReadOnly = true;
+            this.totalCalTB.Size = new System.Drawing.Size(125, 26);
+            this.totalCalTB.TabIndex = 0;
+            // 
+            // panel15
+            // 
+            this.panel15.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel15.Controls.Add(this.label15);
+            this.panel15.Controls.Add(this.totalRWTB);
+            this.panel15.Location = new System.Drawing.Point(425, 10);
+            this.panel15.Name = "panel15";
+            this.panel15.Size = new System.Drawing.Size(135, 58);
+            this.panel15.TabIndex = 6;
+            // 
+            // label15
+            // 
+            this.label15.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.SystemColors.Control;
+            this.label15.Location = new System.Drawing.Point(0, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(135, 20);
+            this.label15.TabIndex = 1;
+            this.label15.Text = "TOTAL RAW WEIGHT";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // totalRWTB
+            // 
+            this.totalRWTB.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalRWTB.Location = new System.Drawing.Point(5, 25);
+            this.totalRWTB.Name = "totalRWTB";
+            this.totalRWTB.ReadOnly = true;
+            this.totalRWTB.Size = new System.Drawing.Size(125, 26);
+            this.totalRWTB.TabIndex = 0;
+            // 
+            // panel12
+            // 
+            this.panel12.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel12.Controls.Add(this.label12);
+            this.panel12.Controls.Add(this.snackCalTotalTB);
+            this.panel12.Location = new System.Drawing.Point(285, 78);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(135, 58);
+            this.panel12.TabIndex = 5;
+            // 
+            // label12
+            // 
+            this.label12.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.SystemColors.Control;
+            this.label12.Location = new System.Drawing.Point(0, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(135, 20);
+            this.label12.TabIndex = 1;
+            this.label12.Text = "SNACK TOTAL CALORIES";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // snackCalTotalTB
+            // 
+            this.snackCalTotalTB.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.snackCalTotalTB.Location = new System.Drawing.Point(5, 25);
+            this.snackCalTotalTB.Name = "snackCalTotalTB";
+            this.snackCalTotalTB.ReadOnly = true;
+            this.snackCalTotalTB.Size = new System.Drawing.Size(125, 26);
+            this.snackCalTotalTB.TabIndex = 0;
+            // 
+            // panel13
+            // 
+            this.panel13.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel13.Controls.Add(this.label13);
+            this.panel13.Controls.Add(this.snackRWTotalTB);
+            this.panel13.Location = new System.Drawing.Point(285, 10);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(135, 58);
+            this.panel13.TabIndex = 4;
+            // 
+            // label13
+            // 
+            this.label13.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.SystemColors.Control;
+            this.label13.Location = new System.Drawing.Point(0, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(135, 20);
+            this.label13.TabIndex = 1;
+            this.label13.Text = "SNACK RAW WEIGHT";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // snackRWTotalTB
+            // 
+            this.snackRWTotalTB.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.snackRWTotalTB.Location = new System.Drawing.Point(5, 25);
+            this.snackRWTotalTB.Name = "snackRWTotalTB";
+            this.snackRWTotalTB.ReadOnly = true;
+            this.snackRWTotalTB.Size = new System.Drawing.Size(125, 26);
+            this.snackRWTotalTB.TabIndex = 0;
+            // 
+            // panel10
+            // 
+            this.panel10.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel10.Controls.Add(this.label10);
+            this.panel10.Controls.Add(this.baseCalTotalTB);
+            this.panel10.Location = new System.Drawing.Point(145, 78);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(135, 58);
+            this.panel10.TabIndex = 3;
+            // 
+            // label10
+            // 
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.SystemColors.Control;
+            this.label10.Location = new System.Drawing.Point(0, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(135, 20);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "BASE TOTAL CALORIES";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // baseCalTotalTB
+            // 
+            this.baseCalTotalTB.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.baseCalTotalTB.Location = new System.Drawing.Point(5, 25);
+            this.baseCalTotalTB.Name = "baseCalTotalTB";
+            this.baseCalTotalTB.ReadOnly = true;
+            this.baseCalTotalTB.Size = new System.Drawing.Size(125, 26);
+            this.baseCalTotalTB.TabIndex = 0;
+            // 
+            // panel11
+            // 
+            this.panel11.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel11.Controls.Add(this.label11);
+            this.panel11.Controls.Add(this.baseRWTotalTB);
+            this.panel11.Location = new System.Drawing.Point(145, 10);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(135, 58);
+            this.panel11.TabIndex = 2;
+            // 
+            // label11
+            // 
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.SystemColors.Control;
+            this.label11.Location = new System.Drawing.Point(0, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(135, 20);
+            this.label11.TabIndex = 1;
+            this.label11.Text = "BASE RAW WEIGHT";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // baseRWTotalTB
+            // 
+            this.baseRWTotalTB.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.baseRWTotalTB.Location = new System.Drawing.Point(5, 25);
+            this.baseRWTotalTB.Name = "baseRWTotalTB";
+            this.baseRWTotalTB.ReadOnly = true;
+            this.baseRWTotalTB.Size = new System.Drawing.Size(125, 26);
+            this.baseRWTotalTB.TabIndex = 0;
+            // 
+            // entreCalTotalPanel
+            // 
+            this.entreCalTotalPanel.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.entreCalTotalPanel.Controls.Add(this.label9);
+            this.entreCalTotalPanel.Controls.Add(this.entreCalTotalTB);
+            this.entreCalTotalPanel.Location = new System.Drawing.Point(5, 78);
+            this.entreCalTotalPanel.Name = "entreCalTotalPanel";
+            this.entreCalTotalPanel.Size = new System.Drawing.Size(135, 58);
+            this.entreCalTotalPanel.TabIndex = 1;
+            // 
+            // label9
+            // 
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.SystemColors.Control;
+            this.label9.Location = new System.Drawing.Point(0, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(135, 20);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "ENTRE TOTAL CALORIES";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // entreCalTotalTB
+            // 
+            this.entreCalTotalTB.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.entreCalTotalTB.Location = new System.Drawing.Point(5, 25);
+            this.entreCalTotalTB.Name = "entreCalTotalTB";
+            this.entreCalTotalTB.ReadOnly = true;
+            this.entreCalTotalTB.Size = new System.Drawing.Size(125, 26);
+            this.entreCalTotalTB.TabIndex = 0;
+            // 
+            // entreRWTotalPanel
+            // 
+            this.entreRWTotalPanel.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.entreRWTotalPanel.Controls.Add(this.label8);
+            this.entreRWTotalPanel.Controls.Add(this.entreRWTotalTB);
+            this.entreRWTotalPanel.Location = new System.Drawing.Point(5, 10);
+            this.entreRWTotalPanel.Name = "entreRWTotalPanel";
+            this.entreRWTotalPanel.Size = new System.Drawing.Size(135, 58);
+            this.entreRWTotalPanel.TabIndex = 0;
+            // 
+            // label8
+            // 
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.SystemColors.Control;
+            this.label8.Location = new System.Drawing.Point(0, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(135, 20);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "ENTRE RAW WEIGHT";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // entreRWTotalTB
+            // 
+            this.entreRWTotalTB.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.entreRWTotalTB.Location = new System.Drawing.Point(5, 25);
+            this.entreRWTotalTB.Name = "entreRWTotalTB";
+            this.entreRWTotalTB.ReadOnly = true;
+            this.entreRWTotalTB.Size = new System.Drawing.Size(125, 26);
+            this.entreRWTotalTB.TabIndex = 0;
             // 
             // panel7
             // 
@@ -318,6 +610,66 @@
             this.snacksIngredientPanel.Size = new System.Drawing.Size(400, 150);
             this.snacksIngredientPanel.TabIndex = 19;
             // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel6.Controls.Add(this.label16);
+            this.panel6.Controls.Add(this.portionlCalTB);
+            this.panel6.Location = new System.Drawing.Point(565, 78);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(135, 58);
+            this.panel6.TabIndex = 9;
+            // 
+            // label16
+            // 
+            this.label16.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.ForeColor = System.Drawing.SystemColors.Control;
+            this.label16.Location = new System.Drawing.Point(0, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(135, 20);
+            this.label16.TabIndex = 1;
+            this.label16.Text = "PORTION CALORIES";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // portionlCalTB
+            // 
+            this.portionlCalTB.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.portionlCalTB.Location = new System.Drawing.Point(5, 25);
+            this.portionlCalTB.Name = "portionlCalTB";
+            this.portionlCalTB.ReadOnly = true;
+            this.portionlCalTB.Size = new System.Drawing.Size(125, 26);
+            this.portionlCalTB.TabIndex = 0;
+            // 
+            // panel16
+            // 
+            this.panel16.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel16.Controls.Add(this.label17);
+            this.panel16.Controls.Add(this.portionWTB);
+            this.panel16.Location = new System.Drawing.Point(565, 10);
+            this.panel16.Name = "panel16";
+            this.panel16.Size = new System.Drawing.Size(135, 58);
+            this.panel16.TabIndex = 8;
+            // 
+            // label17
+            // 
+            this.label17.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.ForeColor = System.Drawing.SystemColors.Control;
+            this.label17.Location = new System.Drawing.Point(0, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(135, 20);
+            this.label17.TabIndex = 1;
+            this.label17.Text = "PORTION WEIGHT";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // portionWTB
+            // 
+            this.portionWTB.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.portionWTB.Location = new System.Drawing.Point(5, 25);
+            this.portionWTB.Name = "portionWTB";
+            this.portionWTB.ReadOnly = true;
+            this.portionWTB.Size = new System.Drawing.Size(125, 26);
+            this.portionWTB.TabIndex = 0;
+            // 
             // BuilderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -329,7 +681,7 @@
             this.Controls.Add(this.panel9);
             this.Controls.Add(this.panel8);
             this.Controls.Add(this.panel7);
-            this.Controls.Add(this.panel6);
+            this.Controls.Add(this.totalsPanel);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.entreIngredientPanel);
             this.Controls.Add(this.panel4);
@@ -348,9 +700,30 @@
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
+            this.totalsPanel.ResumeLayout(false);
+            this.panel14.ResumeLayout(false);
+            this.panel14.PerformLayout();
+            this.panel15.ResumeLayout(false);
+            this.panel15.PerformLayout();
+            this.panel12.ResumeLayout(false);
+            this.panel12.PerformLayout();
+            this.panel13.ResumeLayout(false);
+            this.panel13.PerformLayout();
+            this.panel10.ResumeLayout(false);
+            this.panel10.PerformLayout();
+            this.panel11.ResumeLayout(false);
+            this.panel11.PerformLayout();
+            this.entreCalTotalPanel.ResumeLayout(false);
+            this.entreCalTotalPanel.PerformLayout();
+            this.entreRWTotalPanel.ResumeLayout(false);
+            this.entreRWTotalPanel.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            this.panel16.ResumeLayout(false);
+            this.panel16.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -371,7 +744,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.FlowLayoutPanel entreIngredientPanel;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel totalsPanel;
         private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.Button calculateButton;
         private System.Windows.Forms.Panel panel7;
@@ -382,5 +755,35 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.FlowLayoutPanel baseIngredientPanel;
         private System.Windows.Forms.FlowLayoutPanel snacksIngredientPanel;
+        private System.Windows.Forms.Panel entreRWTotalPanel;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox entreRWTotalTB;
+        private System.Windows.Forms.Panel entreCalTotalPanel;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox entreCalTotalTB;
+        private System.Windows.Forms.Panel panel14;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox totalCalTB;
+        private System.Windows.Forms.Panel panel15;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox totalRWTB;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox snackCalTotalTB;
+        private System.Windows.Forms.Panel panel13;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox snackRWTotalTB;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox baseCalTotalTB;
+        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox baseRWTotalTB;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox portionlCalTB;
+        private System.Windows.Forms.Panel panel16;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox portionWTB;
     }
 }
