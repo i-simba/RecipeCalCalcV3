@@ -118,6 +118,16 @@ namespace RecipeCalCalcV3
             }
         }
 
-        // TODO reset values for each ingredient present in the list.
+        /**
+         * resetListVals() function resets the calculated calorie and entered weight variable
+         * for each Ingredient inside the list.
+         */
+        public static void resetListVals()
+        {
+            foreach (Ingredient ing in ingredients)
+            {
+                ing.resetValues();
+            }
+        }
     }
 }

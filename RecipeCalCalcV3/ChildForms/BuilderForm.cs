@@ -11,29 +11,34 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
+/*
+ * TODO::
+ * 1. Add portion and cooked weight.
+ * 2. Save recipe functionality.
+ * 3. Pot/Pan object with weight(?) used to deduct from cooked weight.
+ */
+
 namespace RecipeCalCalcV3.ChildForms
 {
     public partial class BuilderForm : Form
     {
         MainForm main = null;                             // MainForm object.
-
-        private List<Boolean> isAdded = null;             // List Booleans corresponding to each button.
-        
+                
         private List<Button> ingredientButtons = null;    // List of buttons for each ingredient.
         private List<Panel> ingPanels = null;             // List of Panels which displays all added ingredients.
         private List<Panel> entrePanels = null;           // List of Panels which displays added entre ingredients.
         private List<Panel> basePanels = null;            // List of Panels which displays added base ingredients.
         private List<Panel> snackPanels = null;           // List of Panels which displays added snack ingredients.
 
-        private int entreRW = 0;                          // 
-        private int baseRW = 0;                           // 
-        private int snackRW = 0;                          // 
-        private int totalRW = 0;                          // 
+        private int entreRW = 0;                          // Total of all entered weight for entre ingredients.
+        private int baseRW = 0;                           // Total of all entered weight for base ingredients.
+        private int snackRW = 0;                          // Total of all entered weight for snack ingredients.
+        private int totalRW = 0;                          // Total of all combined entered weight.
 
-        private double entreCalculatedCal = 0.0;          // 
-        private double baseCalculatedCal = 0.0;           // 
-        private double snackCalculatedCal = 0.0;          // 
-        private double totalCalculatedCal = 0.0;          // 
+        private double entreCalculatedCal = 0.0;          // Total of all calculated calories for entre ingredients.
+        private double baseCalculatedCal = 0.0;           // Total of all calculated calories for base ingredients.
+        private double snackCalculatedCal = 0.0;          // Total of all calculated calories for snack ingredients.
+        private double totalCalculatedCal = 0.0;          // Total of all combined calculated calories.
 
         public BuilderForm(MainForm m)
         {
@@ -44,7 +49,6 @@ namespace RecipeCalCalcV3.ChildForms
 
             // Initialize lists.
             ingredientButtons = new List<Button>();
-            isAdded = new List<Boolean>();
             ingPanels = new List<Panel>();
             entrePanels = new List<Panel>();
             basePanels = new List<Panel>();
@@ -53,18 +57,18 @@ namespace RecipeCalCalcV3.ChildForms
         }
 
         /**
-         * 
+         * reset() function disposes of all added ingredient panels, and all totals values will be reset to zero and their
+         * corresponding TextBox set to be empty strings.
          */
         public void reset()
         {
+            // Dispose of any entered ingredient panel.
             foreach (Panel panel in ingPanels)
             {
                 panel.Dispose();
             }
-            for (int i = 0; i < isAdded.Count; i++)
-            {
-                isAdded[i] = false;
-            }
+
+            // Reset the text displayed for each totals TextBox.
             foreach (Panel panel in totalsPanel.Controls)
             {
                 foreach (Control control in panel.Controls)
@@ -75,17 +79,19 @@ namespace RecipeCalCalcV3.ChildForms
                     }
                 }
             }
+
+            // Reset all totals variable, weight and calories, to zero.
             entreRW = 0;
             baseRW = 0;
             snackRW = 0;
             totalRW = 0;
-
             entreCalculatedCal = 0.0;
             baseCalculatedCal = 0.0;
             snackCalculatedCal = 0.0;
             totalCalculatedCal = 0.0;
 
-            // TODO reset ingredient values in program.
+            // Resets the entered weight and calculated calorie variables for each ingredient.
+            Program.resetListVals();
         }
 
         /**
@@ -100,13 +106,11 @@ namespace RecipeCalCalcV3.ChildForms
                 // Temporary Button object used to add to list.
                 Button temp = new Button();
                 temp.Name = ing.getName();
+                temp.Tag = "Not";
                 temp.Image = ing.getImage();
                 temp.Width = 64;
                 temp.Height = 64;
                 temp.Click += new EventHandler(button_Click);
-
-                // Denotes if ingredient has already been added to panel.
-                Boolean b = false;
 
                 // ToolTip used to show user the name of the ingredient.
                 ToolTip tip = new ToolTip();
@@ -130,9 +134,34 @@ namespace RecipeCalCalcV3.ChildForms
                     miscPanel.Controls.Add(temp);
                 }
                 ingredientButtons.Add(temp);
-                isAdded.Add(b);
             }
         }
+
+        /**
+         * panelClick() function listens to a click even that happend for any added ingredient panel
+         * for any course. The clicked panel will be disposed, denoting the removal of the ingredient.
+         */
+        private void panelClick(object sender, EventArgs e)
+        {
+            foreach (Panel panel in ingPanels)
+            {
+                if (sender == panel)
+                {
+                    foreach (Button button in ingredientButtons)
+                    {
+                        if (panel.Name.Equals(button.Name))
+                        {
+                            button.Tag = "Not";
+                        }
+                    }
+                    panel.Dispose();
+                }
+            }
+        }
+
+        /**********************************************************************************/
+        /*                                 BUTTON EVENTS                                  */
+        /**********************************************************************************/
 
         /**
          * button_Click() function is the defacto button listener for the dynamically created ingredient buttons.
@@ -152,10 +181,15 @@ namespace RecipeCalCalcV3.ChildForms
             Panel calPanel = new Panel();
             Label calLabel = new Label();
 
+            // ToolTip object bound to the panel 'container' to display "Delete".
+            ToolTip tip = new ToolTip();
+            tip.SetToolTip(container, "Delete");
+
             // Set Panel 'container' properties.
             container.BackColor = Color.FromArgb(168, 163, 157);
             Padding mainPadding = new Padding(15, 15, 0, 0);
             Padding subPadding = new Padding(5, 5, 0, 0);
+            container.Click += new EventHandler(panelClick);
             container.Width = 375;
             container.Height = 70;
 
@@ -185,13 +219,13 @@ namespace RecipeCalCalcV3.ChildForms
             int i = 0;
             foreach (Button button in ingredientButtons)
             {
-                if (sender == button && isAdded[i] == false)
+                if (sender == button && button.Tag.Equals("Not"))
                 {
                     // Set ingredient's name and image.
                     container.Name = button.Name;
+                    button.Tag = "Added";
                     pic.Image = button.Image;
                     text.Name = button.Name + "TB";
-                    isAdded[i] = true;
 
                     // Build container to add to display by adding child controls.
                     calPanel.Controls.Add(calLabel);
@@ -224,11 +258,7 @@ namespace RecipeCalCalcV3.ChildForms
                 }
                 else i++;
             }
-        }
-
-        /**********************************************************************************/
-        /*                                 BUTTON EVENTS                                  */
-        /**********************************************************************************/
+        }        
 
         /**
          * resetButton_Click() function listens to the resetButton and executes reset().
