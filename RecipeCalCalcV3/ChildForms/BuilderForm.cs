@@ -11,6 +11,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
+/*
+ * TODO::
+ * 1. Add portion and cooked weight.
+ * 2. Save recipe functionality.
+ * 3. Pot/Pan object with weight(?) used to deduct from cooked weight.
+ */
+
 namespace RecipeCalCalcV3.ChildForms
 {
     public partial class BuilderForm : Form
@@ -173,6 +180,10 @@ namespace RecipeCalCalcV3.ChildForms
             TextBox text = new TextBox();
             Panel calPanel = new Panel();
             Label calLabel = new Label();
+
+            // ToolTip object bound to the panel 'container' to display "Delete".
+            ToolTip tip = new ToolTip();
+            tip.SetToolTip(container, "Delete");
 
             // Set Panel 'container' properties.
             container.BackColor = Color.FromArgb(168, 163, 157);
