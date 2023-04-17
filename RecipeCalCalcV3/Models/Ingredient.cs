@@ -73,6 +73,17 @@ namespace RecipeCalCalcV3.Models
         }
 
         /**
+         * resetValues() resets the variables that change with each use, as these variables are based
+         * on user input. These variables are the entered weight of a given ingredient, (enteredWeight)
+         * and the calculated calories of the ingredient based on the entered weight. (calculatedCal)
+         */
+        public void resetValues()
+        {
+            this.calculatedCal = 0.0;
+            this.enteredWeight = 0;
+        }
+
+        /**
          * Getter for 'name'.
          * 
          * @return 'name'.
@@ -258,7 +269,5 @@ namespace RecipeCalCalcV3.Models
         {
             this.img = i;
         }
-
-        // TODO reset data values for each ingredient.
     }
 }
