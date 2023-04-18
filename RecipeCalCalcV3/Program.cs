@@ -19,6 +19,8 @@ namespace RecipeCalCalcV3
         public static List<Ingredient> ingredients = null;                   // Ingredient List that holds added ingredients.
         public const String ingredientPath = ".\\Ingredients\\";             // Path to the directory 'Ingredients'.
         public const String ingredientImgPath = ".\\Images\\";               // Path to the directory 'Images'.
+        public const String savedIngredientPath = ".\\SavedRecipes\\";       // Path to the directory 'SavedRecipes'.
+        public const String logsPath = ".\\Logs\\";                          // Path to the directory 'Logs'.
         public const String proteinPath = ingredientPath + "protein.csv";    // Path to the csv file 'protein.csv'.
         public const String veggiePath = ingredientPath + "veggie.csv";      // Path to the csv file 'veggie.csv'.
         public const String liquidPath = ingredientPath + "liquids.csv";     // Path to the csv file 'liquids.csv'.
@@ -99,6 +101,14 @@ namespace RecipeCalCalcV3
             if (!Directory.Exists(ingredientImgPath))
             {
                 Directory.CreateDirectory (ingredientImgPath);
+            }
+            if (!Directory.Exists(savedIngredientPath))
+            {
+                Directory.CreateDirectory(savedIngredientPath);
+            }
+            if (!Directory.Exists(logsPath))
+            {
+                Directory.CreateDirectory(logsPath);
             }
             if (!File.Exists(proteinPath))
             {
