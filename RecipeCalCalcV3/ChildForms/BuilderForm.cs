@@ -40,6 +40,10 @@ namespace RecipeCalCalcV3.ChildForms
         private double snackCalculatedCal = 0.0;          // Total of all calculated calories for snack ingredients.
         private double totalCalculatedCal = 0.0;          // Total of all combined calculated calories.
 
+        private int cookedWeight = 0;                     // The entered cooked weight of entre ingredients.
+        private int portionWeight = 0;                    // The portion weight as it relates to cooked weight.
+        private double portionCalculatedCal = 0.0;        // The calculated calories of the portion.
+
         public BuilderForm(MainForm m)
         {
             InitializeComponent();
@@ -75,11 +79,34 @@ namespace RecipeCalCalcV3.ChildForms
                 {
                     if (control is TextBox)
                     {
-                        control.Text = "";
+                        control.Text = string.Empty;
                     }
                 }
             }
 
+            // Reset tags on each ingredient button.
+            foreach (Button button in ingredientButtons)
+            {
+                button.Tag = "Not";
+            }
+
+            cookedWeightTB.Text = string.Empty;
+            portionWeightTB.Text = string.Empty;
+
+            // Resets the values of each totals.
+            resetValues();
+            
+            // Resets the entered weight and calculated calorie variables for each ingredient.
+            Program.resetListVals();
+        }
+
+        /**
+         * resetValues() function resets only the total values for each calculation.
+         * Mainly used within the calculateButton_Click() function to accurately display totals.
+         * Pulled from reset() function.
+         */
+        private void resetValues()
+        {
             // Reset all totals variable, weight and calories, to zero.
             entreRW = 0;
             baseRW = 0;
@@ -89,9 +116,6 @@ namespace RecipeCalCalcV3.ChildForms
             baseCalculatedCal = 0.0;
             snackCalculatedCal = 0.0;
             totalCalculatedCal = 0.0;
-
-            // Resets the entered weight and calculated calorie variables for each ingredient.
-            Program.resetListVals();
         }
 
         /**
@@ -157,6 +181,52 @@ namespace RecipeCalCalcV3.ChildForms
                     panel.Dispose();
                 }
             }
+        }
+
+        /**
+         * TODO make form pretty
+         */
+        public static DialogResult inputBox(String promptText, ref String value)
+        {
+            Form form = new Form();
+            Label label = new Label();
+            TextBox textBox = new TextBox();
+            Button buttonOk = new Button();
+            Button buttonCancel = new Button();
+
+            label.Text = promptText;
+
+            buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            buttonOk.BackColor = Color.FromArgb(226, 221, 217);
+            buttonCancel.BackColor = Color.FromArgb(216, 200, 185);
+            buttonOk.Text = "OK";
+            buttonCancel.Text = "Cancel";
+            buttonOk.DialogResult = DialogResult.OK;
+            buttonCancel.DialogResult = DialogResult.Cancel;
+
+            label.SetBounds(15, 20, 200, 20);
+            textBox.SetBounds(110, 20, 170, 20);
+            buttonOk.SetBounds(205, 60, 75, 30);
+            buttonCancel.SetBounds(110, 60, 75, 30);
+
+            label.AutoSize = true;
+            label.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            form.ClientSize = new Size(300, 100);
+            form.FormBorderStyle = FormBorderStyle.FixedDialog;
+            form.StartPosition = FormStartPosition.CenterScreen;
+            form.MinimizeBox = false;
+            form.MaximizeBox = false;
+
+            form.BackColor = Color.FromArgb(168, 163, 157);
+            form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel});
+            form.AcceptButton = buttonOk;
+            form.CancelButton = buttonCancel;
+
+            DialogResult result = form.ShowDialog();
+            value = textBox.Text;
+
+            return result;
         }
 
         /**********************************************************************************/
@@ -278,6 +348,9 @@ namespace RecipeCalCalcV3.ChildForms
          */
         private void calculateButton_Click(object sender, EventArgs e)
         {
+            // Initially reset all total values to zero.
+            resetValues();
+
             // Calculate and add each entre weight to find the sum.
             foreach (Panel panel in entrePanels)
             {
@@ -434,11 +507,49 @@ namespace RecipeCalCalcV3.ChildForms
             totalRWTB.Text = totalRW.ToString();
 
             // Display each total calorie to the corresponding TextBox.
-            entreCalTotalTB.Text = entreCalculatedCal.ToString();
-            baseCalTotalTB.Text = baseCalculatedCal.ToString();
-            snackCalTotalTB.Text = snackCalculatedCal.ToString();
+            entreCalTotalTB.Text = entreCalculatedCal.ToString("0.00");
+            baseCalTotalTB.Text = baseCalculatedCal.ToString("0.00");
+            snackCalTotalTB.Text = snackCalculatedCal.ToString("0.00");
             totalCalculatedCal += entreCalculatedCal + baseCalculatedCal + snackCalculatedCal;
-            totalCalTB.Text = totalCalculatedCal.ToString();
+            totalCalTB.Text = totalCalculatedCal.ToString("0.00");
+
+            // Calculating and displaying portion calories if applicable.
+            if (cookedWeightTB.Text != string.Empty)
+            {
+                if (!int.TryParse(cookedWeightTB.Text, out cookedWeight))
+                    cookedWeight = 0;
+            }
+            else cookedWeight = 0;
+            if (portionWeightTB.Text != string.Empty)
+            {
+                if (!int.TryParse(portionWeightTB.Text, out portionWeight))
+                    portionWeight = 0;
+            }
+            else portionWeight = 0;
+            if (cookedWeight == 0 || portionWeight == 0)
+            {
+                portionCalTB.Text = "0";
+                portionlAllCalTB.Text = "0";
+            }
+            else
+            {
+                portionCalculatedCal = (entreCalculatedCal * portionWeight) / cookedWeight;
+                portionCalTB.Text = portionCalculatedCal.ToString("0.00");
+                portionlAllCalTB.Text = (portionCalculatedCal + baseCalculatedCal + snackCalculatedCal).ToString("0.00");
+            }
+        }
+
+        /**
+         * 
+         */
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            // TODO
+            String value = "";
+            if (inputBox("Recipe Name: ", ref value) == DialogResult.OK)
+            {
+                // <Save Name Var> = value;
+            }
         }
     }
 }

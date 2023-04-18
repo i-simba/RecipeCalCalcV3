@@ -42,9 +42,21 @@
             this.label4 = new System.Windows.Forms.Label();
             this.entreIngredientPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.panel17 = new System.Windows.Forms.Panel();
+            this.label18 = new System.Windows.Forms.Label();
+            this.portionWeightTB = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.cookedWeightTB = new System.Windows.Forms.TextBox();
             this.calculateButton = new System.Windows.Forms.Button();
             this.resetButton = new System.Windows.Forms.Button();
             this.totalsPanel = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.label16 = new System.Windows.Forms.Label();
+            this.portionlAllCalTB = new System.Windows.Forms.TextBox();
+            this.panel16 = new System.Windows.Forms.Panel();
+            this.label17 = new System.Windows.Forms.Label();
+            this.portionCalTB = new System.Windows.Forms.TextBox();
             this.panel14 = new System.Windows.Forms.Panel();
             this.label14 = new System.Windows.Forms.Label();
             this.totalCalTB = new System.Windows.Forms.TextBox();
@@ -77,18 +89,15 @@
             this.label7 = new System.Windows.Forms.Label();
             this.baseIngredientPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.snacksIngredientPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.label16 = new System.Windows.Forms.Label();
-            this.portionlCalTB = new System.Windows.Forms.TextBox();
-            this.panel16 = new System.Windows.Forms.Panel();
-            this.label17 = new System.Windows.Forms.Label();
-            this.portionWTB = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.panel17.SuspendLayout();
             this.totalsPanel.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.panel16.SuspendLayout();
             this.panel14.SuspendLayout();
             this.panel15.SuspendLayout();
             this.panel12.SuspendLayout();
@@ -100,8 +109,6 @@
             this.panel7.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel9.SuspendLayout();
-            this.panel6.SuspendLayout();
-            this.panel16.SuspendLayout();
             this.SuspendLayout();
             // 
             // miscPanel
@@ -236,6 +243,8 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(163)))), ((int)(((byte)(157)))));
+            this.panel5.Controls.Add(this.saveButton);
+            this.panel5.Controls.Add(this.panel17);
             this.panel5.Controls.Add(this.calculateButton);
             this.panel5.Controls.Add(this.resetButton);
             this.panel5.Location = new System.Drawing.Point(10, 635);
@@ -243,15 +252,79 @@
             this.panel5.Size = new System.Drawing.Size(810, 50);
             this.panel5.TabIndex = 13;
             // 
+            // saveButton
+            // 
+            this.saveButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(143)))), ((int)(((byte)(138)))));
+            this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveButton.ForeColor = System.Drawing.SystemColors.Control;
+            this.saveButton.Location = new System.Drawing.Point(425, 5);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(135, 40);
+            this.saveButton.TabIndex = 4;
+            this.saveButton.Text = "SAVE";
+            this.saveButton.UseVisualStyleBackColor = false;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
+            // panel17
+            // 
+            this.panel17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(241)))), ((int)(((byte)(233)))));
+            this.panel17.Controls.Add(this.label18);
+            this.panel17.Controls.Add(this.portionWeightTB);
+            this.panel17.Controls.Add(this.label19);
+            this.panel17.Controls.Add(this.cookedWeightTB);
+            this.panel17.Location = new System.Drawing.Point(5, 5);
+            this.panel17.Name = "panel17";
+            this.panel17.Size = new System.Drawing.Size(415, 40);
+            this.panel17.TabIndex = 3;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(80)))), ((int)(((byte)(76)))));
+            this.label18.Location = new System.Drawing.Point(5, 13);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(59, 15);
+            this.label18.TabIndex = 3;
+            this.label18.Text = "CKD WT";
+            // 
+            // portionWeightTB
+            // 
+            this.portionWeightTB.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.portionWeightTB.Location = new System.Drawing.Point(214, 10);
+            this.portionWeightTB.Name = "portionWeightTB";
+            this.portionWeightTB.Size = new System.Drawing.Size(130, 22);
+            this.portionWeightTB.TabIndex = 2;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(80)))), ((int)(((byte)(76)))));
+            this.label19.Location = new System.Drawing.Point(350, 13);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(58, 15);
+            this.label19.TabIndex = 4;
+            this.label19.Text = "PTN WT";
+            // 
+            // cookedWeightTB
+            // 
+            this.cookedWeightTB.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cookedWeightTB.Location = new System.Drawing.Point(70, 10);
+            this.cookedWeightTB.Name = "cookedWeightTB";
+            this.cookedWeightTB.Size = new System.Drawing.Size(130, 22);
+            this.cookedWeightTB.TabIndex = 1;
+            // 
             // calculateButton
             // 
             this.calculateButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(132)))), ((int)(((byte)(89)))));
             this.calculateButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.calculateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.calculateButton.ForeColor = System.Drawing.SystemColors.Control;
-            this.calculateButton.Location = new System.Drawing.Point(690, 5);
+            this.calculateButton.Location = new System.Drawing.Point(565, 5);
             this.calculateButton.Name = "calculateButton";
-            this.calculateButton.Size = new System.Drawing.Size(115, 40);
+            this.calculateButton.Size = new System.Drawing.Size(135, 40);
             this.calculateButton.TabIndex = 1;
             this.calculateButton.Text = "CALCULATE";
             this.calculateButton.UseVisualStyleBackColor = false;
@@ -263,9 +336,9 @@
             this.resetButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.resetButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.resetButton.ForeColor = System.Drawing.SystemColors.Control;
-            this.resetButton.Location = new System.Drawing.Point(570, 5);
+            this.resetButton.Location = new System.Drawing.Point(705, 5);
             this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(115, 40);
+            this.resetButton.Size = new System.Drawing.Size(100, 40);
             this.resetButton.TabIndex = 0;
             this.resetButton.Text = "RESET";
             this.resetButton.UseVisualStyleBackColor = false;
@@ -288,6 +361,66 @@
             this.totalsPanel.Name = "totalsPanel";
             this.totalsPanel.Size = new System.Drawing.Size(810, 150);
             this.totalsPanel.TabIndex = 14;
+            // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel6.Controls.Add(this.label16);
+            this.panel6.Controls.Add(this.portionlAllCalTB);
+            this.panel6.Location = new System.Drawing.Point(565, 78);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(135, 58);
+            this.panel6.TabIndex = 9;
+            // 
+            // label16
+            // 
+            this.label16.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.ForeColor = System.Drawing.SystemColors.Control;
+            this.label16.Location = new System.Drawing.Point(0, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(135, 20);
+            this.label16.TabIndex = 1;
+            this.label16.Text = "PORTION + ALL CAL";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // portionlAllCalTB
+            // 
+            this.portionlAllCalTB.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.portionlAllCalTB.Location = new System.Drawing.Point(5, 25);
+            this.portionlAllCalTB.Name = "portionlAllCalTB";
+            this.portionlAllCalTB.ReadOnly = true;
+            this.portionlAllCalTB.Size = new System.Drawing.Size(125, 26);
+            this.portionlAllCalTB.TabIndex = 0;
+            // 
+            // panel16
+            // 
+            this.panel16.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel16.Controls.Add(this.label17);
+            this.panel16.Controls.Add(this.portionCalTB);
+            this.panel16.Location = new System.Drawing.Point(565, 10);
+            this.panel16.Name = "panel16";
+            this.panel16.Size = new System.Drawing.Size(135, 58);
+            this.panel16.TabIndex = 8;
+            // 
+            // label17
+            // 
+            this.label17.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.ForeColor = System.Drawing.SystemColors.Control;
+            this.label17.Location = new System.Drawing.Point(0, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(135, 20);
+            this.label17.TabIndex = 1;
+            this.label17.Text = "PORTION CALORIES";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // portionCalTB
+            // 
+            this.portionCalTB.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.portionCalTB.Location = new System.Drawing.Point(5, 25);
+            this.portionCalTB.Name = "portionCalTB";
+            this.portionCalTB.ReadOnly = true;
+            this.portionCalTB.Size = new System.Drawing.Size(125, 26);
+            this.portionCalTB.TabIndex = 0;
             // 
             // panel14
             // 
@@ -610,66 +743,6 @@
             this.snacksIngredientPanel.Size = new System.Drawing.Size(400, 150);
             this.snacksIngredientPanel.TabIndex = 19;
             // 
-            // panel6
-            // 
-            this.panel6.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel6.Controls.Add(this.label16);
-            this.panel6.Controls.Add(this.portionlCalTB);
-            this.panel6.Location = new System.Drawing.Point(565, 78);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(135, 58);
-            this.panel6.TabIndex = 9;
-            // 
-            // label16
-            // 
-            this.label16.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.ForeColor = System.Drawing.SystemColors.Control;
-            this.label16.Location = new System.Drawing.Point(0, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(135, 20);
-            this.label16.TabIndex = 1;
-            this.label16.Text = "PORTION CALORIES";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // portionlCalTB
-            // 
-            this.portionlCalTB.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.portionlCalTB.Location = new System.Drawing.Point(5, 25);
-            this.portionlCalTB.Name = "portionlCalTB";
-            this.portionlCalTB.ReadOnly = true;
-            this.portionlCalTB.Size = new System.Drawing.Size(125, 26);
-            this.portionlCalTB.TabIndex = 0;
-            // 
-            // panel16
-            // 
-            this.panel16.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel16.Controls.Add(this.label17);
-            this.panel16.Controls.Add(this.portionWTB);
-            this.panel16.Location = new System.Drawing.Point(565, 10);
-            this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(135, 58);
-            this.panel16.TabIndex = 8;
-            // 
-            // label17
-            // 
-            this.label17.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.ForeColor = System.Drawing.SystemColors.Control;
-            this.label17.Location = new System.Drawing.Point(0, 0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(135, 20);
-            this.label17.TabIndex = 1;
-            this.label17.Text = "PORTION WEIGHT";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // portionWTB
-            // 
-            this.portionWTB.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.portionWTB.Location = new System.Drawing.Point(5, 25);
-            this.portionWTB.Name = "portionWTB";
-            this.portionWTB.ReadOnly = true;
-            this.portionWTB.Size = new System.Drawing.Size(125, 26);
-            this.portionWTB.TabIndex = 0;
-            // 
             // BuilderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -700,7 +773,13 @@
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
+            this.panel17.ResumeLayout(false);
+            this.panel17.PerformLayout();
             this.totalsPanel.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            this.panel16.ResumeLayout(false);
+            this.panel16.PerformLayout();
             this.panel14.ResumeLayout(false);
             this.panel14.PerformLayout();
             this.panel15.ResumeLayout(false);
@@ -720,10 +799,6 @@
             this.panel7.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
-            this.panel16.ResumeLayout(false);
-            this.panel16.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -781,9 +856,15 @@
         private System.Windows.Forms.TextBox baseRWTotalTB;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox portionlCalTB;
+        private System.Windows.Forms.TextBox portionlAllCalTB;
         private System.Windows.Forms.Panel panel16;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox portionWTB;
+        private System.Windows.Forms.TextBox portionCalTB;
+        private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.Panel panel17;
+        private System.Windows.Forms.TextBox portionWeightTB;
+        private System.Windows.Forms.TextBox cookedWeightTB;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
     }
 }
