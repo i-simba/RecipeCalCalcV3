@@ -14,7 +14,6 @@ using System.Windows.Forms.VisualStyles;
 
 /*
  * TODO::
- * 1. Implement load from saved functionality.
  * 0. Pot/Pan object with weight(?) used to deduct from cooked weight.
  */
 
@@ -252,7 +251,7 @@ namespace RecipeCalCalcV3.ChildForms
          * Panel 'calPanel' that will contain the child form 'calLabel' below.
          * Label 'calLabel' that will contain the numeric calorie value of the ingredient based on its entered weight.
          */
-        private void button_Click(object sender, EventArgs e)
+        public void button_Click(object sender, EventArgs e)
         {
             // Controls used to build the 'container' for the ingredient.
             Panel container = new Panel();

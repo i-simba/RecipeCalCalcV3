@@ -30,6 +30,7 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.mainButtonPanel = new System.Windows.Forms.Panel();
+            this.savedPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.savedButton = new System.Windows.Forms.Button();
             this.builderButton = new System.Windows.Forms.Button();
             this.viewLogsButton = new System.Windows.Forms.Button();
@@ -39,7 +40,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.titleTextBox = new System.Windows.Forms.Label();
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.savedPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1.SuspendLayout();
             this.mainButtonPanel.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -69,6 +69,14 @@
             this.mainButtonPanel.Name = "mainButtonPanel";
             this.mainButtonPanel.Size = new System.Drawing.Size(140, 635);
             this.mainButtonPanel.TabIndex = 1;
+            // 
+            // savedPanel
+            // 
+            this.savedPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(171)))), ((int)(((byte)(167)))));
+            this.savedPanel.Location = new System.Drawing.Point(0, 205);
+            this.savedPanel.Name = "savedPanel";
+            this.savedPanel.Size = new System.Drawing.Size(140, 250);
+            this.savedPanel.TabIndex = 4;
             // 
             // savedButton
             // 
@@ -185,14 +193,6 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(1150, 850);
             this.mainPanel.TabIndex = 2;
-            // 
-            // savedPanel
-            // 
-            this.savedPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(171)))), ((int)(((byte)(167)))));
-            this.savedPanel.Location = new System.Drawing.Point(0, 205);
-            this.savedPanel.Name = "savedPanel";
-            this.savedPanel.Size = new System.Drawing.Size(140, 250);
-            this.savedPanel.TabIndex = 4;
             // 
             // MainForm
             // 
