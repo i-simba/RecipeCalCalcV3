@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.IO.Pipes;
 using System.Linq;
 using System.Text;
@@ -13,9 +14,8 @@ using System.Windows.Forms.VisualStyles;
 
 /*
  * TODO::
- * 1. Add portion and cooked weight.
- * 2. Save recipe functionality.
- * 3. Pot/Pan object with weight(?) used to deduct from cooked weight.
+ * 1. Finish flushing out save recipe functionality.
+ * 2. Pot/Pan object with weight(?) used to deduct from cooked weight.
  */
 
 namespace RecipeCalCalcV3.ChildForms
@@ -72,17 +72,27 @@ namespace RecipeCalCalcV3.ChildForms
                 panel.Dispose();
             }
 
+            // Clear lists of all items.
+            ingPanels.Clear();
+            entrePanels.Clear();
+            basePanels.Clear();
+            snackPanels.Clear();
+
             // Reset the text displayed for each totals TextBox.
-            foreach (Panel panel in totalsPanel.Controls)
+            foreach (Control control in totalsPanel.Controls)
             {
-                foreach (Control control in panel.Controls)
+                if (control is Panel)
                 {
-                    if (control is TextBox)
+                    foreach (Control ctrl in  control.Controls)
                     {
-                        control.Text = string.Empty;
+                        if (ctrl is TextBox)
+                        {
+                            ctrl.Text = string.Empty;
+                        }
                     }
                 }
             }
+            
 
             // Reset tags on each ingredient button.
             foreach (Button button in ingredientButtons)
@@ -360,7 +370,11 @@ namespace RecipeCalCalcV3.ChildForms
                     if (con is TextBox)
                     {
                         // Add entered weight to the sum of total entre weight.
-                        entreRW += Convert.ToInt32(con.Text);
+                        if (con.Text != string.Empty)
+                        {
+                            entreRW += Convert.ToInt32(con.Text);
+                        }
+                        else entreRW += 0;
 
                         // Iterate through each Ingredient object within the Ingredient List in Program.
                         foreach (Ingredient ing in Program.ingredients)
@@ -368,7 +382,11 @@ namespace RecipeCalCalcV3.ChildForms
                             // Match panel that corresponds to the ingredient.
                             if (panel.Name.Equals(ing.getName()))
                             {
-                                ing.setEnteredWeight(Convert.ToInt32(con.Text));                                  // Add entered weight to ingredient.
+                                if (con.Text != string.Empty)
+                                {
+                                    ing.setEnteredWeight(Convert.ToInt32(con.Text));                              // Add entered weight to ingredient.
+                                }
+                                else ing.setEnteredWeight(0);
                                 temp = (ing.getEnteredWeight() * ing.getCalories()) / (double)ing.getWeight();    // Calorie calculation.
                                 ing.setCalculatedCal(temp);                                                       // Add calculated calorie to ingredient.
                             }
@@ -403,7 +421,11 @@ namespace RecipeCalCalcV3.ChildForms
                     if (con is TextBox)
                     {
                         // Add entered weight to the sum of total entre weight.
-                        baseRW += Convert.ToInt32(con.Text);
+                        if (con.Text != string.Empty)
+                        {
+                            baseRW += Convert.ToInt32(con.Text);
+                        }
+                        else baseRW += 0;
 
                         // Iterate through each Ingredient object within the Ingredient List in Program.
                         foreach (Ingredient ing in Program.ingredients)
@@ -411,7 +433,11 @@ namespace RecipeCalCalcV3.ChildForms
                             // Match panel that corresponds to the ingredient.
                             if (panel.Name.Equals(ing.getName()))
                             {
-                                ing.setEnteredWeight(Convert.ToInt32(con.Text));                                  // Add entered weight to ingredient.
+                                if (con.Text != string.Empty)
+                                {
+                                    ing.setEnteredWeight(Convert.ToInt32(con.Text));                              // Add entered weight to ingredient.
+                                }
+                                else ing.setEnteredWeight(0);
                                 temp = (ing.getEnteredWeight() * ing.getCalories()) / (double)ing.getWeight();    // Calorie calculation.
                                 ing.setCalculatedCal(temp);                                                       // Add calculated calorie to ingredient.
                             }
@@ -446,14 +472,22 @@ namespace RecipeCalCalcV3.ChildForms
                     if (con is TextBox)
                     {
                         // Add entered weight to the sum of total entre weight.
-                        snackRW += Convert.ToInt32(con.Text);
+                        if (con.Text != string.Empty)
+                        {
+                            snackRW += Convert.ToInt32(con.Text);
+                        }
+                        else snackRW += 0;
 
                         // Iterate through each Ingredient object within the Ingredient List in Program.
                         foreach (Ingredient ing in Program.ingredients)
                         {
                             if (panel.Name.Equals(ing.getName()))
                             {
-                                ing.setEnteredWeight(Convert.ToInt32(con.Text));                                  // Add entered weight to ingredient.
+                                if (con.Text != string.Empty)
+                                {
+                                    ing.setEnteredWeight(Convert.ToInt32(con.Text));                              // Add entered weight to ingredient.
+                                }
+                                else ing.setEnteredWeight(0);
                                 temp = (ing.getEnteredWeight() * ing.getCalories()) / (double)ing.getWeight();    // Calorie calculation.
                                 ing.setCalculatedCal(temp);                                                       // Add calculated calorie to ingredient.
                             }
@@ -537,6 +571,7 @@ namespace RecipeCalCalcV3.ChildForms
                 portionCalTB.Text = portionCalculatedCal.ToString("0.00");
                 portionlAllCalTB.Text = (portionCalculatedCal + baseCalculatedCal + snackCalculatedCal).ToString("0.00");
             }
+            portionlAllCalTB.Text = (entrePanels.Count + basePanels.Count + snackPanels.Count).ToString();
         }
 
         /**
@@ -548,7 +583,16 @@ namespace RecipeCalCalcV3.ChildForms
             String value = "";
             if (inputBox("Recipe Name: ", ref value) == DialogResult.OK)
             {
-                // <Save Name Var> = value;
+                // Assigning file's name to user entered recipe name and creating the file within the 'SavedRecipes' directory.
+                String fName = value;
+                StreamWriter writer = new StreamWriter(Program.savedIngredientPath + fName + ".txt");
+
+                // Writing all added ingredients to created file.
+                foreach (Panel panel in ingPanels)
+                {
+                    writer.WriteLine(panel.Name);
+                }
+                writer.Close();
             }
         }
     }

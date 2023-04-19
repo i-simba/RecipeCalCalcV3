@@ -51,6 +51,7 @@
             this.calculateButton = new System.Windows.Forms.Button();
             this.resetButton = new System.Windows.Forms.Button();
             this.totalsPanel = new System.Windows.Forms.Panel();
+            this.logButton = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label16 = new System.Windows.Forms.Label();
             this.portionlAllCalTB = new System.Windows.Forms.TextBox();
@@ -347,6 +348,7 @@
             // totalsPanel
             // 
             this.totalsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(134)))), ((int)(((byte)(130)))), ((int)(((byte)(126)))));
+            this.totalsPanel.Controls.Add(this.logButton);
             this.totalsPanel.Controls.Add(this.panel6);
             this.totalsPanel.Controls.Add(this.panel16);
             this.totalsPanel.Controls.Add(this.panel14);
@@ -361,6 +363,15 @@
             this.totalsPanel.Name = "totalsPanel";
             this.totalsPanel.Size = new System.Drawing.Size(810, 150);
             this.totalsPanel.TabIndex = 14;
+            // 
+            // logButton
+            // 
+            this.logButton.Location = new System.Drawing.Point(710, 5);
+            this.logButton.Name = "logButton";
+            this.logButton.Size = new System.Drawing.Size(95, 140);
+            this.logButton.TabIndex = 10;
+            this.logButton.Text = "LOG";
+            this.logButton.UseVisualStyleBackColor = true;
             // 
             // panel6
             // 
@@ -866,5 +877,6 @@
         private System.Windows.Forms.TextBox cookedWeightTB;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Button logButton;
     }
 }
