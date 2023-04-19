@@ -37,9 +37,9 @@ namespace RecipeCalCalcV3
             initForm(childForms[BUILDER]);
         }
 
-        /**********************/
-        /*    Internal Use    */
-        /**********************/
+        /**********************************************************************************/
+        /*                                 INTERNAL USE                                   */
+        /**********************************************************************************/
 
         /**
          * initForm() function takes in a Form and initializes it by setting attributes
@@ -73,9 +73,9 @@ namespace RecipeCalCalcV3
             }
         }
 
-        /*****************************/
-        /*    Button Click Events    */
-        /*****************************/
+        /**********************************************************************************/
+        /*                                 BUTTON EVENTS                                  */
+        /**********************************************************************************/
         private void homeButton_Click(object sender, EventArgs e)
         {
             titleTextBox.Text = "HOME";

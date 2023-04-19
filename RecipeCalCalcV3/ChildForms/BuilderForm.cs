@@ -14,8 +14,8 @@ using System.Windows.Forms.VisualStyles;
 
 /*
  * TODO::
- * 1. Finish flushing out save recipe functionality.
- * 2. Pot/Pan object with weight(?) used to deduct from cooked weight.
+ * 1. Implement load from saved functionality.
+ * 0. Pot/Pan object with weight(?) used to deduct from cooked weight.
  */
 
 namespace RecipeCalCalcV3.ChildForms
@@ -579,7 +579,6 @@ namespace RecipeCalCalcV3.ChildForms
          */
         private void saveButton_Click(object sender, EventArgs e)
         {
-            // TODO
             String value = "";
             if (inputBox("Recipe Name: ", ref value) == DialogResult.OK)
             {
@@ -594,6 +593,350 @@ namespace RecipeCalCalcV3.ChildForms
                 }
                 writer.Close();
             }
+        }
+
+        /**********************************************************************************/
+        /*                                SETTERS/GETTERS                                 */
+        /**********************************************************************************/
+        
+        /**
+         * Getter for 'ingredientButtons'.
+         * 
+         * @return 'ingredientButtons'.
+         */
+        public List<Button> getIngredientButtons()
+        {
+            return this.ingredientButtons;
+        }
+
+        /**
+         * Setter for 'ingredientButtons'.
+         * 
+         * @param iB assigned to 'ingredientButtons'.
+         */
+        public void setIngredientButtons(List<Button> iB)
+        {
+            this.ingredientButtons = iB;
+        }
+
+        /**
+         * Get ingredient button at index 'i' from 'ingredientButtons' list.
+         * 
+         * @param i index.
+         */
+        public Button getIngredientButtonAt(int i)
+        {
+            return this.ingredientButtons[i];
+        }
+
+        /**
+         * Getter for 'ingPanels'.
+         * 
+         * @return 'ingPanels'.
+         */
+        public List<Panel> getIngredientPanels()
+        {
+            return this.ingPanels;
+        }
+
+        /**
+         * Setter for 'ingPanels'.
+         * 
+         * @param iP assigned to 'ingPanels'.
+         */
+        public void setIngredientPanels(List<Panel> iB)
+        {
+            this.ingPanels = iB;
+        }
+
+        /**
+         * Get ingredient panel at index 'i' from 'ingPanels' list.
+         * 
+         * @param i index.
+         */
+        public Panel getIngredientPanelAt(int i)
+        {
+            return this.ingPanels[i];
+        }
+
+        /**
+         * Getter for 'entrePanels'.
+         * 
+         * @return 'entrePanels'.
+         */
+        public List<Panel> getEntrePanels()
+        {
+            return this.entrePanels;
+        }
+
+        /**
+         * Setter for 'entrePanels'.
+         * 
+         * @param eP assigned to 'entrePanels'.
+         */
+        public void setEntrePanels(List<Panel> eP)
+        {
+            this.entrePanels = eP;
+        }
+
+        /**
+         * Get entre panel at index 'i' from 'entrePanels' list.
+         * 
+         * @param i index.
+         */
+        public Panel getEntrePanelAt(int i)
+        {
+            return this.entrePanels[i];
+        }
+
+        /**
+         * Getter for 'basePanels'.
+         * 
+         * @return 'basePPanels'.
+         */
+        public List<Panel> getBasePanels()
+        {
+            return this.basePanels;
+        }
+
+        /**
+         * Setter for 'basePanels'.
+         * 
+         * @param bP assigned to 'basePanels'.
+         */
+        public void setBasePanels(List<Panel> bP)
+        {
+            this.basePanels = bP;
+        }
+
+        /**
+         * Get base panel at index 'i' from 'basePanels' list.
+         * 
+         * @param i index.
+         */
+        public Panel getBasePanelAt(int i)
+        {
+            return this.basePanels[i];
+        }
+
+        /**
+         * Getter for 'entreRW'.
+         * 
+         * @return 'entreRW'.
+         */
+        public int getEntreWeight()
+        {
+            return entreRW;
+        }
+
+        /**
+         * Setter for 'entreRW'.
+         * 
+         * @param eW assigned to 'entreRW'.
+         */
+        public void setEntreWeight(int eW)
+        {
+            this.entreRW = eW;
+        }
+
+        /**
+         * Getter for 'baseRW'.
+         * 
+         * @return 'baseRW'.
+         */
+        public int getBaseWeight()
+        {
+            return this.baseRW;
+        }
+
+        /**
+         * Setter for 'baseRW'.
+         * 
+         * @param bW assigned to 'baseRW'.
+         */
+        public void setBaseWeight(int bW)
+        {
+            this.baseRW = bW;
+        }
+
+        /**
+         * Getter for 'snackRW'.
+         * 
+         * @return 'snackRW'.
+         */
+        public int getSnackWeight()
+        {
+            return this.snackRW;
+        }
+
+        /**
+         * Setter for 'snackRW'.
+         * 
+         * @param sW assigned to 'snackRW'.
+         */
+        public void setSnackWeight(int sW)
+        {
+            this.snackRW = sW;
+        }
+
+        /**
+         * Getter for 'totalRW'.
+         * 
+         * @return 'totalRW'.
+         */
+        public int getTotalWeight()
+        {
+            return this.totalRW;
+        }
+
+        /**
+         * Setter for 'totalRW'.
+         * 
+         * @param tW assigned to 'totalRW'.
+         */
+        public void setTotalWeight(int tW)
+        {
+            this.totalRW = tW;
+        }
+
+        /**
+         * Getter for 'entreCalculatedCal'.
+         * 
+         * @return 'entreCalculatedCal'.
+         */
+        public double getEntreCal()
+        {
+            return this.entreCalculatedCal;
+        }
+
+        /**
+         * Setter for 'entreCalculatedCal'.
+         * 
+         * @param eC assigned to 'entreCalculatedCal'.
+         */
+        public void setEntreCal(double eC)
+        {
+            this.entreCalculatedCal = eC;
+        }
+
+        /**
+         * Getter for 'baseCalculatedCal'.
+         * 
+         * @return 'baseCalculatedCal'.
+         */
+        public double getBaseCal()
+        {
+            return this.baseCalculatedCal;
+        }
+
+        /**
+         * Setter for 'baseCalculatedCal'.
+         * 
+         * @param bC assigned to 'baseCalculatedCal'.
+         */
+        public void setBaseCal(double bC)
+        {
+            this.baseCalculatedCal = bC;
+        }
+
+        /**
+         * Getter for 'snackCalculatedCal'.
+         * 
+         * @return 'snackCalculatedCal'.
+         */
+        public double getSnackCal()
+        {
+            return this.snackCalculatedCal;
+        }
+
+        /**
+         * Setter for 'snackCalculatedCal'.
+         * 
+         * @param sC assigned to 'snackCalculatedCal'.
+         */
+        public void setSnackCal(double sC)
+        {
+            this.snackCalculatedCal = sC;
+        }
+
+        /**
+         * Getter for 'totalCalculatedCal'.
+         * 
+         * @return 'totalCalculatedCal'.
+         */
+        public double getTotalCal()
+        {
+            return this.totalCalculatedCal;
+        }
+
+        /**
+         * Setter for 'totalCalculatedCal'.
+         * 
+         * @param tC assigned to 'totalCalculatedCal'.
+         */
+        public void setTotalCal(double tC)
+        {
+            this.totalCalculatedCal = tC;
+        }
+
+        /**
+         * Getter for 'cookedWeight'.
+         * 
+         * @return 'cookedWeight'.
+         */
+        public int getCookedWeight()
+        {
+            return this.cookedWeight;
+        }
+
+        /**
+         * Setter for 'cookedWeight'.
+         * 
+         * @param cW assigned to 'cookedWeight'.
+         */
+        public void setCookedWeight(int cW)
+        {
+            this.cookedWeight = cW;
+        }
+
+        /**
+         * Getter for 'portionWeight'.
+         * 
+         * @return 'portionWeight'.
+         */
+        public int getPortionWeight()
+        {
+            return this.portionWeight;
+        }
+
+        /**
+         * Setter for 'portionWeight'.
+         * 
+         * @param pW assigned to 'portionWeight'.
+         */
+        public void setPortionWeight(int pW)
+        {
+            this.portionWeight = pW;
+        }
+
+        /**
+         * Getter for 'portionCalculatedCal'.
+         * 
+         * @return 'portionCalculatedCal'.
+         */
+        public double getPortionCal()
+        {
+            return this.portionCalculatedCal;
+        }
+
+        /**
+         * Setter for 'portionCalculatedCal'.
+         * 
+         * @param pC assigned to 'portionCalculatedCal'.
+         */
+        public void setPortionCal(double pC)
+        {
+            this.portionCalculatedCal = pC;
         }
     }
 }

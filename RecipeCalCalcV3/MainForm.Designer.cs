@@ -39,6 +39,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.titleTextBox = new System.Windows.Forms.Label();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.savedPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1.SuspendLayout();
             this.mainButtonPanel.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -59,6 +60,7 @@
             // 
             // mainButtonPanel
             // 
+            this.mainButtonPanel.Controls.Add(this.savedPanel);
             this.mainButtonPanel.Controls.Add(this.savedButton);
             this.mainButtonPanel.Controls.Add(this.builderButton);
             this.mainButtonPanel.Controls.Add(this.viewLogsButton);
@@ -184,6 +186,14 @@
             this.mainPanel.Size = new System.Drawing.Size(1150, 850);
             this.mainPanel.TabIndex = 2;
             // 
+            // savedPanel
+            // 
+            this.savedPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(171)))), ((int)(((byte)(167)))));
+            this.savedPanel.Location = new System.Drawing.Point(0, 205);
+            this.savedPanel.Name = "savedPanel";
+            this.savedPanel.Size = new System.Drawing.Size(140, 250);
+            this.savedPanel.TabIndex = 4;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -220,6 +230,7 @@
         private System.Windows.Forms.Button builderButton;
         private System.Windows.Forms.Button viewLogsButton;
         private System.Windows.Forms.Label titleTextBox;
+        private System.Windows.Forms.FlowLayoutPanel savedPanel;
     }
 }
 
