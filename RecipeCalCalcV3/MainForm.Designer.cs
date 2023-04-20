@@ -28,22 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.mainButtonPanel = new System.Windows.Forms.Panel();
+            this.savedPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.savedButton = new System.Windows.Forms.Button();
             this.builderButton = new System.Windows.Forms.Button();
             this.viewLogsButton = new System.Windows.Forms.Button();
             this.homeButton = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.titleTextBox = new System.Windows.Forms.Label();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.savedPanelTimer = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.mainButtonPanel.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -59,6 +62,7 @@
             // 
             // mainButtonPanel
             // 
+            this.mainButtonPanel.Controls.Add(this.savedPanel);
             this.mainButtonPanel.Controls.Add(this.savedButton);
             this.mainButtonPanel.Controls.Add(this.builderButton);
             this.mainButtonPanel.Controls.Add(this.viewLogsButton);
@@ -67,6 +71,16 @@
             this.mainButtonPanel.Name = "mainButtonPanel";
             this.mainButtonPanel.Size = new System.Drawing.Size(140, 635);
             this.mainButtonPanel.TabIndex = 1;
+            // 
+            // savedPanel
+            // 
+            this.savedPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(171)))), ((int)(((byte)(167)))));
+            this.savedPanel.Location = new System.Drawing.Point(0, 205);
+            this.savedPanel.MaximumSize = new System.Drawing.Size(140, 400);
+            this.savedPanel.MinimumSize = new System.Drawing.Size(140, 0);
+            this.savedPanel.Name = "savedPanel";
+            this.savedPanel.Size = new System.Drawing.Size(140, 400);
+            this.savedPanel.TabIndex = 4;
             // 
             // savedButton
             // 
@@ -145,15 +159,6 @@
             this.panel3.Size = new System.Drawing.Size(140, 140);
             this.panel3.TabIndex = 0;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::RecipeCalCalcV3.Properties.Resources.calories;
-            this.pictureBox1.Location = new System.Drawing.Point(6, 6);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(128, 128);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(85)))), ((int)(((byte)(71)))));
@@ -184,6 +189,20 @@
             this.mainPanel.Size = new System.Drawing.Size(1150, 850);
             this.mainPanel.TabIndex = 2;
             // 
+            // savedPanelTimer
+            // 
+            this.savedPanelTimer.Interval = 10;
+            this.savedPanelTimer.Tick += new System.EventHandler(this.savedPanelTimer_Tick);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::RecipeCalCalcV3.Properties.Resources.calories;
+            this.pictureBox1.Location = new System.Drawing.Point(6, 6);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(128, 128);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -198,11 +217,12 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.panel1.ResumeLayout(false);
             this.mainButtonPanel.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -220,6 +240,8 @@
         private System.Windows.Forms.Button builderButton;
         private System.Windows.Forms.Button viewLogsButton;
         private System.Windows.Forms.Label titleTextBox;
+        private System.Windows.Forms.FlowLayoutPanel savedPanel;
+        private System.Windows.Forms.Timer savedPanelTimer;
     }
 }
 

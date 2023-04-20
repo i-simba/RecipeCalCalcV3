@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.IO.Pipes;
 using System.Linq;
 using System.Text;
@@ -12,10 +13,9 @@ using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
 /*
- * TODO::
- * 1. Add portion and cooked weight.
- * 2. Save recipe functionality.
- * 3. Pot/Pan object with weight(?) used to deduct from cooked weight.
+ * TODO ::
+ * 1. Log functionality.
+ * 0. Pot/Pan object with weight(?) used to deduct from cooked weight.
  */
 
 namespace RecipeCalCalcV3.ChildForms
@@ -23,7 +23,7 @@ namespace RecipeCalCalcV3.ChildForms
     public partial class BuilderForm : Form
     {
         MainForm main = null;                             // MainForm object.
-                
+        
         private List<Button> ingredientButtons = null;    // List of buttons for each ingredient.
         private List<Panel> ingPanels = null;             // List of Panels which displays all added ingredients.
         private List<Panel> entrePanels = null;           // List of Panels which displays added entre ingredients.
@@ -72,17 +72,27 @@ namespace RecipeCalCalcV3.ChildForms
                 panel.Dispose();
             }
 
+            // Clear lists of all items.
+            ingPanels.Clear();
+            entrePanels.Clear();
+            basePanels.Clear();
+            snackPanels.Clear();
+
             // Reset the text displayed for each totals TextBox.
-            foreach (Panel panel in totalsPanel.Controls)
+            foreach (Control control in totalsPanel.Controls)
             {
-                foreach (Control control in panel.Controls)
+                if (control is Panel)
                 {
-                    if (control is TextBox)
+                    foreach (Control ctrl in  control.Controls)
                     {
-                        control.Text = string.Empty;
+                        if (ctrl is TextBox)
+                        {
+                            ctrl.Text = string.Empty;
+                        }
                     }
                 }
             }
+            
 
             // Reset tags on each ingredient button.
             foreach (Button button in ingredientButtons)
@@ -116,6 +126,9 @@ namespace RecipeCalCalcV3.ChildForms
             baseCalculatedCal = 0.0;
             snackCalculatedCal = 0.0;
             totalCalculatedCal = 0.0;
+            cookedWeight = 0;
+            portionWeight = 0;
+            portionCalculatedCal = 0.0;
         }
 
         /**
@@ -167,6 +180,8 @@ namespace RecipeCalCalcV3.ChildForms
          */
         private void panelClick(object sender, EventArgs e)
         {
+            resetValues();
+            Program.resetListVals();
             foreach (Panel panel in ingPanels)
             {
                 if (sender == panel)
@@ -178,15 +193,30 @@ namespace RecipeCalCalcV3.ChildForms
                             button.Tag = "Not";
                         }
                     }
+                    foreach (Control ctrl in panel.Controls)
+                    {
+                        panel.Controls.Remove(ctrl);
+                    }
+                    if (entrePanels.Contains(panel))
+                        entrePanels.Remove(panel);
+                    if (basePanels.Contains(panel))
+                        basePanels.Remove(panel);
+                    if (snackPanels.Contains(panel))
+                        snackPanels.Remove(panel);
+                    ingPanels.Remove(panel);
                     panel.Dispose();
+                    return;
                 }
             }
         }
 
         /**
-         * TODO make form pretty
+         * inputBox() function dynamically creates a new Form that prompts the user to enter a
+         * name for the recipe.
+         * If the string entered is either empty or only contains white spaces, this function will
+         * display an error and recursively prompt the user again until a valid input is entered.
          */
-        public static DialogResult inputBox(String promptText, ref String value)
+        public static DialogResult inputBox(String promptText, String text, ref String value, int i)
         {
             Form form = new Form();
             Label label = new Label();
@@ -195,6 +225,11 @@ namespace RecipeCalCalcV3.ChildForms
             Button buttonCancel = new Button();
 
             label.Text = promptText;
+            // Conditional statements based on the caller 'i'.
+            if (i == 2)
+            {
+                textBox.Text = text;
+            }
 
             buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
@@ -224,8 +259,23 @@ namespace RecipeCalCalcV3.ChildForms
             form.CancelButton = buttonCancel;
 
             DialogResult result = form.ShowDialog();
-            value = textBox.Text;
 
+            // Validate recipe name input - Recursively show Dialog if empty.
+            if (result == DialogResult.OK && string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                if (i == 1)
+                {
+                    MessageBox.Show("Recipe name cannot be empty!", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return inputBox(promptText, text, ref value, i);
+                }
+                if (i == 2)
+                {
+                    MessageBox.Show("Log name cannot be empty!", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return inputBox(promptText, text, ref value, i);
+                }
+            }
+
+            value = textBox.Text;
             return result;
         }
 
@@ -242,7 +292,7 @@ namespace RecipeCalCalcV3.ChildForms
          * Panel 'calPanel' that will contain the child form 'calLabel' below.
          * Label 'calLabel' that will contain the numeric calorie value of the ingredient based on its entered weight.
          */
-        private void button_Click(object sender, EventArgs e)
+        public void button_Click(object sender, EventArgs e)
         {
             // Controls used to build the 'container' for the ingredient.
             Panel container = new Panel();
@@ -308,15 +358,15 @@ namespace RecipeCalCalcV3.ChildForms
                     {
                         case 1:
                             container.Padding = new Padding(15, 15, 0, 0);
-                            entreIngredientPanel.Controls.Add(container); Console.WriteLine("\nENTRE\n");
+                            entreIngredientPanel.Controls.Add(container);
                             entrePanels.Add(container);
                             break;
                         case 2: 
-                            baseIngredientPanel.Controls.Add(container); Console.WriteLine("\nBASE\n");
+                            baseIngredientPanel.Controls.Add(container);
                             basePanels.Add(container);
                             break;
                         case 3: 
-                            snacksIngredientPanel.Controls.Add(container); Console.WriteLine("\nSNACK\n");
+                            snacksIngredientPanel.Controls.Add(container);
                             snackPanels.Add(container);
                             break;
                         default: Console.WriteLine("\nERROR! BuilderForm.cs -> button_Click() -> switch!");
@@ -360,7 +410,11 @@ namespace RecipeCalCalcV3.ChildForms
                     if (con is TextBox)
                     {
                         // Add entered weight to the sum of total entre weight.
-                        entreRW += Convert.ToInt32(con.Text);
+                        if (con.Text != string.Empty)
+                        {
+                            entreRW += Convert.ToInt32(con.Text);
+                        }
+                        else entreRW += 0;
 
                         // Iterate through each Ingredient object within the Ingredient List in Program.
                         foreach (Ingredient ing in Program.ingredients)
@@ -368,7 +422,11 @@ namespace RecipeCalCalcV3.ChildForms
                             // Match panel that corresponds to the ingredient.
                             if (panel.Name.Equals(ing.getName()))
                             {
-                                ing.setEnteredWeight(Convert.ToInt32(con.Text));                                  // Add entered weight to ingredient.
+                                if (con.Text != string.Empty)
+                                {
+                                    ing.setEnteredWeight(Convert.ToInt32(con.Text));                              // Add entered weight to ingredient.
+                                }
+                                else ing.setEnteredWeight(0);
                                 temp = (ing.getEnteredWeight() * ing.getCalories()) / (double)ing.getWeight();    // Calorie calculation.
                                 ing.setCalculatedCal(temp);                                                       // Add calculated calorie to ingredient.
                             }
@@ -403,7 +461,11 @@ namespace RecipeCalCalcV3.ChildForms
                     if (con is TextBox)
                     {
                         // Add entered weight to the sum of total entre weight.
-                        baseRW += Convert.ToInt32(con.Text);
+                        if (con.Text != string.Empty)
+                        {
+                            baseRW += Convert.ToInt32(con.Text);
+                        }
+                        else baseRW += 0;
 
                         // Iterate through each Ingredient object within the Ingredient List in Program.
                         foreach (Ingredient ing in Program.ingredients)
@@ -411,7 +473,11 @@ namespace RecipeCalCalcV3.ChildForms
                             // Match panel that corresponds to the ingredient.
                             if (panel.Name.Equals(ing.getName()))
                             {
-                                ing.setEnteredWeight(Convert.ToInt32(con.Text));                                  // Add entered weight to ingredient.
+                                if (con.Text != string.Empty)
+                                {
+                                    ing.setEnteredWeight(Convert.ToInt32(con.Text));                              // Add entered weight to ingredient.
+                                }
+                                else ing.setEnteredWeight(0);
                                 temp = (ing.getEnteredWeight() * ing.getCalories()) / (double)ing.getWeight();    // Calorie calculation.
                                 ing.setCalculatedCal(temp);                                                       // Add calculated calorie to ingredient.
                             }
@@ -446,14 +512,22 @@ namespace RecipeCalCalcV3.ChildForms
                     if (con is TextBox)
                     {
                         // Add entered weight to the sum of total entre weight.
-                        snackRW += Convert.ToInt32(con.Text);
+                        if (con.Text != string.Empty)
+                        {
+                            snackRW += Convert.ToInt32(con.Text);
+                        }
+                        else snackRW += 0;
 
                         // Iterate through each Ingredient object within the Ingredient List in Program.
                         foreach (Ingredient ing in Program.ingredients)
                         {
                             if (panel.Name.Equals(ing.getName()))
                             {
-                                ing.setEnteredWeight(Convert.ToInt32(con.Text));                                  // Add entered weight to ingredient.
+                                if (con.Text != string.Empty)
+                                {
+                                    ing.setEnteredWeight(Convert.ToInt32(con.Text));                              // Add entered weight to ingredient.
+                                }
+                                else ing.setEnteredWeight(0);
                                 temp = (ing.getEnteredWeight() * ing.getCalories()) / (double)ing.getWeight();    // Calorie calculation.
                                 ing.setCalculatedCal(temp);                                                       // Add calculated calorie to ingredient.
                             }
@@ -540,16 +614,475 @@ namespace RecipeCalCalcV3.ChildForms
         }
 
         /**
-         * 
+         * saveButton_Click() function listens to the saveButton.
+         * Upon a click, a new generated Form will appear prompting the user to enter a recipe name.
+         * The user is then given the choice to either press 'cancel' or 'ok'.
+         * If the user entered a name and pressed 'ok', the recipe will be saved.
          */
         private void saveButton_Click(object sender, EventArgs e)
         {
-            // TODO
-            String value = "";
-            if (inputBox("Recipe Name: ", ref value) == DialogResult.OK)
+            // Error trap - Cannot save if no ingredient is present.
+            if (ingPanels.Count <= 0)
             {
-                // <Save Name Var> = value;
+                MessageBox.Show("No ingredients to save!", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error );
+                return;
+            }
+
+            String value = "";
+            if (inputBox("Recipe Name: ", "", ref value, 1) == DialogResult.OK)
+            {
+                // Assigning file's name to user entered recipe name and creating the file within the 'SavedRecipes' directory.
+                String fName = value;
+                StreamWriter writer = new StreamWriter(Program.savedIngredientPath + fName + ".txt");
+
+                // Writing all added ingredients to created file.
+                foreach (Panel panel in ingPanels)
+                {
+                    writer.WriteLine(panel.Name);
+                }
+                writer.Close();
+
+                // Display Success message upon recipe save.
+                MessageBox.Show("SUCCESS! Recipe saved!", "", MessageBoxButtons.OK);
             }
         }
+
+        /**
+         * TODO
+         */
+        private void logButton_Click(object sender, EventArgs e)
+        {
+            // Error trap - Cannot log before calculating.
+            if (totalCalTB.Text.Equals(string.Empty) || totalCalTB.Text.Equals("0"))
+            {
+                MessageBox.Show("No data to log! Make sure to calculate first!", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error );
+                return;
+            }
+
+            // Name of the log file to be saved will be log day's date.
+            String stemp = DateTime.Today.ToString("ddMMMyy").ToUpper();
+
+            // Dialog Box asking user to confirm log name. (Correct Date)
+            String value = "";
+            if (inputBox("Log Name: ", stemp, ref value, 2) == DialogResult.OK)
+            {
+                stemp = value;
+
+                // Display Success message upon saving log.
+                MessageBox.Show("SUCCESS! Log saved!", "", MessageBoxButtons.OK);
+            }
+            else return;
+
+            String fName = Program.logsPath + stemp + ".txt";
+            Log temp = null;
+            StreamWriter writer = new StreamWriter(fName);
+
+            // Recipe is not portioned.
+            if (portionCalTB.Text.Equals(string.Empty) || portionCalTB.Text.Equals("0"))
+            {
+                temp = new Log(fName, main.getTitle(), 
+                    entreRW, baseRW, snackRW, totalRW, 
+                    entreCalculatedCal, baseCalculatedCal, snackCalculatedCal, totalCalculatedCal);
+            }
+
+            // Recipe is portioned.
+            else
+            {
+                temp = new Log(fName, main.getTitle(),
+                    entreRW, baseRW, snackRW, totalRW,
+                    entreCalculatedCal, baseCalculatedCal, snackCalculatedCal, totalCalculatedCal,
+                    cookedWeight, portionWeight, portionCalculatedCal);
+            }
+
+            // Loop through each ingredient panels.
+            foreach (Panel panel in ingPanels)
+            {
+                foreach (Ingredient ing in Program.ingredients)
+                {
+                    if (panel.Name.Equals(ing.getName()))
+                    {
+                        temp.addIngredient(ing);
+                    }
+                }
+            }
+
+            // Write log to file.
+            writer.Write(temp.toString());
+            writer.Close();
+        }
+
+        /**********************************************************************************/
+        /*                                SETTERS/GETTERS                                 */
+        /**********************************************************************************/
+
+        /**
+         * Getter for 'ingredientButtons'.
+         * 
+         * @return 'ingredientButtons'.
+         */
+        public List<Button> getIngredientButtons()
+        {
+            return this.ingredientButtons;
+        }
+
+        /**
+         * Setter for 'ingredientButtons'.
+         * 
+         * @param iB assigned to 'ingredientButtons'.
+         */
+        public void setIngredientButtons(List<Button> iB)
+        {
+            this.ingredientButtons = iB;
+        }
+
+        /**
+         * Get ingredient button at index 'i' from 'ingredientButtons' list.
+         * 
+         * @param i index.
+         */
+        public Button getIngredientButtonAt(int i)
+        {
+            return this.ingredientButtons[i];
+        }
+
+        /**
+         * Getter for 'ingPanels'.
+         * 
+         * @return 'ingPanels'.
+         */
+        public List<Panel> getIngredientPanels()
+        {
+            return this.ingPanels;
+        }
+
+        /**
+         * Setter for 'ingPanels'.
+         * 
+         * @param iP assigned to 'ingPanels'.
+         */
+        public void setIngredientPanels(List<Panel> iB)
+        {
+            this.ingPanels = iB;
+        }
+
+        /**
+         * Get ingredient panel at index 'i' from 'ingPanels' list.
+         * 
+         * @param i index.
+         */
+        public Panel getIngredientPanelAt(int i)
+        {
+            return this.ingPanels[i];
+        }
+
+        /**
+         * Getter for 'entrePanels'.
+         * 
+         * @return 'entrePanels'.
+         */
+        public List<Panel> getEntrePanels()
+        {
+            return this.entrePanels;
+        }
+
+        /**
+         * Setter for 'entrePanels'.
+         * 
+         * @param eP assigned to 'entrePanels'.
+         */
+        public void setEntrePanels(List<Panel> eP)
+        {
+            this.entrePanels = eP;
+        }
+
+        /**
+         * Get entre panel at index 'i' from 'entrePanels' list.
+         * 
+         * @param i index.
+         */
+        public Panel getEntrePanelAt(int i)
+        {
+            return this.entrePanels[i];
+        }
+
+        /**
+         * Getter for 'basePanels'.
+         * 
+         * @return 'basePanels'.
+         */
+        public List<Panel> getBasePanels()
+        {
+            return this.basePanels;
+        }
+
+        /**
+         * Setter for 'basePanels'.
+         * 
+         * @param bP assigned to 'basePanels'.
+         */
+        public void setBasePanels(List<Panel> bP)
+        {
+            this.basePanels = bP;
+        }
+
+        /**
+         * Get base panel at index 'i' from 'basePanels' list.
+         * 
+         * @param i index.
+         */
+        public Panel getBasePanelAt(int i)
+        {
+            return this.basePanels[i];
+        }
+
+        /**
+         * Getter for 'snackPanels'.
+         * 
+         * @return 'snackPanels'.
+         */
+        public List<Panel> getSnackPanels()
+        {
+            return this.snackPanels;
+        }
+
+        /**
+         * Setter for 'snackPanels'.
+         * 
+         * @param sP assigned to 'snackPanels'.
+         */
+        public void setSnackPanels(List<Panel> sP)
+        {
+            this.snackPanels = sP;
+        }
+
+        /**
+         * Get base panel at index 'i' from 'snackPanels' list.
+         * 
+         * @param i index.
+         */
+        public Panel getSnackPanelAt(int i)
+        {
+            return this.snackPanels[i];
+        }
+
+        /**
+         * Getter for 'entreRW'.
+         * 
+         * @return 'entreRW'.
+         */
+        public int getEntreWeight()
+        {
+            return entreRW;
+        }
+
+        /**
+         * Setter for 'entreRW'.
+         * 
+         * @param eW assigned to 'entreRW'.
+         */
+        public void setEntreWeight(int eW)
+        {
+            this.entreRW = eW;
+        }
+
+        /**
+         * Getter for 'baseRW'.
+         * 
+         * @return 'baseRW'.
+         */
+        public int getBaseWeight()
+        {
+            return this.baseRW;
+        }
+
+        /**
+         * Setter for 'baseRW'.
+         * 
+         * @param bW assigned to 'baseRW'.
+         */
+        public void setBaseWeight(int bW)
+        {
+            this.baseRW = bW;
+        }
+
+        /**
+         * Getter for 'snackRW'.
+         * 
+         * @return 'snackRW'.
+         */
+        public int getSnackWeight()
+        {
+            return this.snackRW;
+        }
+
+        /**
+         * Setter for 'snackRW'.
+         * 
+         * @param sW assigned to 'snackRW'.
+         */
+        public void setSnackWeight(int sW)
+        {
+            this.snackRW = sW;
+        }
+
+        /**
+         * Getter for 'totalRW'.
+         * 
+         * @return 'totalRW'.
+         */
+        public int getTotalWeight()
+        {
+            return this.totalRW;
+        }
+
+        /**
+         * Setter for 'totalRW'.
+         * 
+         * @param tW assigned to 'totalRW'.
+         */
+        public void setTotalWeight(int tW)
+        {
+            this.totalRW = tW;
+        }
+
+        /**
+         * Getter for 'entreCalculatedCal'.
+         * 
+         * @return 'entreCalculatedCal'.
+         */
+        public double getEntreCal()
+        {
+            return this.entreCalculatedCal;
+        }
+
+        /**
+         * Setter for 'entreCalculatedCal'.
+         * 
+         * @param eC assigned to 'entreCalculatedCal'.
+         */
+        public void setEntreCal(double eC)
+        {
+            this.entreCalculatedCal = eC;
+        }
+
+        /**
+         * Getter for 'baseCalculatedCal'.
+         * 
+         * @return 'baseCalculatedCal'.
+         */
+        public double getBaseCal()
+        {
+            return this.baseCalculatedCal;
+        }
+
+        /**
+         * Setter for 'baseCalculatedCal'.
+         * 
+         * @param bC assigned to 'baseCalculatedCal'.
+         */
+        public void setBaseCal(double bC)
+        {
+            this.baseCalculatedCal = bC;
+        }
+
+        /**
+         * Getter for 'snackCalculatedCal'.
+         * 
+         * @return 'snackCalculatedCal'.
+         */
+        public double getSnackCal()
+        {
+            return this.snackCalculatedCal;
+        }
+
+        /**
+         * Setter for 'snackCalculatedCal'.
+         * 
+         * @param sC assigned to 'snackCalculatedCal'.
+         */
+        public void setSnackCal(double sC)
+        {
+            this.snackCalculatedCal = sC;
+        }
+
+        /**
+         * Getter for 'totalCalculatedCal'.
+         * 
+         * @return 'totalCalculatedCal'.
+         */
+        public double getTotalCal()
+        {
+            return this.totalCalculatedCal;
+        }
+
+        /**
+         * Setter for 'totalCalculatedCal'.
+         * 
+         * @param tC assigned to 'totalCalculatedCal'.
+         */
+        public void setTotalCal(double tC)
+        {
+            this.totalCalculatedCal = tC;
+        }
+
+        /**
+         * Getter for 'cookedWeight'.
+         * 
+         * @return 'cookedWeight'.
+         */
+        public int getCookedWeight()
+        {
+            return this.cookedWeight;
+        }
+
+        /**
+         * Setter for 'cookedWeight'.
+         * 
+         * @param cW assigned to 'cookedWeight'.
+         */
+        public void setCookedWeight(int cW)
+        {
+            this.cookedWeight = cW;
+        }
+
+        /**
+         * Getter for 'portionWeight'.
+         * 
+         * @return 'portionWeight'.
+         */
+        public int getPortionWeight()
+        {
+            return this.portionWeight;
+        }
+
+        /**
+         * Setter for 'portionWeight'.
+         * 
+         * @param pW assigned to 'portionWeight'.
+         */
+        public void setPortionWeight(int pW)
+        {
+            this.portionWeight = pW;
+        }
+
+        /**
+         * Getter for 'portionCalculatedCal'.
+         * 
+         * @return 'portionCalculatedCal'.
+         */
+        public double getPortionCal()
+        {
+            return this.portionCalculatedCal;
+        }
+
+        /**
+         * Setter for 'portionCalculatedCal'.
+         * 
+         * @param pC assigned to 'portionCalculatedCal'.
+         */
+        public void setPortionCal(double pC)
+        {
+            this.portionCalculatedCal = pC;
+        }        
     }
 }
