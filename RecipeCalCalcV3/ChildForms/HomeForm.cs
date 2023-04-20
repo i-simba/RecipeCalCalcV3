@@ -8,6 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+/**
+ * TODO ::
+ * 1. Add ingredient functionality.
+ * 2. Display tips.
+ */
+
 namespace RecipeCalCalcV3.ChildForms
 {
     public partial class HomeForm : Form

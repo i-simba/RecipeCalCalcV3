@@ -21,16 +21,17 @@ namespace RecipeCalCalcV3.Models
         private String name;                        // Name of the log. (Date)
         private String recipeName;                  // Name of the recipe saved in the log.
 
-        private List<Ingredient> entreIng;          // Ingredients used in making the entre.
-        private List<Ingredient> baseIng;           // Ingredients not used in the entre. i.e. rice, pasta, etc.
-        private List<Ingredient> snackIng;          // Ingredients that are also not used in the entre. i.e. chips, desserts, etc.
+        private List<Ingredient> ingredientList;    // Ingredients used in making the entre.
 
-        private double rawEntreWeight;              // Total weight of uncooked entre ingredients.
+        private double entreIngWeight;              // Total weight of uncooked entre ingredients.
         private double baseIngWeight;               // Total weight of base ingredients.
+        private double snackIngWeight;              // Total weight of snack ingredients.
+        private double totalIngWeight;              // Total weight of all ingredients.
 
         private double entreCalories;               // Total calories of entre ingredients.
         private double baseCalories;                // Total calories of base ingredients.
-        private double totalCalories;               // Total combined calories of entre and base ingredients.
+        private double snackCalories;               // Total calories of snack ingredients.
+        private double totalCalories;               // Total combined calories of all ingredients.
 
         private double cookedWeight;                // Total cooked weight of ingredients.
         private double portionWeight;               // Total portion weight of cooked ingredients.
@@ -46,10 +47,9 @@ namespace RecipeCalCalcV3.Models
             this.name = string.Empty;
             this.recipeName = string.Empty;
 
-            this.entreIng = new List<Ingredient>();
-            this.baseIng = new List<Ingredient>();
+            this.ingredientList = new List<Ingredient>();
 
-            this.rawEntreWeight = 0.0;
+            this.entreIngWeight = 0.0;
             this.baseIngWeight = 0.0;
 
             this.entreCalories = 0.0;
@@ -68,25 +68,30 @@ namespace RecipeCalCalcV3.Models
          * 
          * @param n assigned to 'name'.
          * @param rN assigned to 'recipeName'.
-         * @param rEW assigned to 'rawEntreWeight'.
+         * @param rEW assigned to 'entreIngWeight'.
          * @param bW assigned to 'baseIngWeight'.
+         * @param sW assigned to 'snackIngWeight'.
+         * @param tW assigned to 'totalIngWeight'.
          * @param eC assigned to 'entreCalories'.
          * @param bC assigned to 'baseCalories'.
+         * @param sC assigned to 'snackCalories'.
          * @param tC assigned to 'totalCalories'.
          */
-        public Log(String n, String rN, double rEW, double bW, double eC, double bC, double tC)
+        public Log(String n, String rN, double rEW, double bW, double sW, double tW, double eC, double bC, double sC, double tC)
         {
             this.name = n;
             this.recipeName = rN;
 
-            this.entreIng = new List<Ingredient>();
-            this.baseIng = new List<Ingredient>();
+            this.ingredientList = new List<Ingredient>();
 
-            this.rawEntreWeight = rEW;
+            this.entreIngWeight = rEW;
             this.baseIngWeight = bW;
+            this.snackIngWeight = sW;
+            this.totalIngWeight = tW;
 
             this.entreCalories = eC;
             this.baseCalories = bC;
+            this.snackCalories = sC;
             this.totalCalories = tC;
 
             this.cookedWeight = 0.0;
@@ -101,28 +106,33 @@ namespace RecipeCalCalcV3.Models
          * 
          * @param n assigned to 'name'.
          * @param rN assigned to 'recipeName'.
-         * @param rEW assigned to 'rawEntreWeight'.
+         * @param rEW assigned to 'entreIngWeight'.
          * @param bW assigned to 'baseIngWeight'.
+         * @param sW assigned to 'snackIngWeight'.
+         * @param tW assigned to 'totalIngWeight'.
          * @param eC assigned to 'entreCalories'.
          * @param bC assigned to 'baseCalories'.
+         * @param sC assigned to 'snackCalories'.
          * @param tC assigned to 'totalCalories'.
          * @param cW assigned to 'cookedWeight'.
          * @param pW assigned to 'portionWeight'.
          * @param pC assigned to 'portionCalories'.
          */
-        public Log(String n, String rN, double rEW, double bW, double eC, double bC, double tC, double cW, double pW, double pC)
+        public Log(String n, String rN, double rEW, double bW, double sW, double tW, double eC, double bC, double sC, double tC, double cW, double pW, double pC)
         {
             this.name = n;
             this.recipeName = rN;
 
-            this.entreIng = new List<Ingredient>();
-            this.baseIng = new List<Ingredient>();
+            this.ingredientList = new List<Ingredient>();
 
-            this.rawEntreWeight = rEW;
+            this.entreIngWeight = rEW;
             this.baseIngWeight = bW;
+            this.snackIngWeight = sW;
+            this.totalIngWeight = tW;
 
             this.entreCalories = eC;
             this.baseCalories = bC;
+            this.snackCalories = sC;
             this.totalCalories = tC;
 
             this.cookedWeight = cW;
@@ -133,6 +143,25 @@ namespace RecipeCalCalcV3.Models
         /**
          * TODO: toString().
          */
+        public String toString()
+        {
+            String temp = string.Empty;
+
+            temp += recipeName + "\n";
+            foreach (Ingredient ing in ingredientList)
+            {
+                temp += ing.getName() + "," +
+                    ing.getEnteredWeight() + "," +
+                    ing.getCalculatedCal() + "\n";
+            }
+            temp += "TOTALS\n";
+            temp += entreIngWeight.ToString() + "," + entreCalories.ToString() + "\n";
+            temp += baseIngWeight.ToString() + "," + baseCalories.ToString() + "\n";
+            temp += snackIngWeight.ToString() + "," + snackCalories.ToString() + "\n";
+            temp += totalIngWeight.ToString() + "," + totalCalories.ToString() + "\n";
+
+            return temp;
+        }
 
         /**
          * Getter for 'name'.
@@ -175,23 +204,23 @@ namespace RecipeCalCalcV3.Models
         }
 
         /**
-         * Getter for 'rawEntreWeight'.
+         * Getter for 'entreIngWeight'.
          * 
-         * @return 'rawEntreWeight'.
+         * @return 'entreIngWeight'.
          */
-        public double getRawEntreWeight()
+        public double getentreIngWeight()
         {
-            return this.rawEntreWeight;
+            return this.entreIngWeight;
         }
 
         /**
-         * Setter for 'rawEntreWeight'.
+         * Setter for 'entreIngWeight'.
          * 
-         * @param eW assigned to 'rawEntreWeight'.
+         * @param eW assigned to 'entreIngWeight'.
          */
-        public void setRawEntreWeight(double eW)
+        public void setentreIngWeight(double eW)
         {
-            this.rawEntreWeight = eW;
+            this.entreIngWeight = eW;
         }
 
         /**
@@ -339,9 +368,9 @@ namespace RecipeCalCalcV3.Models
          * 
          * @return 'entreIng'.
          */
-        public List<Ingredient> getEntreList()
+        public List<Ingredient> getIngredientList()
         {
-            return this.entreIng;
+            return this.ingredientList;
         }
 
         /**
@@ -349,17 +378,17 @@ namespace RecipeCalCalcV3.Models
          * 
          * @param e assigned to 'entreIng'.
          */
-        public void setEntreList(List<Ingredient> e)
+        public void setIngredientList(List<Ingredient> e)
         {
-            this.entreIng = e;
+            this.ingredientList = e;
         }
 
         /**
          * addEntre() function adds an ingredient to the entre list.
          */
-        public void addEntre(Ingredient e)
+        public void addIngredient(Ingredient e)
         {
-            this.entreIng.Add(e);
+            this.ingredientList.Add(e);
         }
 
         /**
@@ -367,85 +396,9 @@ namespace RecipeCalCalcV3.Models
          * 
          * @param i index.
          */
-        public Ingredient getEntreAt(int i)
+        public Ingredient getIngredientAt(int i)
         {
-            return this.entreIng[i];
-        }
-
-        /**
-         * Getter for 'baseIng'.
-         * 
-         * @return 'baseIng'.
-         */
-        public List<Ingredient> getBaseList()
-        {
-            return this.baseIng;
-        }
-
-        /**
-         * Setter for 'baseIng'.
-         * 
-         * @param b assigned to 'baseIng'.
-         */
-        public void setBaseList(List<Ingredient> b)
-        {
-            this.baseIng = b;
-        }
-
-        /**
-         * addBase() function adds an ingredient to the entre list.
-         */
-        public void addBase(Ingredient b)
-        {
-            this.baseIng.Add(b);
-        }
-
-        /**
-         * getBaseAt() function returns the ingredient indexed at i.
-         * 
-         * @param i index.
-         */
-        public Ingredient getBaseAt(int i)
-        {
-            return this.baseIng[i];
-        }
-
-        /**
-         * Getter for 'SnackIng'.
-         * 
-         * @return 'snackIng'.
-         */
-        public List<Ingredient> getSnackList()
-        {
-            return this.snackIng;
-        }
-
-        /**
-         * Setter for 'snackIng'.
-         * 
-         * @param s assigned to 'snackIng'.
-         */
-        public void setSnackList(List<Ingredient> s)
-        {
-            this.snackIng = s;
-        }
-
-        /**
-         * addSnack() function adds an ingredient to the snack list.
-         */
-        public void addSnack(Ingredient s)
-        {
-            this.snackIng.Add(s);
-        }
-
-        /**
-         * getSnackAt() function returns ingredient indexed at i.
-         * 
-         * @param i index.
-         */
-        public Ingredient getSnackAt(int i)
-        {
-            return this.snackIng[i];
+            return this.ingredientList[i];
         }
     }
 }

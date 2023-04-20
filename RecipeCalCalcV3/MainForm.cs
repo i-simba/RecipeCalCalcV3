@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -43,7 +44,6 @@ namespace RecipeCalCalcV3
 
         public MainForm()
         {
-            // Initialize Form.
             InitializeComponent();
 
             // Initialize 'childForms' array.
@@ -270,6 +270,20 @@ namespace RecipeCalCalcV3
                 }
             }
         }
+
+        /**********************************************************************************/
+        /*                                SETTERS/GETTERS                                 */
+        /**********************************************************************************/
+
+        /**
+         * Getter for 'titleTextBox' text.
+         * 
+         * @return 'titleTextBox' text.
+         */
+        public String getTitle()
+        {
+            return titleTextBox.Text;
+        }        
     }
 }
 
