@@ -14,7 +14,6 @@ using System.Windows.Forms.VisualStyles;
 
 /*
  * TODO ::
- * 1. Log functionality.
  * 0. Pot/Pan object with weight(?) used to deduct from cooked weight.
  */
 
@@ -43,6 +42,10 @@ namespace RecipeCalCalcV3.ChildForms
         private int cookedWeight = 0;                     // The entered cooked weight of entre ingredients.
         private int portionWeight = 0;                    // The portion weight as it relates to cooked weight.
         private double portionCalculatedCal = 0.0;        // The calculated calories of the portion.
+
+        /**********************************************************************************/
+        /*                                  CONSTRUCTOR                                   */
+        /**********************************************************************************/
 
         public BuilderForm(MainForm m)
         {
@@ -648,7 +651,12 @@ namespace RecipeCalCalcV3.ChildForms
         }
 
         /**
-         * TODO
+         * logButton_Click() function listents to the logButton.
+         * Upon a click, a new generated Form will appear prompting the user to enter a log name.
+         * The generated TextBox within the Form will already contain the intended log name. (Todays date)
+         * The user is then given a chance to change it, or keep it by pressing 'ok'.
+         * Additionally, the user can cancel the log by pressing 'cancel'.
+         * If the user entered a name and pressed 'ok', the log will be saved.
          */
         private void logButton_Click(object sender, EventArgs e)
         {
@@ -660,20 +668,20 @@ namespace RecipeCalCalcV3.ChildForms
             }
 
             // Name of the log file to be saved will be log day's date.
-            String stemp = DateTime.Today.ToString("ddMMMyy").ToUpper();
+            String lName = DateTime.Today.ToString("ddMMMyy").ToUpper();
 
             // Dialog Box asking user to confirm log name. (Correct Date)
             String value = "";
-            if (inputBox("Log Name: ", stemp, ref value, 2) == DialogResult.OK)
+            if (inputBox("Log Name: ", lName, ref value, 2) == DialogResult.OK)
             {
-                stemp = value;
+                lName = value;
 
                 // Display Success message upon saving log.
                 MessageBox.Show("SUCCESS! Log saved!", "", MessageBoxButtons.OK);
             }
             else return;
-
-            String fName = Program.logsPath + stemp + ".txt";
+            
+            String fName = Program.logsPath + lName + ".txt";
             Log temp = null;
             StreamWriter writer = new StreamWriter(fName);
 
@@ -693,7 +701,6 @@ namespace RecipeCalCalcV3.ChildForms
                     entreCalculatedCal, baseCalculatedCal, snackCalculatedCal, totalCalculatedCal,
                     cookedWeight, portionWeight, portionCalculatedCal);
             }
-
             // Loop through each ingredient panels.
             foreach (Panel panel in ingPanels)
             {
@@ -709,6 +716,7 @@ namespace RecipeCalCalcV3.ChildForms
             // Write log to file.
             writer.Write(temp.toString());
             writer.Close();
+            reset();
         }
 
         /**********************************************************************************/

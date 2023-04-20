@@ -70,8 +70,11 @@ namespace RecipeCalCalcV3.Models
          * @param rN assigned to 'recipeName'.
          * @param rEW assigned to 'entreIngWeight'.
          * @param bW assigned to 'baseIngWeight'.
+         * @param sW assigned to 'snackIngWeight'.
+         * @param tW assigned to 'totalIngWeight'.
          * @param eC assigned to 'entreCalories'.
          * @param bC assigned to 'baseCalories'.
+         * @param sC assigned to 'snackCalories'.
          * @param tC assigned to 'totalCalories'.
          */
         public Log(String n, String rN, double rEW, double bW, double sW, double tW, double eC, double bC, double sC, double tC)
@@ -105,8 +108,11 @@ namespace RecipeCalCalcV3.Models
          * @param rN assigned to 'recipeName'.
          * @param rEW assigned to 'entreIngWeight'.
          * @param bW assigned to 'baseIngWeight'.
+         * @param sW assigned to 'snackIngWeight'.
+         * @param tW assigned to 'totalIngWeight'.
          * @param eC assigned to 'entreCalories'.
          * @param bC assigned to 'baseCalories'.
+         * @param sC assigned to 'snackCalories'.
          * @param tC assigned to 'totalCalories'.
          * @param cW assigned to 'cookedWeight'.
          * @param pW assigned to 'portionWeight'.
