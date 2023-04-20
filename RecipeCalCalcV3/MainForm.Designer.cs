@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.mainButtonPanel = new System.Windows.Forms.Panel();
             this.savedPanel = new System.Windows.Forms.FlowLayoutPanel();
@@ -40,6 +41,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.titleTextBox = new System.Windows.Forms.Label();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.savedPanelTimer = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.mainButtonPanel.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -74,8 +76,10 @@
             // 
             this.savedPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(171)))), ((int)(((byte)(167)))));
             this.savedPanel.Location = new System.Drawing.Point(0, 205);
+            this.savedPanel.MaximumSize = new System.Drawing.Size(140, 400);
+            this.savedPanel.MinimumSize = new System.Drawing.Size(140, 0);
             this.savedPanel.Name = "savedPanel";
-            this.savedPanel.Size = new System.Drawing.Size(140, 250);
+            this.savedPanel.Size = new System.Drawing.Size(140, 400);
             this.savedPanel.TabIndex = 4;
             // 
             // savedButton
@@ -194,6 +198,11 @@
             this.mainPanel.Size = new System.Drawing.Size(1150, 850);
             this.mainPanel.TabIndex = 2;
             // 
+            // savedPanelTimer
+            // 
+            this.savedPanelTimer.Interval = 10;
+            this.savedPanelTimer.Tick += new System.EventHandler(this.savedPanelTimer_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -208,6 +217,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.panel1.ResumeLayout(false);
             this.mainButtonPanel.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
@@ -231,6 +241,7 @@
         private System.Windows.Forms.Button viewLogsButton;
         private System.Windows.Forms.Label titleTextBox;
         private System.Windows.Forms.FlowLayoutPanel savedPanel;
+        private System.Windows.Forms.Timer savedPanelTimer;
     }
 }
 

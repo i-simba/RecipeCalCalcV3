@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 /*
  * TODO ::
- * 1. Animate savedPanel.
+ * 1. 
  */
 
 namespace RecipeCalCalcV3
@@ -36,10 +36,17 @@ namespace RecipeCalCalcV3
         // List of ingredients assigned from loaded recipe.
         private List<List<String>> ingLists = null;
 
+        // Animation variable.
+        private bool isSavedExpanded = false;
+        private int openInt = 30;
+        private int closeInt = 60;
+
         public MainForm()
         {
+            // Initialize Form.
             InitializeComponent();
 
+            // Initialize 'childForms' array.
             childForms = new Form[3];
 
             // Initializing Child Forms.
@@ -70,6 +77,16 @@ namespace RecipeCalCalcV3
         /**********************************************************************************/
         /*                                 INTERNAL USE                                   */
         /**********************************************************************************/
+
+        /**
+         * MainForm_Load() function sets the default opening screen to be the 'HOME' screen
+         * as well as ensuring the 'savedPanel' starts off collapsed.
+         */
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            savedPanel.Size = savedPanel.MinimumSize;
+            homeButton_Click(sender, e);
+        }
 
         /**
          * initForm() function takes in a Form and initializes it by setting attributes
@@ -173,6 +190,7 @@ namespace RecipeCalCalcV3
             foreach (Button button in ingButtons)
             {
                 if (sender != button) continue;
+                titleTextBox.Text = button.Text;
                 for (int i = 0; i  < ingLists.Count; i++)
                 {
                     if (i != (int)button.Tag) continue;
@@ -213,11 +231,44 @@ namespace RecipeCalCalcV3
         }
 
         /**
-         * 
+         * savedButton_Click() function listens to a click event on 'savedButton'.
+         * It then will call on 'savedPanelTimer' to start, which in turn will either
+         * expand or collapse 'savedPanel'.
          */
         private void savedButton_Click(object sender, EventArgs e)
         {
-            
+            savedPanelTimer.Start();
+        }
+
+        /**********************************************************************************/
+        /*                              ANIMATION FUNCTIONS                               */
+        /**********************************************************************************/
+
+        /**
+         * savedPanelTimer_Tick() function animates the expansion/collapse of the 'savedPanel' panel.
+         */
+        private void savedPanelTimer_Tick(object sender, EventArgs e)
+        {
+            if (isSavedExpanded)
+            {
+                savedPanel.Height -= closeInt;
+                if (savedPanel.Height == savedPanel.MinimumSize.Height)
+                {
+                    isSavedExpanded = false;
+                    //savedPanel.Size = savedPanel.MinimumSize;
+                    savedPanelTimer.Stop();
+                }
+            }
+            else
+            {
+                savedPanel.Height += openInt;
+                if (savedPanel.Height == savedPanel.MaximumSize.Height)
+                {
+                    isSavedExpanded = true;
+                    //savedPanel.Size = savedPanel.MaximumSize;
+                    savedPanelTimer.Stop();
+                }
+            }
         }
     }
 }
