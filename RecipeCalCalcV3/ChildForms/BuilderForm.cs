@@ -23,7 +23,7 @@ namespace RecipeCalCalcV3.ChildForms
     public partial class BuilderForm : Form
     {
         MainForm main = null;                             // MainForm object.
-                
+        
         private List<Button> ingredientButtons = null;    // List of buttons for each ingredient.
         private List<Panel> ingPanels = null;             // List of Panels which displays all added ingredients.
         private List<Panel> entrePanels = null;           // List of Panels which displays added entre ingredients.
@@ -126,6 +126,9 @@ namespace RecipeCalCalcV3.ChildForms
             baseCalculatedCal = 0.0;
             snackCalculatedCal = 0.0;
             totalCalculatedCal = 0.0;
+            cookedWeight = 0;
+            portionWeight = 0;
+            portionCalculatedCal = 0.0;
         }
 
         /**
@@ -177,6 +180,8 @@ namespace RecipeCalCalcV3.ChildForms
          */
         private void panelClick(object sender, EventArgs e)
         {
+            resetValues();
+            Program.resetListVals();
             foreach (Panel panel in ingPanels)
             {
                 if (sender == panel)
@@ -188,7 +193,19 @@ namespace RecipeCalCalcV3.ChildForms
                             button.Tag = "Not";
                         }
                     }
+                    foreach (Control ctrl in panel.Controls)
+                    {
+                        panel.Controls.Remove(ctrl);
+                    }
+                    if (entrePanels.Contains(panel))
+                        entrePanels.Remove(panel);
+                    if (basePanels.Contains(panel))
+                        basePanels.Remove(panel);
+                    if (snackPanels.Contains(panel))
+                        snackPanels.Remove(panel);
+                    ingPanels.Remove(panel);
                     panel.Dispose();
+                    return;
                 }
             }
         }
@@ -199,7 +216,7 @@ namespace RecipeCalCalcV3.ChildForms
          * If the string entered is either empty or only contains white spaces, this function will
          * display an error and recursively prompt the user again until a valid input is entered.
          */
-        public static DialogResult inputBox(String promptText, ref String value)
+        public static DialogResult inputBox(String promptText, String text, ref String value, int i)
         {
             Form form = new Form();
             Label label = new Label();
@@ -208,6 +225,11 @@ namespace RecipeCalCalcV3.ChildForms
             Button buttonCancel = new Button();
 
             label.Text = promptText;
+            // Conditional statements based on the caller 'i'.
+            if (i == 2)
+            {
+                textBox.Text = text;
+            }
 
             buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
@@ -241,8 +263,16 @@ namespace RecipeCalCalcV3.ChildForms
             // Validate recipe name input - Recursively show Dialog if empty.
             if (result == DialogResult.OK && string.IsNullOrWhiteSpace(textBox.Text))
             {
-                MessageBox.Show("Recipe name cannot be empty!", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return inputBox(promptText, ref value);
+                if (i == 1)
+                {
+                    MessageBox.Show("Recipe name cannot be empty!", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return inputBox(promptText, text, ref value, i);
+                }
+                if (i == 2)
+                {
+                    MessageBox.Show("Log name cannot be empty!", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return inputBox(promptText, text, ref value, i);
+                }
             }
 
             value = textBox.Text;
@@ -599,7 +629,7 @@ namespace RecipeCalCalcV3.ChildForms
             }
 
             String value = "";
-            if (inputBox("Recipe Name: ", ref value) == DialogResult.OK)
+            if (inputBox("Recipe Name: ", "", ref value, 1) == DialogResult.OK)
             {
                 // Assigning file's name to user entered recipe name and creating the file within the 'SavedRecipes' directory.
                 String fName = value;
@@ -622,7 +652,63 @@ namespace RecipeCalCalcV3.ChildForms
          */
         private void logButton_Click(object sender, EventArgs e)
         {
+            // Error trap - Cannot log before calculating.
+            if (totalCalTB.Text.Equals(string.Empty) || totalCalTB.Text.Equals("0"))
+            {
+                MessageBox.Show("No data to log! Make sure to calculate first!", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error );
+                return;
+            }
 
+            // Name of the log file to be saved will be log day's date.
+            String stemp = DateTime.Today.ToString("ddMMMyy").ToUpper();
+
+            // Dialog Box asking user to confirm log name. (Correct Date)
+            String value = "";
+            if (inputBox("Log Name: ", stemp, ref value, 2) == DialogResult.OK)
+            {
+                stemp = value;
+
+                // Display Success message upon saving log.
+                MessageBox.Show("SUCCESS! Log saved!", "", MessageBoxButtons.OK);
+            }
+            else return;
+
+            String fName = Program.logsPath + stemp + ".txt";
+            Log temp = null;
+            StreamWriter writer = new StreamWriter(fName);
+
+            // Recipe is not portioned.
+            if (portionCalTB.Text.Equals(string.Empty) || portionCalTB.Text.Equals("0"))
+            {
+                temp = new Log(fName, main.getTitle(), 
+                    entreRW, baseRW, snackRW, totalRW, 
+                    entreCalculatedCal, baseCalculatedCal, snackCalculatedCal, totalCalculatedCal);
+            }
+
+            // Recipe is portioned.
+            else
+            {
+                temp = new Log(fName, main.getTitle(),
+                    entreRW, baseRW, snackRW, totalRW,
+                    entreCalculatedCal, baseCalculatedCal, snackCalculatedCal, totalCalculatedCal,
+                    cookedWeight, portionWeight, portionCalculatedCal);
+            }
+
+            // Loop through each ingredient panels.
+            foreach (Panel panel in ingPanels)
+            {
+                foreach (Ingredient ing in Program.ingredients)
+                {
+                    if (panel.Name.Equals(ing.getName()))
+                    {
+                        temp.addIngredient(ing);
+                    }
+                }
+            }
+
+            // Write log to file.
+            writer.Write(temp.toString());
+            writer.Close();
         }
 
         /**********************************************************************************/
@@ -722,7 +808,7 @@ namespace RecipeCalCalcV3.ChildForms
         /**
          * Getter for 'basePanels'.
          * 
-         * @return 'basePPanels'.
+         * @return 'basePanels'.
          */
         public List<Panel> getBasePanels()
         {
@@ -747,6 +833,36 @@ namespace RecipeCalCalcV3.ChildForms
         public Panel getBasePanelAt(int i)
         {
             return this.basePanels[i];
+        }
+
+        /**
+         * Getter for 'snackPanels'.
+         * 
+         * @return 'snackPanels'.
+         */
+        public List<Panel> getSnackPanels()
+        {
+            return this.snackPanels;
+        }
+
+        /**
+         * Setter for 'snackPanels'.
+         * 
+         * @param sP assigned to 'snackPanels'.
+         */
+        public void setSnackPanels(List<Panel> sP)
+        {
+            this.snackPanels = sP;
+        }
+
+        /**
+         * Get base panel at index 'i' from 'snackPanels' list.
+         * 
+         * @param i index.
+         */
+        public Panel getSnackPanelAt(int i)
+        {
+            return this.snackPanels[i];
         }
 
         /**
