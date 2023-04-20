@@ -231,7 +231,7 @@ namespace RecipeCalCalcV3
         }
 
         /**
-         * savedButton_Click() function listens to a click event on 'savedButton'.
+         * savedButton_Click() function listens to the savedButton.
          * It then will call on 'savedPanelTimer' to start, which in turn will either
          * expand or collapse 'savedPanel'.
          */

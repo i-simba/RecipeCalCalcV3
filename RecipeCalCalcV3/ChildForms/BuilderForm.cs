@@ -13,7 +13,8 @@ using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
 /*
- * TODO::
+ * TODO ::
+ * 1. Log functionality.
  * 0. Pot/Pan object with weight(?) used to deduct from cooked weight.
  */
 
@@ -233,8 +234,15 @@ namespace RecipeCalCalcV3.ChildForms
             form.CancelButton = buttonCancel;
 
             DialogResult result = form.ShowDialog();
-            value = textBox.Text;
 
+            // Validate recipe name input - Recursively show Dialog if empty.
+            if (result == DialogResult.OK && string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                MessageBox.Show("Recipe name cannot be empty!", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return inputBox(promptText, ref value);
+            }
+
+            value = textBox.Text;
             return result;
         }
 
@@ -574,10 +582,20 @@ namespace RecipeCalCalcV3.ChildForms
         }
 
         /**
-         * 
+         * saveButton_Click() function listens to the saveButton.
+         * Upon a click, a new generated Form will appear prompting the user to enter a recipe name.
+         * The user is then given the choice to either press 'cancel' or 'ok'.
+         * If the user entered a name and pressed 'ok', the recipe will be saved.
          */
         private void saveButton_Click(object sender, EventArgs e)
         {
+            // Error trap - Cannot save if no ingredient is present.
+            if (ingPanels.Count <= 0)
+            {
+                MessageBox.Show("No ingredients to save!", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error );
+                return;
+            }
+
             String value = "";
             if (inputBox("Recipe Name: ", ref value) == DialogResult.OK)
             {
@@ -591,6 +609,9 @@ namespace RecipeCalCalcV3.ChildForms
                     writer.WriteLine(panel.Name);
                 }
                 writer.Close();
+
+                // Display Success message upon recipe save.
+                MessageBox.Show("SUCCESS! Recipe saved!", "", MessageBoxButtons.OK);
             }
         }
 
