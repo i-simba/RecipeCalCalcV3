@@ -680,7 +680,7 @@ namespace RecipeCalCalcV3.ChildForms
                 MessageBox.Show("SUCCESS! Log saved!", "", MessageBoxButtons.OK);
             }
             else return;
-
+            
             String fName = Program.logsPath + lName + ".txt";
             Log temp = null;
             StreamWriter writer = new StreamWriter(fName);
@@ -701,7 +701,6 @@ namespace RecipeCalCalcV3.ChildForms
                     entreCalculatedCal, baseCalculatedCal, snackCalculatedCal, totalCalculatedCal,
                     cookedWeight, portionWeight, portionCalculatedCal);
             }
-
             // Loop through each ingredient panels.
             foreach (Panel panel in ingPanels)
             {
