@@ -12,7 +12,7 @@ using System.Windows.Forms;
  * TODO ::
  * 1. Dynamically add buttons representing LOG inside 'logPanel'.
  * 2. Dynamically add 'nutritional info' screen for 'ingredientDataPanel'  | ingredient name/weight/calories.
- * 3. Dynamically add 'nutritional info' screen for 'ingredientMacroPanel' | meal macros. 
+ * 3. Dynamically add 'nutritional info' screen for 'ingredientMacroPanel' | meal macros.
  */
 
 namespace RecipeCalCalcV3.ChildForms
