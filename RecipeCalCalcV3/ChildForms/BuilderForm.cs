@@ -14,7 +14,6 @@ using System.Windows.Forms.VisualStyles;
 
 /*
  * TODO ::
- * 1. Log functionality.
  * 0. Pot/Pan object with weight(?) used to deduct from cooked weight.
  */
 
@@ -43,6 +42,10 @@ namespace RecipeCalCalcV3.ChildForms
         private int cookedWeight = 0;                     // The entered cooked weight of entre ingredients.
         private int portionWeight = 0;                    // The portion weight as it relates to cooked weight.
         private double portionCalculatedCal = 0.0;        // The calculated calories of the portion.
+
+        /**********************************************************************************/
+        /*                                  CONSTRUCTOR                                   */
+        /**********************************************************************************/
 
         public BuilderForm(MainForm m)
         {

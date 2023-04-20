@@ -42,6 +42,10 @@ namespace RecipeCalCalcV3
         private int openInt = 30;
         private int closeInt = 60;
 
+        /**********************************************************************************/
+        /*                                  CONSTRUCTOR                                   */
+        /**********************************************************************************/
+
         public MainForm()
         {
             InitializeComponent();

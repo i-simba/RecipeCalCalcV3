@@ -21,6 +21,10 @@ namespace RecipeCalCalcV3.ChildForms
         // MainFrom object
         MainForm main = null;
 
+        /**********************************************************************************/
+        /*                                  CONSTRUCTOR                                   */
+        /**********************************************************************************/
+
         public HomeForm(MainForm m)
         {
             InitializeComponent();
