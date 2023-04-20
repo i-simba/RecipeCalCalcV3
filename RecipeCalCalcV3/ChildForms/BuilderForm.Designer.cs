@@ -51,7 +51,6 @@
             this.calculateButton = new System.Windows.Forms.Button();
             this.resetButton = new System.Windows.Forms.Button();
             this.totalsPanel = new System.Windows.Forms.Panel();
-            this.logButton = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label16 = new System.Windows.Forms.Label();
             this.portionlAllCalTB = new System.Windows.Forms.TextBox();
@@ -90,6 +89,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.baseIngredientPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.snacksIngredientPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.logButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -363,15 +363,6 @@
             this.totalsPanel.Name = "totalsPanel";
             this.totalsPanel.Size = new System.Drawing.Size(810, 150);
             this.totalsPanel.TabIndex = 14;
-            // 
-            // logButton
-            // 
-            this.logButton.Location = new System.Drawing.Point(710, 5);
-            this.logButton.Name = "logButton";
-            this.logButton.Size = new System.Drawing.Size(95, 140);
-            this.logButton.TabIndex = 10;
-            this.logButton.Text = "LOG";
-            this.logButton.UseVisualStyleBackColor = true;
             // 
             // panel6
             // 
@@ -753,6 +744,19 @@
             this.snacksIngredientPanel.Name = "snacksIngredientPanel";
             this.snacksIngredientPanel.Size = new System.Drawing.Size(400, 150);
             this.snacksIngredientPanel.TabIndex = 19;
+            // 
+            // logButton
+            // 
+            this.logButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(120)))), ((int)(((byte)(116)))));
+            this.logButton.FlatAppearance.BorderSize = 0;
+            this.logButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.logButton.Image = global::RecipeCalCalcV3.Properties.Resources.log_file_format;
+            this.logButton.Location = new System.Drawing.Point(705, 10);
+            this.logButton.Name = "logButton";
+            this.logButton.Size = new System.Drawing.Size(100, 126);
+            this.logButton.TabIndex = 10;
+            this.logButton.UseVisualStyleBackColor = false;
+            this.logButton.Click += new System.EventHandler(this.logButton_Click);
             // 
             // BuilderForm
             // 

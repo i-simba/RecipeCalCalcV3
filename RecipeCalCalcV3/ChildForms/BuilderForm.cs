@@ -194,7 +194,10 @@ namespace RecipeCalCalcV3.ChildForms
         }
 
         /**
-         * TODO make form pretty
+         * inputBox() function dynamically creates a new Form that prompts the user to enter a
+         * name for the recipe.
+         * If the string entered is either empty or only contains white spaces, this function will
+         * display an error and recursively prompt the user again until a valid input is entered.
          */
         public static DialogResult inputBox(String promptText, ref String value)
         {
@@ -325,15 +328,15 @@ namespace RecipeCalCalcV3.ChildForms
                     {
                         case 1:
                             container.Padding = new Padding(15, 15, 0, 0);
-                            entreIngredientPanel.Controls.Add(container); Console.WriteLine("\nENTRE\n");
+                            entreIngredientPanel.Controls.Add(container);
                             entrePanels.Add(container);
                             break;
                         case 2: 
-                            baseIngredientPanel.Controls.Add(container); Console.WriteLine("\nBASE\n");
+                            baseIngredientPanel.Controls.Add(container);
                             basePanels.Add(container);
                             break;
                         case 3: 
-                            snacksIngredientPanel.Controls.Add(container); Console.WriteLine("\nSNACK\n");
+                            snacksIngredientPanel.Controls.Add(container);
                             snackPanels.Add(container);
                             break;
                         default: Console.WriteLine("\nERROR! BuilderForm.cs -> button_Click() -> switch!");
@@ -578,7 +581,6 @@ namespace RecipeCalCalcV3.ChildForms
                 portionCalTB.Text = portionCalculatedCal.ToString("0.00");
                 portionlAllCalTB.Text = (portionCalculatedCal + baseCalculatedCal + snackCalculatedCal).ToString("0.00");
             }
-            portionlAllCalTB.Text = (entrePanels.Count + basePanels.Count + snackPanels.Count).ToString();
         }
 
         /**
@@ -615,10 +617,18 @@ namespace RecipeCalCalcV3.ChildForms
             }
         }
 
+        /**
+         * TODO
+         */
+        private void logButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
         /**********************************************************************************/
         /*                                SETTERS/GETTERS                                 */
         /**********************************************************************************/
-        
+
         /**
          * Getter for 'ingredientButtons'.
          * 
@@ -957,6 +967,6 @@ namespace RecipeCalCalcV3.ChildForms
         public void setPortionCal(double pC)
         {
             this.portionCalculatedCal = pC;
-        }
+        }        
     }
 }

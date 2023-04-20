@@ -112,5 +112,8 @@
   <ItemGroup>
     <None Include="Resources\calories.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\log-file-format.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
