@@ -21,7 +21,7 @@ namespace RecipeCalCalcV3.ChildForms
 {
     public partial class BuilderForm : Form
     {
-        MainForm main = null;                             // MainForm object. 
+        MainForm main = null;                             // MainForm object.
         
         private List<Button> ingredientButtons = null;    // List of buttons for each ingredient.
         private List<Panel> ingPanels = null;             // List of Panels which displays all added ingredients.

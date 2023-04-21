@@ -120,6 +120,7 @@ namespace RecipeCalCalcV3
             {
                 List<String> temp = new List<String>();
                 reader = new StreamReader(name);
+
                 while (!reader.EndOfStream)
                 {
                     temp.Add(reader.ReadLine());
@@ -293,7 +294,8 @@ namespace RecipeCalCalcV3
 
 
 /*
- * OpenFileDialog opnfd = new OpenFileDialog();
+ * 
+            OpenFileDialog opnfd = new OpenFileDialog();
             opnfd.Filter = "Image Files (*.jpg;*.jpeg;.*.gif;)|*.jpg;*.jpeg;.*.gif;*.png";
             if (opnfd.ShowDialog() == DialogResult.OK)
             {
