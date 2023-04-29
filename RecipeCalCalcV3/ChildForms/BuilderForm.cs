@@ -21,7 +21,7 @@ namespace RecipeCalCalcV3.ChildForms
 {
     public partial class BuilderForm : Form
     {
-        MainForm main = null;                             // MainForm object. 
+        MainForm main = null;                             // MainForm object.
         
         private List<Button> ingredientButtons = null;    // List of buttons for each ingredient.
         private List<Panel> ingPanels = null;             // List of Panels which displays all added ingredients.
@@ -42,6 +42,7 @@ namespace RecipeCalCalcV3.ChildForms
         private int cookedWeight = 0;                     // The entered cooked weight of entre ingredients.
         private int portionWeight = 0;                    // The portion weight as it relates to cooked weight.
         private double portionCalculatedCal = 0.0;        // The calculated calories of the portion.
+        private double portionAllCalories = 0.0;          // The calculated calories of the portion plus snack and base calories.
 
         /**********************************************************************************/
         /*                                  CONSTRUCTOR                                   */
@@ -612,6 +613,7 @@ namespace RecipeCalCalcV3.ChildForms
             {
                 portionCalculatedCal = (entreCalculatedCal * portionWeight) / cookedWeight;
                 portionCalTB.Text = portionCalculatedCal.ToString("0.00");
+                portionAllCalories = portionCalculatedCal + baseCalculatedCal + snackCalculatedCal;
                 portionlAllCalTB.Text = (portionCalculatedCal + baseCalculatedCal + snackCalculatedCal).ToString("0.00");
             }
         }
@@ -699,7 +701,8 @@ namespace RecipeCalCalcV3.ChildForms
                 temp = new Log(fName, main.getTitle(),
                     entreRW, baseRW, snackRW, totalRW,
                     entreCalculatedCal, baseCalculatedCal, snackCalculatedCal, totalCalculatedCal,
-                    cookedWeight, portionWeight, portionCalculatedCal);
+                    cookedWeight, portionWeight, portionCalculatedCal, portionAllCalories);
+                temp.setIsPortioned(true);
             }
             // Loop through each ingredient panels.
             foreach (Panel panel in ingPanels)
@@ -712,6 +715,9 @@ namespace RecipeCalCalcV3.ChildForms
                     }
                 }
             }
+
+            // Set Program logAdded variable to true.
+            Program.logAdded = true;
 
             // Write log to file.
             writer.Write(temp.toString());

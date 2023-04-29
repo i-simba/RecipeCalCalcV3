@@ -120,6 +120,7 @@ namespace RecipeCalCalcV3
             {
                 List<String> temp = new List<String>();
                 reader = new StreamReader(name);
+
                 while (!reader.EndOfStream)
                 {
                     temp.Add(reader.ReadLine());
@@ -220,6 +221,11 @@ namespace RecipeCalCalcV3
          */
         private void viewLogsButton_Click(object sender, EventArgs e)
         {
+            if (Program.logAdded)
+            {
+                lForm.reset();
+                Program.logAdded = false;
+            }
             titleTextBox.Text = "LOGS";
             activateForm(childForms[LOGS]);
         }
@@ -287,13 +293,24 @@ namespace RecipeCalCalcV3
         public String getTitle()
         {
             return titleTextBox.Text;
-        }        
+        }
+
+        /**
+         * Setter for 'titleTextBox' text.
+         * 
+         * @param t assigned to 'titleTextBox'.Text.
+         */
+        public void setTitle(String t)
+        {
+            titleTextBox.Text = t;
+        }
     }
 }
 
 
 /*
- * OpenFileDialog opnfd = new OpenFileDialog();
+ * 
+            OpenFileDialog opnfd = new OpenFileDialog();
             opnfd.Filter = "Image Files (*.jpg;*.jpeg;.*.gif;)|*.jpg;*.jpeg;.*.gif;*.png";
             if (opnfd.ShowDialog() == DialogResult.OK)
             {

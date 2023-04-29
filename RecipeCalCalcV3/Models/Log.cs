@@ -18,6 +18,8 @@ namespace RecipeCalCalcV3.Models
 {
     internal class Log
     {
+        private Boolean isPortioned;                // Denotes if a given logged recipe has been portioned.
+
         private String name;                        // Name of the log. (Date)
         private String recipeName;                  // Name of the recipe saved in the log.
 
@@ -36,6 +38,7 @@ namespace RecipeCalCalcV3.Models
         private double cookedWeight;                // Total cooked weight of ingredients.
         private double portionWeight;               // Total portion weight of cooked ingredients.
         private double portionCalories;             // Total calories of the entered portion weight.
+        private double portionAllCalories;          // Total calories of the entered portion weight plus snacks and base.
 
         /**
          * Constructor.
@@ -44,6 +47,8 @@ namespace RecipeCalCalcV3.Models
          */
         public Log()
         {
+            this.isPortioned = false;
+
             this.name = string.Empty;
             this.recipeName = string.Empty;
 
@@ -79,6 +84,8 @@ namespace RecipeCalCalcV3.Models
          */
         public Log(String n, String rN, double rEW, double bW, double sW, double tW, double eC, double bC, double sC, double tC)
         {
+            this.isPortioned = false;
+
             this.name = n;
             this.recipeName = rN;
 
@@ -97,6 +104,7 @@ namespace RecipeCalCalcV3.Models
             this.cookedWeight = 0.0;
             this.portionWeight = 0.0;
             this.portionCalories = 0.0;
+            this.portionAllCalories = 0.0;
         }
 
         /**
@@ -118,8 +126,10 @@ namespace RecipeCalCalcV3.Models
          * @param pW assigned to 'portionWeight'.
          * @param pC assigned to 'portionCalories'.
          */
-        public Log(String n, String rN, double rEW, double bW, double sW, double tW, double eC, double bC, double sC, double tC, double cW, double pW, double pC)
+        public Log(String n, String rN, double rEW, double bW, double sW, double tW, double eC, double bC, double sC, double tC, double cW, double pW, double pC, double pAC)
         {
+            this.isPortioned = false;
+
             this.name = n;
             this.recipeName = rN;
 
@@ -138,6 +148,7 @@ namespace RecipeCalCalcV3.Models
             this.cookedWeight = cW;
             this.portionWeight = pW;
             this.portionCalories = pC;
+            this.portionAllCalories = pAC;
         }
 
         /**
@@ -150,17 +161,41 @@ namespace RecipeCalCalcV3.Models
             temp += recipeName + "\n";
             foreach (Ingredient ing in ingredientList)
             {
-                temp += ing.getName() + "," +
+                temp += ing.getCourse() + "," + ing.getName() + "," +
                     ing.getEnteredWeight() + "," +
                     ing.getCalculatedCal() + "\n";
             }
             temp += "TOTALS\n";
+            temp += isPortioned.ToString() + "\n";
             temp += entreIngWeight.ToString() + "," + entreCalories.ToString() + "\n";
             temp += baseIngWeight.ToString() + "," + baseCalories.ToString() + "\n";
             temp += snackIngWeight.ToString() + "," + snackCalories.ToString() + "\n";
             temp += totalIngWeight.ToString() + "," + totalCalories.ToString() + "\n";
 
+            temp += cookedWeight.ToString() + "," + portionWeight.ToString() + "\n";
+            temp += portionCalories.ToString() + "," + portionAllCalories.ToString() + "\n";
+
             return temp;
+        }
+
+        /**
+         * Getter for 'isPortioned'.
+         * 
+         * @return 'isPortioned'.
+         */
+        public Boolean getIsPortioned()
+        {
+            return this.isPortioned;
+        }
+
+        /**
+         * Setter for 'isPortioned'.
+         * 
+         * @param b assigned to 'isPortioned'.
+         */
+        public void setIsPortioned(Boolean b)
+        {
+            this.isPortioned = b;
         }
 
         /**
@@ -244,6 +279,46 @@ namespace RecipeCalCalcV3.Models
         }
 
         /**
+         * Getter for 'snackIngWeight'.
+         * 
+         * @return 'snackIngWeight'.
+         */
+        public double getSnackIngWeight()
+        {
+            return this.snackIngWeight;
+        }
+
+        /**
+         * Setter for 'snackIngWeight'.
+         * 
+         * @param sW assigned to 'snackIngWeight'.
+         */
+        public void setSnackIngWeight(double sW)
+        {
+            this.snackIngWeight = sW;
+        }
+
+        /**
+         * Getter for 'totalIngWeight'.
+         * 
+         * @return 'totalIngWeight'.
+         */
+        public double getTotalIngWeight()
+        {
+            return this.totalIngWeight;
+        }
+
+        /**
+         * Setter for 'totalIngWeight'.
+         * 
+         * @param tW assigned to 'totalIngWeight'.
+         */
+        public void setTotalIngWeight(double tW)
+        {
+            this.totalIngWeight = tW;
+        }
+
+        /**
          * Getter for 'entreCalories'.
          * 
          * @return 'entreCalories'.
@@ -281,6 +356,26 @@ namespace RecipeCalCalcV3.Models
         public void setBaseCalories(double bC)
         {
             this.baseCalories = bC;
+        }
+
+        /**
+         * Getter for 'snackCalories'.
+         * 
+         * @return 'snackCalories'.
+         */
+        public double getSnackCalories()
+        {
+            return this.snackCalories;
+        }
+
+        /**
+         * Setter for 'snackCalories'.
+         * 
+         * @param sC assigned to 'snackCalories'.
+         */
+        public void setSnackCalories(double sC)
+        {
+            this.snackCalories = sC;
         }
 
         /**
@@ -361,6 +456,26 @@ namespace RecipeCalCalcV3.Models
         public void setPortionCalories(double pC)
         {
             this.portionCalories = pC;
+        }
+
+        /**
+         * Getter for 'portionAllCalories'.
+         * 
+         * @return 'portionAllCalories'.
+         */
+        public double getPortionAllCalories()
+        {
+            return this.portionAllCalories;
+        }
+
+        /**
+         * Setter for 'portionAllCalories'.
+         * 
+         * @param pAC assigned to 'portionAllCalories'.
+         */
+        public void setPortionAllCalories(double pAC)
+        {
+            this.portionAllCalories = pAC;
         }
 
         /**
