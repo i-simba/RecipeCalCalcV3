@@ -38,6 +38,7 @@
             // 
             // logPanel
             // 
+            this.logPanel.AutoScroll = true;
             this.logPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(134)))), ((int)(((byte)(130)))), ((int)(((byte)(126)))));
             this.logPanel.Location = new System.Drawing.Point(10, 60);
             this.logPanel.Name = "logPanel";

@@ -26,6 +26,11 @@ namespace RecipeCalCalcV3
         public const String liquidPath = ingredientPath + "liquids.csv";     // Path to the csv file 'liquids.csv'.
         public const String miscPath = ingredientPath + "misc.csv";          // Path to the csv file 'misc.csv'.
 
+        /************************************************/
+        /*    Global Variables used by all Forms        */
+        /************************************************/
+        public static Boolean logAdded = false;                              // Denotes whether a log was added at runtime.
+
 
         /************************************************/
         /*    The main entry point for the application. */

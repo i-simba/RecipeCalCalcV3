@@ -221,6 +221,11 @@ namespace RecipeCalCalcV3
          */
         private void viewLogsButton_Click(object sender, EventArgs e)
         {
+            if (Program.logAdded)
+            {
+                lForm.reset();
+                Program.logAdded = false;
+            }
             titleTextBox.Text = "LOGS";
             activateForm(childForms[LOGS]);
         }
@@ -288,7 +293,17 @@ namespace RecipeCalCalcV3
         public String getTitle()
         {
             return titleTextBox.Text;
-        }        
+        }
+
+        /**
+         * Setter for 'titleTextBox' text.
+         * 
+         * @param t assigned to 'titleTextBox'.Text.
+         */
+        public void setTitle(String t)
+        {
+            titleTextBox.Text = t;
+        }
     }
 }
 

@@ -38,6 +38,22 @@ namespace RecipeCalCalcV3.Models
         private Image img;               // Associated image file for ingredient.
 
         /**
+         * Constructor - Default.
+         */
+        public Ingredient()
+        {
+            this.name = string.Empty;
+            this.tipName = string.Empty;
+            this.type = string.Empty;
+            this.calories = 0;
+            this.weight = 0;
+            this.course = 0;
+
+            this.calculatedCal = 0.0;
+            this.enteredWeight = 0;
+        }
+
+        /**
          * Constructor - String, String, Int, Int.
          * 
          * @param n assigned to 'name'.
