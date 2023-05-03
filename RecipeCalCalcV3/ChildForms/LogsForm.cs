@@ -13,8 +13,7 @@ using System.Windows.Forms.VisualStyles;
 
 /**
  * TODO ::
- * #. Make unportioned calorie break down display better info similar to portioned.
- * #. 'Load-in-Builder' log for portioned recipes.
+ * #. Sort LOGS by month - SEE DISCORD MISC.
  * #. Add Documentation.
  * #. Dynamically add 'nutritional info' screen for 'ingredientMacroPanel' | meal macros.
  */
@@ -31,9 +30,11 @@ namespace RecipeCalCalcV3.ChildForms
         public const int INGREDIENT = 1;                      // 
         public const int PORTIONED = 2;                       // 
 
-        MainForm main = null;                                 // MainFrom object
+        MainForm main = null;                                 // MainFrom object.
+        BuilderForm bForm = null;                             // BuilderForm object.
         
         private Dictionary<String, Log> logList = null;       // List of logs accompanied by their log name. (date)
+        private String selected = null;                       // 
         private List<Button> logButtons = null;               // List of buttons dynamically created containing logs.
         private List<Panel> entrePanels = null;               // 
         private List<Panel> basePanels = null;                // 
@@ -46,12 +47,16 @@ namespace RecipeCalCalcV3.ChildForms
         /*                                  CONSTRUCTOR                                   */
         /**********************************************************************************/
 
-        public LogsForm(MainForm m)
+        public LogsForm(MainForm m, Form b)
         {
             InitializeComponent();
 
-            // Setting 'main' to passed in MainForm 'm'.
+            // Setting 'main' to passed in MainForm 'm' and 'bForm' to passed in Form 'b'.
             main = m;
+            bForm = (BuilderForm)b;
+
+            // Initialize Strings.
+            selected = string.Empty;
 
             // Initialize lists.
             logList = new Dictionary<String, Log>();
@@ -110,6 +115,7 @@ namespace RecipeCalCalcV3.ChildForms
 
                 line = reader.ReadLine();
                 entry.setRecipeName(line);
+                entry.setName(Path.GetFileNameWithoutExtension(name).ToUpper());
 
                 while (line != "TOTALS")
                 {
@@ -397,14 +403,31 @@ namespace RecipeCalCalcV3.ChildForms
             {
                 if (sender == button)
                 {
+                    // Reset.
                     ingredientDataPanel.Controls.Clear();
+                    ingredientMacroPanel.Controls.Clear();
                     initCalorieBreakdown();
                     entrePanels.Clear();
                     basePanels.Clear();
                     snackPanels.Clear();
 
+                    // Set selected button's color to a darker shade to denote it is selected.
+                    button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(113)))), ((int)(((byte)(108)))));
+
+                    // Set 'isClicked' values of all logs to 'false'.
+                    foreach (KeyValuePair<String, Log> log in logList)
+                    {
+                        Log foo = log.Value;
+                        foo.setIsClicked(false);
+                    }
+
+                    // Set the selected log's 'isClicked' value to 'true'.
                     Log temp = null;
-                    logList.TryGetValue(button.Text, out temp);
+                    if (logList.TryGetValue(button.Text, out temp))
+                    {
+                        temp.setIsClicked(true);
+                        selected = button.Text;
+                    }
 
                     rName.Text = temp.getRecipeName();
                     eWeight.Text = temp.getTotalIngWeight().ToString() + "g";
@@ -581,8 +604,57 @@ namespace RecipeCalCalcV3.ChildForms
                         ingredientDataPanel.Controls.Add(singlePortionPanel);
                     }
                 }
+                else
+                {
+                    // Reset buttons BackColor back to original.
+                    button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(143)))), ((int)(((byte)(138)))));
+                }
             }
         }
-        
+
+        /**
+         * loadButton_Click() function listens to the loadButton.
+         * Upon a click, the selected log will be parsed for ingredient data, and if applicable, cooked weight data.
+         * Each present ingredient will then be used to 'push' buttons within the BuilderForm that corresponds to that ingredient.
+         * The entered weight of each ingredient will then be displayed on the BuilderForm's ingredient panel's TextBox.
+         * If the selected log is portioned, the cooked weight will also be displayed.
+         * This function also 'pushes' the builderButton in MainForm to hide LogsForm and display BuilderForm with the mentioned data above.
+         */
+        private void loadButton_Click(object sender, EventArgs e)
+        {
+            // Error trap - No log selected.
+            if (selected.Equals(string.Empty))
+            {
+                MessageBox.Show("No selected log!", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Retrieve the log from the dictionary and assign it to 'log'.
+            List<Button> tempBL = bForm.getIngredientButtons();
+            Log log = new Log();
+            logList.TryGetValue(selected, out log);
+
+            // Click 'builderButton' in main.
+            main.builderButton_Click(sender, e);
+
+            // Click ingredient buttons in BuilderForm.
+            foreach (Ingredient ing in log.getIngredientList())
+            {
+                foreach (Button btn in tempBL)
+                {
+                    if (btn.Name.Equals(ing.getName()))
+                    {
+                        btn.Tag = ing.getEnteredWeight();
+                        bForm.button_Click(btn, e);
+                    }
+                }
+            }
+
+            // Set cooked weight in BuilderForm if log is portioned.
+            if (log.getIsPortioned())
+            {
+                bForm.setCookedWeight((int)log.getCookedWeight());
+            }
+        }
     }
 }
