@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 /*
  * TODO ::
- * 1. 
+ * #. 
  */
 
 namespace RecipeCalCalcV3
@@ -307,15 +307,3 @@ namespace RecipeCalCalcV3
         }
     }
 }
-
-
-/*
- * 
-            OpenFileDialog opnfd = new OpenFileDialog();
-            opnfd.Filter = "Image Files (*.jpg;*.jpeg;.*.gif;)|*.jpg;*.jpeg;.*.gif;*.png";
-            if (opnfd.ShowDialog() == DialogResult.OK)
-            {
-                pictureBox1.Image = new Bitmap(opnfd.FileName);
-            }
- * 
- */

@@ -45,3 +45,15 @@ namespace RecipeCalCalcV3.ChildForms
         }
     }
 }
+
+
+/*
+ * 
+            OpenFileDialog opnfd = new OpenFileDialog();
+            opnfd.Filter = "Image Files (*.jpg;*.jpeg;.*.gif;)|*.jpg;*.jpeg;.*.gif;*.png";
+            if (opnfd.ShowDialog() == DialogResult.OK)
+            {
+                pictureBox1.Image = new Bitmap(opnfd.FileName);
+            }
+ * 
+ */
