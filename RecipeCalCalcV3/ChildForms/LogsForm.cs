@@ -22,6 +22,10 @@ namespace RecipeCalCalcV3.ChildForms
 {
     public partial class LogsForm : Form
     {
+        // String array containing months of the year.
+        private readonly String[] MONTHS = { "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+                                            "JUL", "AUG", "SEP", "OCT", "NOV", "DEC" };
+
         public const int COURSE = 0;                          // Denotes ingredient's course type index found in a log file.
         public const int NAME = 1;                            // Denotes ingredient's name index found in a log file.
         public const int WEIGHT = 2;                          // Denotes ingredient's entered weight found in a log file. 
@@ -106,7 +110,13 @@ namespace RecipeCalCalcV3.ChildForms
             String[] ingDetails = null;
             String line = null;
 
-            String[] fNames = Directory.GetFiles(Program.logsPath);
+            /* NOTE:
+             * Currently, files are being read in order of creation (decending) then reversed to get a proper order of each log.
+             * Needs to be refactored later to actually sort the log buttons based on month, then year as this implementation
+             * can cause problems, i.e., adding a log that meant for a previous date.
+             */
+            var oNames = Directory.GetFiles(Program.logsPath).OrderByDescending(d => new FileInfo(d).CreationTime);
+            String[] fNames = oNames.Reverse().ToArray();
             foreach (String name in fNames)
             {
                 List<String> temp = new List<string>();
@@ -212,6 +222,11 @@ namespace RecipeCalCalcV3.ChildForms
                 addLogButton(Path.GetFileNameWithoutExtension(name).ToUpper());          // Add button representing entry for the user to interact with.
                 reader.Close();
             }
+            
+            foreach (Button button in logButtons)
+            {
+                logPanel.Controls.Add(button);
+            }
         }
 
         /**
@@ -307,7 +322,6 @@ namespace RecipeCalCalcV3.ChildForms
             temp.Text = n;
             temp.Click += new EventHandler(button_Click);
 
-            logPanel.Controls.Add(temp);
             logButtons.Add(temp);
         }
 
