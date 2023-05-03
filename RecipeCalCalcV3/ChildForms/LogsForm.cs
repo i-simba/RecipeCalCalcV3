@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -732,6 +733,247 @@ namespace RecipeCalCalcV3.ChildForms
             {
                 bForm.setCookedWeight((int)log.getCookedWeight());
             }
+        }
+
+        /**********************************************************************************/
+        /*                                SETTERS/GETTERS                                 */
+        /**********************************************************************************/
+
+        /**
+         * Getter for 'logFLP'.
+         * 
+         * @return 'logFLP'.
+         */
+        public Dictionary<String, FlowLayoutPanel> getFlowPanelDict()
+        {
+            return this.logFLP;
+        }
+
+        /**
+         * Setter for 'logFLP'.
+         * 
+         * @param flp assigned to 'logFLP'.
+         */
+        public void setFlowPanelDict(Dictionary<String, FlowLayoutPanel> flp)
+        {
+            this.logFLP = flp;
+        }
+
+        /**
+         * Get FlowLayoutPanel at a given String key 'key'.
+         * 
+         * @param key String used as a key to get a given value within 'logFLP'.
+         * @return FlowLayoutPanel with matched key.
+         */
+        public FlowLayoutPanel getFlowPanelAt(String key)
+        {
+            FlowLayoutPanel temp = null;
+            logFLP.TryGetValue(key, out temp);
+            return temp;
+        }
+
+        /**
+         * Getter for 'selected'.
+         * 
+         * @return 'selected'.
+         */
+        public String getSelectedLog()
+        {
+            return this.selected;
+        }
+
+        /**
+         * Setter for 'selected'.
+         * 
+         * @param log assigned to 'selected'.
+         */
+        public void setSelectedLog(String log)
+        {
+            this.selected = log;
+        }
+
+        /**
+         * Getter for 'logButtons'.
+         * 
+         * @return 'logButtons'.
+         */
+        public List<Button> getLogButtons()
+        {
+            return this.logButtons;
+        }
+
+        /**
+         * Setter for 'logButtons'.
+         * 
+         * @param logB assigned to 'logButtons'.
+         */
+        public void setLogButtons(List<Button> logB)
+        {
+            this.logButtons = logB;
+        }
+
+        /**
+         * Get Button indexed at 'i'.
+         * 
+         * @param i used as an index for an element in 'logButtons'.
+         * @return Button indexed at 'i'.
+         */
+        public Button getLogButtonAt(int i)
+        {
+            return logButtons[i];
+        }
+
+        /**
+         * Getter for 'entrePanels'.
+         * 
+         * @return 'entrePanels'.
+         */
+        public List<Panel> getEntrePanels()
+        {
+            return this.entrePanels;
+        }
+
+        /**
+         * Setter for 'entrePanels'.
+         * 
+         * @param entreP assigned to 'entrePanels'.
+         */
+        public void setEntrePanels(List<Panel> entreP)
+        {
+            this.entrePanels = entreP;
+        }
+
+        /**
+         * Get Entre Panel indexed at 'i'.
+         * 
+         * @param i used as an index for an element in 'entrePanels'.
+         * @return Panel indexed at 'i'.
+         */
+        public Panel getEntrePanelAt(int i)
+        {
+            return entrePanels[i];
+        }
+
+        /**
+         * Getter for 'basePanels'.
+         * 
+         * @return 'basePanels'.
+         */
+        public List<Panel> getBasePanels()
+        {
+            return this.basePanels;
+        }
+
+        /**
+         * Setter for 'basePanels'.
+         * 
+         * @param baseP assigned to 'basePanels'.
+         */
+        public void setBasePanels(List<Panel> baseP)
+        {
+            this.basePanels = baseP;
+        }
+
+        /**
+         * Get Base Panel indexed at 'i'.
+         * 
+         * @param i used as an index for an element in 'basePanels'.
+         * @return Panel indexed at 'i'.
+         */
+        public Panel getBasePanelAt(int i)
+        {
+            return basePanels[i];
+        }
+
+        /**
+         * Getter for 'snackPanels'.
+         * 
+         * @return 'snackPanels'.
+         */
+        public List<Panel> getSnackPanels()
+        {
+            return this.snackPanels;
+        }
+
+        /**
+         * Setter for 'snackPanels'.
+         * 
+         * @param snackP assigned to 'snackPanels'.
+         */
+        public void setSnackPanels(List<Panel> snackP)
+        {
+            this.snackPanels = snackP;
+        }
+
+        /**
+         * Get Snack Panel indexed at 'i'.
+         * 
+         * @param i used as an index for an element in 'snackPanels'.
+         * @return Panel indexed at 'i'.
+         */
+        public Panel getSnackPanelAt(int i)
+        {
+            return snackPanels[i];
+        }
+
+        /**
+         * Getter for 'rName'.
+         * 
+         * @return 'rName'.
+         */
+        public Label getRecipeName()
+        {
+            return rName;
+        }
+
+        /**
+         * Setter for 'rName'.
+         * 
+         * @param recipeN assigned to 'rName'.
+         */
+        public void setRecipeName(Label recipeN)
+        {
+            this.rName = recipeN;
+        }
+
+        /**
+         * Getter for 'eWeight'.
+         * 
+         * @return 'eWeight'.
+         */
+        public Label getEnteredWeight()
+        {
+            return eWeight;
+        }
+
+        /**
+         * Setter for 'eWeight'.
+         * 
+         * @param enteredW assigned to 'eWeight'.
+         */
+        public void setEnteredWeight(Label enteredW)
+        {
+            this.eWeight = enteredW;
+        }
+
+        /**
+         * Getter for 'tCal'.
+         * 
+         * @return 'tCal'.
+         */
+        public Label getTotalCal()
+        {
+            return tCal;
+        }
+
+        /**
+         * Setter for 'tCal'.
+         * 
+         * @param totalC assigned to 'tCal'.
+         */
+        public void setTotalCal(Label totalC)
+        {
+            this.tCal = totalC;
         }
     }
 }
