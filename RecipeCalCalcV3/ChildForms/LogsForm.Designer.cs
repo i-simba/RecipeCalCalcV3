@@ -33,6 +33,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.ingredientDataPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.ingredientMacroPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.loadButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,7 +43,7 @@
             this.logPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(134)))), ((int)(((byte)(130)))), ((int)(((byte)(126)))));
             this.logPanel.Location = new System.Drawing.Point(10, 60);
             this.logPanel.Name = "logPanel";
-            this.logPanel.Size = new System.Drawing.Size(310, 780);
+            this.logPanel.Size = new System.Drawing.Size(310, 725);
             this.logPanel.TabIndex = 3;
             // 
             // panel1
@@ -82,12 +83,27 @@
             this.ingredientMacroPanel.Size = new System.Drawing.Size(400, 835);
             this.ingredientMacroPanel.TabIndex = 6;
             // 
+            // loadButton
+            // 
+            this.loadButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(92)))), ((int)(((byte)(69)))));
+            this.loadButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.loadButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loadButton.ForeColor = System.Drawing.SystemColors.Control;
+            this.loadButton.Location = new System.Drawing.Point(10, 790);
+            this.loadButton.Name = "loadButton";
+            this.loadButton.Size = new System.Drawing.Size(310, 50);
+            this.loadButton.TabIndex = 7;
+            this.loadButton.Text = "LOAD IN BUILDER";
+            this.loadButton.UseVisualStyleBackColor = false;
+            this.loadButton.Click += new System.EventHandler(this.loadButton_Click);
+            // 
             // LogsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(221)))), ((int)(((byte)(217)))));
             this.ClientSize = new System.Drawing.Size(1150, 850);
+            this.Controls.Add(this.loadButton);
             this.Controls.Add(this.ingredientMacroPanel);
             this.Controls.Add(this.ingredientDataPanel);
             this.Controls.Add(this.panel1);
@@ -106,5 +122,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FlowLayoutPanel ingredientDataPanel;
         private System.Windows.Forms.FlowLayoutPanel ingredientMacroPanel;
+        private System.Windows.Forms.Button loadButton;
     }
 }

@@ -54,9 +54,10 @@ namespace RecipeCalCalcV3
             childForms = new Form[3];
 
             // Initializing Child Forms.
-            childForms[HOME] = new HomeForm(this);
-            childForms[LOGS] = new LogsForm(this);
             childForms[BUILDER] = new BuilderForm(this);
+            childForms[HOME] = new HomeForm(this);
+            childForms[LOGS] = new LogsForm(this, childForms[BUILDER]);
+            
 
             // Setting Attributes and adding Child Forms to 'mainPanel'.
             initForm(childForms[HOME]);
@@ -208,18 +209,18 @@ namespace RecipeCalCalcV3
         }
 
         /**
-         * 
+         * TODO:
          */
-        private void homeButton_Click(object sender, EventArgs e)
+        public void homeButton_Click(object sender, EventArgs e)
         {
             titleTextBox.Text = "HOME";
             activateForm(childForms[HOME]);
         }
 
         /**
-         * 
+         * TODO:
          */
-        private void viewLogsButton_Click(object sender, EventArgs e)
+        public void viewLogsButton_Click(object sender, EventArgs e)
         {
             if (Program.logAdded)
             {
@@ -231,9 +232,9 @@ namespace RecipeCalCalcV3
         }
 
         /**
-         * 
+         * TODO:
          */
-        private void builderButton_Click(object sender, EventArgs e)
+        public void builderButton_Click(object sender, EventArgs e)
         {
             titleTextBox.Text = "BUILDER";
             bForm.reset();

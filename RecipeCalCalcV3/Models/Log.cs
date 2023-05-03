@@ -19,6 +19,7 @@ namespace RecipeCalCalcV3.Models
     internal class Log
     {
         private Boolean isPortioned;                // Denotes if a given logged recipe has been portioned.
+        private Boolean isClicked;                  // Boolean variable used within LogsForm to denote whether a given log is selected.
 
         private String name;                        // Name of the log. (Date)
         private String recipeName;                  // Name of the recipe saved in the log.
@@ -48,6 +49,7 @@ namespace RecipeCalCalcV3.Models
         public Log()
         {
             this.isPortioned = false;
+            this.isClicked = false;
 
             this.name = string.Empty;
             this.recipeName = string.Empty;
@@ -85,6 +87,7 @@ namespace RecipeCalCalcV3.Models
         public Log(String n, String rN, double rEW, double bW, double sW, double tW, double eC, double bC, double sC, double tC)
         {
             this.isPortioned = false;
+            this.isClicked = false;
 
             this.name = n;
             this.recipeName = rN;
@@ -129,6 +132,7 @@ namespace RecipeCalCalcV3.Models
         public Log(String n, String rN, double rEW, double bW, double sW, double tW, double eC, double bC, double sC, double tC, double cW, double pW, double pC, double pAC)
         {
             this.isPortioned = false;
+            this.isClicked = false;
 
             this.name = n;
             this.recipeName = rN;
@@ -196,6 +200,26 @@ namespace RecipeCalCalcV3.Models
         public void setIsPortioned(Boolean b)
         {
             this.isPortioned = b;
+        }
+
+        /**
+         * Getter for 'isClicked'.
+         * 
+         * @return 'isClicked'.
+         */
+        public Boolean getIsClicked()
+        {
+            return this.isClicked;
+        }
+
+        /**
+         * Setter for 'isClicked'.
+         * 
+         * @param c assigned to 'isClicked'.
+         */
+        public void setIsClicked(Boolean c)
+        {
+            this.isClicked = c;
         }
 
         /**

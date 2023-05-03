@@ -52,7 +52,7 @@ namespace RecipeCalCalcV3.ChildForms
         {
             InitializeComponent();
 
-            // Setting 'main' to passed in MainForm 'm'.
+            // Setting 'main' to passed in MainForm 'm' and bForm to passed in Form 'b'.
             main = m;
 
             // Initialize lists.
@@ -329,7 +329,7 @@ namespace RecipeCalCalcV3.ChildForms
             text.Size = new System.Drawing.Size(150, 44);
 
             // Set Panel 'calPanel' properties.
-            calPanel.Width = 115;
+            calPanel.Width = 130;
             calPanel.Height = 44;
             calPanel.BackColor = Color.FromArgb(134, 130, 126);
             calPanel.Location = new System.Drawing.Point(230, 13);
@@ -338,13 +338,26 @@ namespace RecipeCalCalcV3.ChildForms
             calLabel.Font = new System.Drawing.Font("Courier New", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             calLabel.ForeColor = System.Drawing.SystemColors.Control;
             calLabel.Location = new System.Drawing.Point(3, 9);
-            calLabel.Size = new System.Drawing.Size(85, 27);
+            calLabel.Size = new System.Drawing.Size(125, 27);
 
             int i = 0;
             foreach (Button button in ingredientButtons)
             {
-                if (sender == button && button.Tag.Equals("Not"))
+                String[] tempTag = button.Tag.ToString().Split('-');
+                if (sender == button && tempTag[0] != "Added")
                 {
+                    // If button Tag is "Not" it means it was clicked from builder.
+                    if (tempTag[0].Equals("Not"))
+                    {
+                        button.Tag = "Added";
+                    }
+                    // If button Tag is NOT "Not" it means it was clicked from LogsForm - Tag contains the entered weight.
+                    else
+                    {
+                        text.Text = tempTag[0];
+                        button.Tag = "Added";
+                    }
+
                     // Set ingredient's name and image.
                     container.Name = button.Name;
                     button.Tag = "Added";
@@ -447,7 +460,7 @@ namespace RecipeCalCalcV3.ChildForms
                                 {
                                     if (panel.Name.Equals(ing.getName()))
                                     {
-                                        lab.Text = ing.getCalculatedCal().ToString();    // Display calculated calories.
+                                        lab.Text = ing.getCalculatedCal().ToString("F2");    // Display calculated calories.
                                     }
                                 }
                             }
@@ -498,7 +511,7 @@ namespace RecipeCalCalcV3.ChildForms
                                 {
                                     if (panel.Name.Equals(ing.getName()))
                                     {
-                                        lab.Text = ing.getCalculatedCal().ToString();    // Display calculated calories.
+                                        lab.Text = ing.getCalculatedCal().ToString("F2");    // Display calculated calories.
                                     }
                                 }
                             }
@@ -548,7 +561,7 @@ namespace RecipeCalCalcV3.ChildForms
                                 {
                                     if (panel.Name.Equals(ing.getName()))
                                     {
-                                        lab.Text = ing.getCalculatedCal().ToString();    // Display calculated calories.
+                                        lab.Text = ing.getCalculatedCal().ToString("F2");    // Display calculated calories.
                                     }
                                 }
                             }
@@ -1057,6 +1070,7 @@ namespace RecipeCalCalcV3.ChildForms
         public void setCookedWeight(int cW)
         {
             this.cookedWeight = cW;
+            cookedWeightTB.Text = cW.ToString();
         }
 
         /**

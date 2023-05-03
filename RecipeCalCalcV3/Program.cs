@@ -27,6 +27,11 @@ namespace RecipeCalCalcV3
         public const String miscPath = ingredientPath + "misc.csv";          // Path to the csv file 'misc.csv'.
 
         /************************************************/
+        /*    Data Handling Variables - Ingredients     */
+        /************************************************/
+        public const String ratPicsPath = ".\\RatPics\\";                    // Path to the directory 'RatPics'.
+
+        /************************************************/
         /*    Global Variables used by all Forms        */
         /************************************************/
         public static Boolean logAdded = false;                              // Denotes whether a log was added at runtime.
@@ -114,6 +119,10 @@ namespace RecipeCalCalcV3
             if (!Directory.Exists(logsPath))
             {
                 Directory.CreateDirectory(logsPath);
+            }
+            if (!Directory.Exists(ratPicsPath))
+            {
+                Directory.CreateDirectory(ratPicsPath);
             }
             if (!File.Exists(proteinPath))
             {
