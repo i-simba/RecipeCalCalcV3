@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 /*
  * TODO ::
- * 1. 
+ * #. 
  */
 
 namespace RecipeCalCalcV3
@@ -209,7 +209,9 @@ namespace RecipeCalCalcV3
         }
 
         /**
-         * TODO:
+         * homeButton_Click() function listens to 'homeButton'.
+         * This fucntion sets the titleTextBox Text to "HOME" and
+         * calls on activateForm() to activate the home form.
          */
         public void homeButton_Click(object sender, EventArgs e)
         {
@@ -218,7 +220,12 @@ namespace RecipeCalCalcV3
         }
 
         /**
-         * TODO:
+         * viewLogsButton_Click() function listens to 'viewLogsButton'.
+         * This function checks the Boolean variable 'logAdded' inside Program.
+         * If 'logAdded' is true, this function will call on the reset() function in LogsForm
+         * to reset and rebuild the log buttons in 'logPanel'.
+         * The function then resets 'logAdded' to false, and calls on activateForm() to
+         * activate the LogsForm.
          */
         public void viewLogsButton_Click(object sender, EventArgs e)
         {
@@ -232,7 +239,10 @@ namespace RecipeCalCalcV3
         }
 
         /**
-         * TODO:
+         * builderButton_Click() function listens to 'builderButton'.
+         * This function will then call on the reset() function in BuilderForm to clear
+         * the ingredients present within each category's FlowLayoutPanel.
+         * The function then calls on activateForm() to activate the builder form.
          */
         public void builderButton_Click(object sender, EventArgs e)
         {
@@ -242,7 +252,7 @@ namespace RecipeCalCalcV3
         }
 
         /**
-         * savedButton_Click() function listens to the savedButton.
+         * savedButton_Click() function listens to 'savedButton'.
          * It then will call on 'savedPanelTimer' to start, which in turn will either
          * expand or collapse 'savedPanel'.
          */
@@ -307,15 +317,3 @@ namespace RecipeCalCalcV3
         }
     }
 }
-
-
-/*
- * 
-            OpenFileDialog opnfd = new OpenFileDialog();
-            opnfd.Filter = "Image Files (*.jpg;*.jpeg;.*.gif;)|*.jpg;*.jpeg;.*.gif;*.png";
-            if (opnfd.ShowDialog() == DialogResult.OK)
-            {
-                pictureBox1.Image = new Bitmap(opnfd.FileName);
-            }
- * 
- */
