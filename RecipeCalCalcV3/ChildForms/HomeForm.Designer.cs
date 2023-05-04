@@ -31,7 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.ingDisplayPanel = new System.Windows.Forms.Panel();
             this.ingPicsAnim = new System.Windows.Forms.Timer(this.components);
-            this.button1 = new System.Windows.Forms.Button();
+            this.addIngredientButton = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // ingDisplayPanel
@@ -48,19 +49,27 @@
             this.ingPicsAnim.Interval = 30;
             this.ingPicsAnim.Tick += new System.EventHandler(this.ingPicsAnim_Tick);
             // 
-            // button1
+            // addIngredientButton
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(92)))), ((int)(((byte)(69)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.SystemColors.Control;
-            this.button1.Location = new System.Drawing.Point(1005, 50);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 74);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "ADD INGREDIENT";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.addIngredientButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(92)))), ((int)(((byte)(69)))));
+            this.addIngredientButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.addIngredientButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addIngredientButton.ForeColor = System.Drawing.SystemColors.Control;
+            this.addIngredientButton.Location = new System.Drawing.Point(1005, 50);
+            this.addIngredientButton.Name = "addIngredientButton";
+            this.addIngredientButton.Size = new System.Drawing.Size(100, 74);
+            this.addIngredientButton.TabIndex = 1;
+            this.addIngredientButton.Text = "ADD INGREDIENT";
+            this.addIngredientButton.UseVisualStyleBackColor = false;
+            this.addIngredientButton.Click += new System.EventHandler(this.addIngredientButton_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(121)))), ((int)(((byte)(102)))));
+            this.panel1.Location = new System.Drawing.Point(35, 40);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1080, 94);
+            this.panel1.TabIndex = 2;
             // 
             // HomeForm
             // 
@@ -68,8 +77,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(221)))), ((int)(((byte)(217)))));
             this.ClientSize = new System.Drawing.Size(1150, 850);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.addIngredientButton);
             this.Controls.Add(this.ingDisplayPanel);
+            this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "HomeForm";
             this.Text = "HomeForm";
@@ -81,6 +91,7 @@
 
         private System.Windows.Forms.Panel ingDisplayPanel;
         private System.Windows.Forms.Timer ingPicsAnim;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button addIngredientButton;
+        private System.Windows.Forms.Panel panel1;
     }
 }

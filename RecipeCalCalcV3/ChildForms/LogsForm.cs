@@ -92,6 +92,7 @@ namespace RecipeCalCalcV3.ChildForms
             entrePanels.Clear();
             basePanels.Clear();
             snackPanels.Clear();
+            logFLP.Clear();
             initLogs();
         }
 

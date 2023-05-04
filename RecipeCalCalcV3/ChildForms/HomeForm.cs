@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -77,14 +78,9 @@ namespace RecipeCalCalcV3.ChildForms
         /**
          * TODO:
          */
-        private void button1_Click(object sender, EventArgs e)
+        private void addIngredientButton_Click(object sender, EventArgs e)
         {
-            OpenFileDialog opnfd = new OpenFileDialog();
-            opnfd.Filter = "Image Files (*.jpg;*.jpeg;.*.gif;)|*.jpg;*.jpeg;.*.gif;*.png";
-            if (opnfd.ShowDialog() == DialogResult.OK)
-            {
-                //TODO: Do something with selected image. File.Copy(?).
-            }
+            
         }
 
         /**********************************************************************************/
@@ -108,5 +104,14 @@ namespace RecipeCalCalcV3.ChildForms
                 ingredientPics[i].Location = new Point(ingredientPics[i].Location.X - 2, ingredientPics[i].Location.Y);
             }
         }
+
     }
 }
+/*
+OpenFileDialog opnfd = new OpenFileDialog();
+            opnfd.Filter = "Image Files (*.jpg;*.jpeg;.*.gif;)|*.jpg;*.jpeg;.*.gif;*.png";
+            if (opnfd.ShowDialog() == DialogResult.OK)
+            {
+                //TODO: Do something with selected image. File.Copy(?).
+            }
+*/
