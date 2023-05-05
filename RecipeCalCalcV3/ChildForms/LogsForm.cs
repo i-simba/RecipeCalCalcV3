@@ -734,6 +734,9 @@ namespace RecipeCalCalcV3.ChildForms
             {
                 bForm.setCookedWeight((int)log.getCookedWeight());
             }
+
+            // Set main title's Text to recipe name.
+            main.setTitle(rName.Text);
         }
 
         /**********************************************************************************/
