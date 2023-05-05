@@ -80,7 +80,8 @@ namespace RecipeCalCalcV3.ChildForms
          */
         private void addIngredientButton_Click(object sender, EventArgs e)
         {
-            
+            AddIngredient add = new AddIngredient();
+            add.Show();
         }
 
         /**********************************************************************************/
@@ -107,11 +108,3 @@ namespace RecipeCalCalcV3.ChildForms
 
     }
 }
-/*
-OpenFileDialog opnfd = new OpenFileDialog();
-            opnfd.Filter = "Image Files (*.jpg;*.jpeg;.*.gif;)|*.jpg;*.jpeg;.*.gif;*.png";
-            if (opnfd.ShowDialog() == DialogResult.OK)
-            {
-                //TODO: Do something with selected image. File.Copy(?).
-            }
-*/

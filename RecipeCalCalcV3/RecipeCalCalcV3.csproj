@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChildForms\AddIngredient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChildForms\AddIngredient.Designer.cs">
+      <DependentUpon>AddIngredient.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChildForms\BuilderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +80,9 @@
     <Compile Include="Models\Log.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ChildForms\AddIngredient.resx">
+      <DependentUpon>AddIngredient.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ChildForms\BuilderForm.resx">
       <DependentUpon>BuilderForm.cs</DependentUpon>
     </EmbeddedResource>
