@@ -56,10 +56,19 @@ namespace RecipeCalCalcV3
             Application.Run(new MainForm());
         }
 
+
+        /**********************************************************************************/
+        /*                                 INTERNAL USE                                   */
+        /**********************************************************************************/
+
+
         /**
          * initIngredients(String, String) function that reads in data from a given csv file denoted by 'path'
          * Each row contains data of a given ingredient (Name, Calories, Weight).
          * This information is then passed into an Ingredient object, which is then added to the List 'ingredients'.
+         * 
+         * @param path String denoting ingredient's type file, i.e., protein.csv/veggie.csv/liquids.csv/misc.csv
+         * @param type String denoting ingredient's type.
          */
         private static void initIngredients(String path, String type)
         {
@@ -140,6 +149,34 @@ namespace RecipeCalCalcV3
             {
                 File.Create(miscPath).Close();
             }
+        }
+
+
+        /**********************************************************************************/
+        /*                                 EXTERNAL USE                                   */
+        /**********************************************************************************/
+
+
+        /**
+         * resetRebuildIngredients() function clears and resets all Ingredients within the 'ingredients' list.
+         * It first calls 'cleanUp()' and assigns each Ingredient object to null, then calls 'Clear()' on the list.
+         * Lastly, 'initIngredients()' is called to re-add all protein/veggie/liquid/misc ingredients to the list
+         * to include newly added ingredients.
+         */
+        public static void resetRebuildIngredients()
+        {
+            // cleanUp() and assign each element to 'null'.
+            for (int i = 0; i < ingredients.Count; i++)
+            {
+                ingredients[i].cleanUp();
+                ingredients[i] = null;
+            }
+            ingredients.Clear();
+
+            initIngredients(proteinPath, "protein");    // Add 'protein' type ingredients to List.
+            initIngredients(veggiePath, "veggie");      // Add 'veggie' type ingredients to List.
+            initIngredients(liquidPath, "liquid");      // Add 'liquid' type ingredients to List.
+            initIngredients(miscPath, "misc");          // Add 'misc' type ingredients to List.
         }
 
         /**

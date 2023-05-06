@@ -10,27 +10,40 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
+/**
+ * TODO:
+ * #. 
+ */
+
 namespace RecipeCalCalcV3.ChildForms
 {
     public partial class AddIngredient : Form
     {
-        private String destPath = null;      // Destination copied image path.
-        private String sourcePath = null;    // Source image path.
+        private BuilderForm bForm = null;     // BuilderForm object.
 
-        private String type = null;          // User entered ingredient type.
-        private String name = null;          // User entered ingredient name.
-        private int calories;                // User entered ingredient calories per given weight.
-        private int weight;                  // User entered ingredient weight.
-        private int course;                  // User entered ingredient course.
+        private String destPath = null;       // Destination copied image path.
+        private String sourcePath = null;     // Source image path.
+        private String tempPath = null;       // String containing ingredient 'type' file.
 
-        public AddIngredient()
+        private String type = null;           // User entered ingredient type.
+        private String name = null;           // User entered ingredient name.
+        private String tipNameConv = null;    // 
+        private int calories;                 // User entered ingredient calories per given weight.
+        private int weight;                   // User entered ingredient weight.
+        private int course;                   // User entered ingredient course.
+
+        public AddIngredient(BuilderForm b)
         {
             InitializeComponent();
+            this.bForm = b;
         }
+
 
         /**********************************************************************************/
         /*                                 Internal Use                                   */
         /**********************************************************************************/
+
 
         /**
          * getTipName() function converts a given string, in this context, a user entered ingredient name
@@ -42,7 +55,7 @@ namespace RecipeCalCalcV3.ChildForms
          * @param n Ingredient name to be converted.
          * @return String conversion of 'n'.
          */
-        private String getTipName(String n)
+        private String getTipNameConv(String n)
         {
             // Split 'n' and convert all characters to lower-case.
             String[] token = n.ToLower().Split(' ');
@@ -60,7 +73,11 @@ namespace RecipeCalCalcV3.ChildForms
         }
 
         /**
-         * TODO:
+         * resetTextBox() function resets a given's TextBox's properties to its original form.
+         * The string 'n' is used to denote which TextBox is passed.
+         * 
+         * @param TextBox has its properties reset.
+         * @param n String denoting which TextBox to manipulate.
          */
         private void resetTextBox(TextBox tb, String n)
         {
@@ -71,9 +88,11 @@ namespace RecipeCalCalcV3.ChildForms
             }
         }
 
+
         /**********************************************************************************/
         /*                                 BUTTON EVENTS                                  */
         /**********************************************************************************/
+
 
         /**
          * ingNameTB_Click() function listens for a click on 'ingNameTB'.
@@ -103,12 +122,16 @@ namespace RecipeCalCalcV3.ChildForms
         }
 
         /**
-         * TODO: okButton_Click()
+         * okButton_Click() function listens for a click on 'okButton'.
+         * Once clicked, it first validates input from the user to ensure only valid input is entered.
+         * If all inputs are valid, user entered ingredient data are assigned to local variables.
+         * Those variables are then written to a file that corresponds to the ingredient's type.
+         * i.e., protein/veggie/liquids/misc.
          */
         private void okButton_Click(object sender, EventArgs e)
         {
-            int calParse = 0;    // Calories per entered weight.
-            int weightParse = 0;      // Entered weight.
+            int calParse = 0;       // Calories per entered weight.
+            int weightParse = 0;    // Entered weight.
             
             // Error trap - If Name have not been changed or are empty.
             if (ingNameTB.Text.Equals("Name") || ingNameTB.Text.Equals(string.Empty))
@@ -166,27 +189,62 @@ namespace RecipeCalCalcV3.ChildForms
             weight = weightParse;
             course = courseCombo.SelectedIndex + 1;
             type = typeCombo.SelectedItem.ToString();
+            tipNameConv = getTipNameConv(name);
 
-            destPath = Path.Combine(Program.ingredientImgPath, getTipName(name) + Path.GetExtension(sourcePath));
+            // Building 'destPath' and 'tempPath'.
+            destPath = Path.Combine(Program.ingredientImgPath, tipNameConv + Path.GetExtension(sourcePath));
+            tempPath = Path.Combine(Program.ingredientPath, typeCombo.SelectedItem.ToString().ToLower() + ".csv");
 
-            // TODO: File.Copy(source, destination);
+            // Error trap - If ingredient being added is already present within ingredient type file.
+            String[] lines = File.ReadAllLines(tempPath);
+            foreach (String str in lines)
+            {
+                String[] temp = str.Split(',');
+                if (temp[0].Equals(tipNameConv))
+                {
+                    MessageBox.Show("Ingredient is already ADDED!", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
 
+            // Writing ingredient data to the right file.
+            using (StreamWriter writer = File.AppendText(tempPath))
+            {
+                writer.WriteLine(
+                    tipNameConv + "," +
+                    name + "," +
+                    calories + "," +
+                    weight + "," +
+                    course);
+            }
 
-            /*
-            Console.WriteLine("\n" + sourcePath + "\n");
-            Console.WriteLine(destPath + "\n");
-            /*
-            Console.WriteLine("\n" +
-                "Name     : " + name + "\n" +
-                "Calories : " + calories + "\n" +
-                "Weight   : " + weight + "\n" +
-                "Type     : " + type + "\n" +
-                "Course   : " + course + "\n" +
-                "Tip Name : " + getTipName(name) + "\n");*/
+            // Copy source image to destination path.
+            try
+            {
+                File.Copy(sourcePath, destPath);
+            }
+            catch (IOException ex)
+            {
+                if (ex.Message.Contains("already exists"))
+                {
+                    MessageBox.Show("Ingredient image already EXISTS!", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message, "IO EXCEPTION OCCURED!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+
+            Program.resetRebuildIngredients();
+            bForm.resetRebuildButtons();
+            MessageBox.Show("SUCCESS! Ingredient saved!", "", MessageBoxButtons.OK);
+            this.Close();
         }
 
         /**
-         * TODO: cancelButton_Click() listens for a click on 'cancelButton'.
+         * cancelButton_Click() listens for a click on 'cancelButton'.
          * If the button is clicked, this form Closes.
          */
         private void cancelButton_Click(object sender, EventArgs e)
@@ -195,7 +253,11 @@ namespace RecipeCalCalcV3.ChildForms
         }
 
         /**
-         * TODO: addPicButton()
+         * addPicButton() function listens for a click on 'addPicButton'.
+         * Once clicked, an OpenFileDialog is opened in which the user has the option to select
+         * and image from their computer.
+         * After clicking 'OK', the image's path is assigned to 'sourcePath' and the 'addPicButton'
+         * image is set to the selected image.
          */
         private void addPicButton_Click(object sender, EventArgs e)
         {
@@ -209,9 +271,11 @@ namespace RecipeCalCalcV3.ChildForms
             }
         }
 
+
         /**********************************************************************************/
         /*                                 FOCUS EVENTS                                   */
         /**********************************************************************************/
+
 
         /**
          * ingNameTB_Leave() function listens when focus leaves 'ingNameTB'.

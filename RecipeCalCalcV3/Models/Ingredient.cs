@@ -89,7 +89,7 @@ namespace RecipeCalCalcV3.Models
         }
 
         /**
-         * resetValues() resets the variables that change with each use, as these variables are based
+         * resetValues() function resets the variables that change with each use, as these variables are based
          * on user input. These variables are the entered weight of a given ingredient, (enteredWeight)
          * and the calculated calories of the ingredient based on the entered weight. (calculatedCal)
          */
@@ -97,6 +97,18 @@ namespace RecipeCalCalcV3.Models
         {
             this.calculatedCal = 0.0;
             this.enteredWeight = 0;
+        }
+
+        /**
+         * cleanUp() function sets all String and Image variables to null.
+         * Usually followed up by a list clearing containing Ingredient objects.
+         */
+        public void cleanUp()
+        {
+            this.name = null;
+            this.tipName = null;
+            this.type = null;
+            this.img = null;
         }
 
         /**
