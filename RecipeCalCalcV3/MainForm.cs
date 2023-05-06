@@ -42,9 +42,11 @@ namespace RecipeCalCalcV3
         private int openInt = 30;
         private int closeInt = 60;
 
+
         /**********************************************************************************/
         /*                                  CONSTRUCTOR                                   */
         /**********************************************************************************/
+
 
         public MainForm()
         {
@@ -55,7 +57,7 @@ namespace RecipeCalCalcV3
 
             // Initializing Child Forms.
             childForms[BUILDER] = new BuilderForm(this);
-            childForms[HOME] = new HomeForm(this);
+            childForms[HOME] = new HomeForm(this, childForms[BUILDER]);
             childForms[LOGS] = new LogsForm(this, childForms[BUILDER]);
             
 
@@ -79,9 +81,11 @@ namespace RecipeCalCalcV3
             initSaved();
         }
 
+
         /**********************************************************************************/
         /*                                 INTERNAL USE                                   */
         /**********************************************************************************/
+
 
         /**
          * MainForm_Load() function sets the default opening screen to be the 'HOME' screen
@@ -177,9 +181,11 @@ namespace RecipeCalCalcV3
             }
         }
 
+
         /**********************************************************************************/
         /*                                 BUTTON EVENTS                                  */
         /**********************************************************************************/
+
 
         /**
          * button_Click() function listens for click events from buttons inside 'ingButtons'.
@@ -261,9 +267,11 @@ namespace RecipeCalCalcV3
             savedPanelTimer.Start();
         }
 
+
         /**********************************************************************************/
         /*                              ANIMATION FUNCTIONS                               */
         /**********************************************************************************/
+
 
         /**
          * savedPanelTimer_Tick() function animates the expansion/collapse of the 'savedPanel' panel.
@@ -292,9 +300,11 @@ namespace RecipeCalCalcV3
             }
         }
 
+
         /**********************************************************************************/
         /*                                SETTERS/GETTERS                                 */
         /**********************************************************************************/
+
 
         /**
          * Getter for 'titleTextBox' text.

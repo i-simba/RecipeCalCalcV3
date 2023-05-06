@@ -34,8 +34,8 @@ namespace RecipeCalCalcV3.ChildForms
         public const int INGREDIENT = 1;                              // Denotes the type of Panel to be created is an Ingredient.
         public const int PORTIONED = 2;                               // Denotes the type of Panel to be created is a Portion.
 
-        MainForm main = null;                                         // MainFrom object.
-        BuilderForm bForm = null;                                     // BuilderForm object.
+        private MainForm main = null;                                 // MainFrom object.
+        private BuilderForm bForm = null;                             // BuilderForm object.
 
         private Dictionary<String, FlowLayoutPanel> logFLP = null;    // Dictionary of FlowLayoutPanels keyed by their log name. (date)
         private Dictionary<String, Log> logList = null;               // Dictionary of logs keyed by their log name. (date)
@@ -48,9 +48,11 @@ namespace RecipeCalCalcV3.ChildForms
         private Label eWeight = null;                                 // Label containing entered weight.
         private Label tCal = null;                                    // Label containing total calories.
         
+
         /**********************************************************************************/
         /*                                  CONSTRUCTOR                                   */
         /**********************************************************************************/
+
 
         public LogsForm(MainForm m, Form b)
         {
@@ -75,30 +77,11 @@ namespace RecipeCalCalcV3.ChildForms
             initLogs();
         }
 
-        /**********************************************************************************/
-        /*                                 EXTERNAL USE                                   */
-        /**********************************************************************************/
-
-        /**
-         * reset() function resets 'logPanel' by clearing it's Controls.
-         * Panels containing ingredient data, i.e., entre/base/snack, are also cleared and 'initLogs' is called again to rebuild logs.
-         * This function is mainly used within MainForm, to reset and rebuild 'logPanel' if a new log has just been created.
-         */
-        public void reset()
-        {
-            logPanel.Controls.Clear();
-            logList.Clear();
-            logButtons.Clear();
-            entrePanels.Clear();
-            basePanels.Clear();
-            snackPanels.Clear();
-            logFLP.Clear();
-            initLogs();
-        }
 
         /**********************************************************************************/
         /*                                 INTERNAL USE                                   */
         /**********************************************************************************/
+
 
         /**
          * initLogs() function is the main data parsing function that gets the files present within the 'Logs' directory.
@@ -445,7 +428,30 @@ namespace RecipeCalCalcV3.ChildForms
 
             return container;
         }
-        
+
+
+        /**********************************************************************************/
+        /*                                 EXTERNAL USE                                   */
+        /**********************************************************************************/
+
+
+        /**
+         * reset() function resets 'logPanel' by clearing it's Controls.
+         * Panels containing ingredient data, i.e., entre/base/snack, are also cleared and 'initLogs' is called again to rebuild logs.
+         * This function is mainly used within MainForm, to reset and rebuild 'logPanel' if a new log has just been created.
+         */
+        public void reset()
+        {
+            logPanel.Controls.Clear();
+            logList.Clear();
+            logButtons.Clear();
+            entrePanels.Clear();
+            basePanels.Clear();
+            snackPanels.Clear();
+            logFLP.Clear();
+            initLogs();
+        }
+
         /**********************************************************************************/
         /*                                 BUTTON EVENTS                                  */
         /**********************************************************************************/
@@ -734,11 +740,16 @@ namespace RecipeCalCalcV3.ChildForms
             {
                 bForm.setCookedWeight((int)log.getCookedWeight());
             }
+
+            // Set main title's Text to recipe name.
+            main.setTitle(rName.Text);
         }
+
 
         /**********************************************************************************/
         /*                                SETTERS/GETTERS                                 */
         /**********************************************************************************/
+
 
         /**
          * Getter for 'logFLP'.

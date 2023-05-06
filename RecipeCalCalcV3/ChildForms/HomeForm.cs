@@ -12,8 +12,7 @@ using System.Windows.Forms;
 
 /**
  * TODO ::
- * 1. Add ingredient functionality.
- * 2. Display tips.
+ * #. Display tips.
  */
 
 namespace RecipeCalCalcV3.ChildForms
@@ -22,20 +21,24 @@ namespace RecipeCalCalcV3.ChildForms
     {
         private const int picSize = 64;                    // Denotes the max size for a picture box.
 
-        MainForm main = null;                              // MainForm object.
+        private MainForm main = null;                      // MainForm object.
+        private BuilderForm bForm = null;                  // BuilderForm object.
 
         private List<PictureBox> ingredientPics = null;    // List containing all added ingredient PictureBoxes.
+
 
         /**********************************************************************************/
         /*                                  CONSTRUCTOR                                   */
         /**********************************************************************************/
 
-        public HomeForm(MainForm m)
+
+        public HomeForm(MainForm m, Form b)
         {
             InitializeComponent();
 
             // Setting 'main' to passed in MainForm 'm'.
             main = m;
+            bForm = (BuilderForm)b;
 
             // Initialize lists.
             ingredientPics = new List<PictureBox>();
@@ -47,9 +50,11 @@ namespace RecipeCalCalcV3.ChildForms
             ingPicsAnim.Start();
         }
 
+
         /**********************************************************************************/
         /*                                 INTERNAL USE                                   */
         /**********************************************************************************/
+
 
         /**
          * initPic() function dynamically creates PictureBoxes that contains images from files
@@ -71,21 +76,27 @@ namespace RecipeCalCalcV3.ChildForms
             }
         }
 
+
         /**********************************************************************************/
         /*                                 BUTTON EVENTS                                  */
         /**********************************************************************************/
 
+
         /**
-         * TODO:
+         * addIngredientButton_Click() function listens to 'addIngredientButton'.
+         * Once clicked, a new AddIngredient form is created and shown.
          */
         private void addIngredientButton_Click(object sender, EventArgs e)
         {
-            
+            AddIngredient add = new AddIngredient(bForm);
+            add.Show();
         }
+
 
         /**********************************************************************************/
         /*                              ANIMATION FUNCTIONS                               */
         /**********************************************************************************/
+
 
         /**
          * ingPicsAnim_Tick(() function is a function that controls the animation of all PictureBoxes
@@ -107,11 +118,3 @@ namespace RecipeCalCalcV3.ChildForms
 
     }
 }
-/*
-OpenFileDialog opnfd = new OpenFileDialog();
-            opnfd.Filter = "Image Files (*.jpg;*.jpeg;.*.gif;)|*.jpg;*.jpeg;.*.gif;*.png";
-            if (opnfd.ShowDialog() == DialogResult.OK)
-            {
-                //TODO: Do something with selected image. File.Copy(?).
-            }
-*/

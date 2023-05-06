@@ -15,7 +15,7 @@ using System.Windows.Forms.VisualStyles;
 
 /*
  * TODO ::
- * 0. Pot/Pan object with weight(?) used to deduct from cooked weight.
+ * #. Pot/Pan object with weight(?) used to deduct from cooked weight.
  */
 
 namespace RecipeCalCalcV3.ChildForms
@@ -45,9 +45,11 @@ namespace RecipeCalCalcV3.ChildForms
         private double portionCalculatedCal = 0.0;        // The calculated calories of the portion.
         private double portionAllCalories = 0.0;          // The calculated calories of the portion plus snack and base calories.
 
+
         /**********************************************************************************/
         /*                                  CONSTRUCTOR                                   */
         /**********************************************************************************/
+
 
         public BuilderForm(MainForm m)
         {
@@ -65,55 +67,11 @@ namespace RecipeCalCalcV3.ChildForms
             initButtons();
         }
 
-        /**
-         * reset() function disposes of all added ingredient panels, and all totals values will be reset to zero and their
-         * corresponding TextBox set to be empty strings.
-         */
-        public void reset()
-        {
-            // Dispose of any entered ingredient panel.
-            foreach (Panel panel in ingPanels)
-            {
-                panel.Dispose();
-            }
 
-            // Clear lists of all items.
-            ingPanels.Clear();
-            entrePanels.Clear();
-            basePanels.Clear();
-            snackPanels.Clear();
+        /**********************************************************************************/
+        /*                                 INTERNAL USE                                   */
+        /**********************************************************************************/
 
-            // Reset the text displayed for each totals TextBox.
-            foreach (Control control in totalsPanel.Controls)
-            {
-                if (control is Panel)
-                {
-                    foreach (Control ctrl in  control.Controls)
-                    {
-                        if (ctrl is TextBox)
-                        {
-                            ctrl.Text = string.Empty;
-                        }
-                    }
-                }
-            }
-            
-
-            // Reset tags on each ingredient button.
-            foreach (Button button in ingredientButtons)
-            {
-                button.Tag = "Not";
-            }
-
-            cookedWeightTB.Text = string.Empty;
-            portionWeightTB.Text = string.Empty;
-
-            // Resets the values of each totals.
-            resetValues();
-            
-            // Resets the entered weight and calculated calorie variables for each ingredient.
-            Program.resetListVals();
-        }
 
         /**
          * resetValues() function resets only the total values for each calculation.
@@ -220,8 +178,13 @@ namespace RecipeCalCalcV3.ChildForms
          * name for the recipe.
          * If the string entered is either empty or only contains white spaces, this function will
          * display an error and recursively prompt the user again until a valid input is entered.
+         * 
+         * @param prompText String denoting a prompt that tells what the user should enter. i.e., 'Recipe Name: '.
+         * @param text String denoting the name of the log file to be saved.
+         * @param value String value being returned. i.e., user entered recipe/log name.
+         * @param i Integer denoting who called this function.
          */
-        public static DialogResult inputBox(String promptText, String text, ref String value, int i)
+        private static DialogResult inputBox(String promptText, String text, ref String value, int i)
         {
             Form form = new Form();
             Label label = new Label();
@@ -230,6 +193,7 @@ namespace RecipeCalCalcV3.ChildForms
             Button buttonCancel = new Button();
 
             label.Text = promptText;
+
             // Conditional statements based on the caller 'i'.
             if (i == 2)
             {
@@ -284,9 +248,109 @@ namespace RecipeCalCalcV3.ChildForms
             return result;
         }
 
+
+        /**********************************************************************************/
+        /*                                 EXTERNAL USE                                   */
+        /**********************************************************************************/
+
+
+        /**
+         * reset() function disposes of all added ingredient panels, and all totals values will be reset to zero and their
+         * corresponding TextBox set to be empty strings.
+         */
+        public void reset()
+        {
+            // Dispose of any entered ingredient panel.
+            foreach (Panel panel in ingPanels)
+            {
+                panel.Dispose();
+            }
+
+            // Clear lists of all items.
+            ingPanels.Clear();
+            entrePanels.Clear();
+            basePanels.Clear();
+            snackPanels.Clear();
+
+            // Reset the text displayed for each totals TextBox.
+            foreach (Control control in totalsPanel.Controls)
+            {
+                if (control is Panel)
+                {
+                    foreach (Control ctrl in control.Controls)
+                    {
+                        if (ctrl is TextBox)
+                        {
+                            ctrl.Text = string.Empty;
+                        }
+                    }
+                }
+            }
+
+
+            // Reset tags on each ingredient button.
+            foreach (Button button in ingredientButtons)
+            {
+                button.Tag = "Not";
+            }
+
+            cookedWeightTB.Text = string.Empty;
+            portionWeightTB.Text = string.Empty;
+
+            // Resets the values of each totals.
+            resetValues();
+
+            // Resets the entered weight and calculated calorie variables for each ingredient.
+            Program.resetListVals();
+        }
+
+        /**
+         * resetRebuildButtons() function clears and resets all ingredient panels.
+         * i.e., proteinPanel/veggiePanel/liquidPanel/miscPanel.
+         * This function first assigns all Button objects within 'ingredientButtons' list
+         * before finally calling 'Clear()' on the list.
+         * Each panels mentioned above then calls 'Clear()' on all of their respective controls
+         * prior to calling 'Clear()' on the panels themselves.
+         * Lastly, 'initButtons()' is called to rebuild the cleared buttons to include newly added ingredients.
+         */
+        public void resetRebuildButtons()
+        {
+            for (int i = 0; i < ingredientButtons.Count; i++)
+            {
+                ingredientButtons[i] = null;
+            }
+            ingredientButtons.Clear();
+
+            foreach (Control ctrl in proteinPanel.Controls)
+            {
+                ctrl.Controls.Clear();
+            }
+            foreach (Control ctrl in veggiePanel.Controls)
+            {
+                ctrl.Controls.Clear();
+            }
+            foreach (Control ctrl in liquidPanel.Controls)
+            {
+                ctrl.Controls.Clear();
+            }
+            foreach (Control ctrl in miscPanel.Controls)
+            {
+                ctrl.Controls.Clear();
+            }
+
+            proteinPanel.Controls.Clear();
+            veggiePanel.Controls.Clear();
+            liquidPanel.Controls.Clear();
+            miscPanel.Controls.Clear();
+
+            initButtons();
+        }
+
+
         /**********************************************************************************/
         /*                                 BUTTON EVENTS                                  */
         /**********************************************************************************/
+
 
         /**
          * button_Click() function is the defacto button listener for the dynamically created ingredient buttons.
@@ -739,9 +803,11 @@ namespace RecipeCalCalcV3.ChildForms
             reset();
         }
 
+
         /**********************************************************************************/
         /*                                SETTERS/GETTERS                                 */
         /**********************************************************************************/
+
 
         /**
          * Getter for 'ingredientButtons'.
