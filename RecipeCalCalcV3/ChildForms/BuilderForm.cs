@@ -15,7 +15,7 @@ using System.Windows.Forms.VisualStyles;
 
 /*
  * TODO ::
- * #. Pot/Pan object with weight(?) used to deduct from cooked weight.
+ * #.
  */
 
 namespace RecipeCalCalcV3.ChildForms
