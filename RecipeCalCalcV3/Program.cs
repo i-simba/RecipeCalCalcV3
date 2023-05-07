@@ -14,27 +14,29 @@ namespace RecipeCalCalcV3
     internal static class Program
     {
         /************************************************/
-        /*    Data Handling Variables - Ingredients     */
+        /*    Data Handling Variables                   */
         /************************************************/
-        public static List<Ingredient> ingredients = null;                   // Ingredient List that holds added ingredients.
-        public const String ingredientPath = ".\\Ingredients\\";             // Path to the directory 'Ingredients'.
-        public const String ingredientImgPath = ".\\Images\\";               // Path to the directory 'Images'.
-        public const String savedIngredientPath = ".\\SavedRecipes\\";       // Path to the directory 'SavedRecipes'.
-        public const String logsPath = ".\\Logs\\";                          // Path to the directory 'Logs'.
-        public const String proteinPath = ingredientPath + "protein.csv";    // Path to the csv file 'protein.csv'.
-        public const String veggiePath = ingredientPath + "veggie.csv";      // Path to the csv file 'veggie.csv'.
-        public const String liquidPath = ingredientPath + "liquids.csv";     // Path to the csv file 'liquids.csv'.
-        public const String miscPath = ingredientPath + "misc.csv";          // Path to the csv file 'misc.csv'.
+        public static List<Ingredient> ingredients = null;                       // Ingredient List that holds added ingredients.
+        public static List<Cookware> cookwares = null;                           // Cookware List that holds added cookwares.
+        public const String ingredientPath = ".\\Ingredients\\";                 // Path to the directory 'Ingredients'.
+        public const String ingredientImgPath = ".\\Images\\";                   // Path to the directory 'Images'.
+        public const String savedIngredientPath = ".\\SavedRecipes\\";           // Path to the directory 'SavedRecipes'.
+        public const String logsPath = ".\\Logs\\";                              // Path to the directory 'Logs'.
+        public const String proteinPath = ingredientPath + "protein.csv";        // Path to the csv file 'protein.csv'.
+        public const String veggiePath = ingredientPath + "veggie.csv";          // Path to the csv file 'veggie.csv'.
+        public const String liquidPath = ingredientPath + "liquids.csv";         // Path to the csv file 'liquids.csv'.
+        public const String miscPath = ingredientPath + "misc.csv";              // Path to the csv file 'misc.csv'.
+        public const String cookwaresPath = ingredientPath + "cookwares.csv";    // Path to the csv file 'cookwares.csv'.
 
         /************************************************/
-        /*    Data Handling Variables - Ingredients     */
+        /*    MISC Data Handling Variables              */
         /************************************************/
-        public const String ratPicsPath = ".\\RatPics\\";                    // Path to the directory 'RatPics'.
+        public const String ratPicsPath = ".\\RatPics\\";                        // Path to the directory 'RatPics'.
 
         /************************************************/
         /*    Global Variables used by all Forms        */
         /************************************************/
-        public static Boolean logAdded = false;                              // Denotes whether a log was added at runtime.
+        public static Boolean logAdded = false;                                  // Denotes whether a log was added at runtime.
 
 
         /************************************************/
@@ -44,12 +46,14 @@ namespace RecipeCalCalcV3
         static void Main()
         {
             ingredients = new List<Ingredient>();       // Initialize 'ingredients' List.
+            cookwares = new List<Cookware>();           // Initialize 'cookwares' List.
             initFiles();                                // Create directories/files if they don't exist.
             initIngredients(proteinPath, "protein");    // Add 'protein' type ingredients to List.
             initIngredients(veggiePath, "veggie");      // Add 'veggie' type ingredients to List.
             initIngredients(liquidPath, "liquid");      // Add 'liquid' type ingredients to List.
             initIngredients(miscPath, "misc");          // Add 'misc' type ingredients to List.
-
+            initCookwares(cookwaresPath);               // Add Cookwares to List.
+            
             // Provided code to start forms.
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -63,8 +67,8 @@ namespace RecipeCalCalcV3
 
 
         /**
-         * initIngredients(String, String) function that reads in data from a given csv file denoted by 'path'
-         * Each row contains data of a given ingredient (Name, Calories, Weight).
+         * initIngredients(String, String) function reads in data from a given csv file denoted by 'path'
+         * Each row contains data of a given ingredient (Name, Tool Tip Name, Calories, Weight).
          * This information is then passed into an Ingredient object, which is then added to the List 'ingredients'.
          * 
          * @param path String denoting ingredient's type file, i.e., protein.csv/veggie.csv/liquids.csv/misc.csv
@@ -72,15 +76,15 @@ namespace RecipeCalCalcV3
          */
         private static void initIngredients(String path, String type)
         {
-            // Check if file within given path is empty - exit if empty.
+            // Error trap - If file within given path is empty - exit if empty.
             if (new FileInfo(path).Length == 0)
             {
                 return;
             }
 
-            // File Reading variables
+            // File reading variables
             StreamReader reader = null;    // StreamReader object used to parse csv files.
-            String[] ingDetails = null;    // String array containing tokenized Strings from 'line'
+            String[] ingDetails = null;    // String array containing tokenized Strings from 'line'.
             String line = null;            // String containing read in current line from csv.
 
             // Reading ingredients from 'path'.
@@ -102,6 +106,43 @@ namespace RecipeCalCalcV3
                 ingredients.Add(temp);
                 Image pic = Image.FromFile(ingredientImgPath + temp.getName() + ".png");
                 temp.setImage(pic);
+            }
+            reader.Close();
+        }
+
+        /**
+         * initCookwares() function reads in data from a given csv file denoted by 'path'.
+         * Each row contains data of a given cookware (Name, Tool Tip Name, Weight).
+         * This informatino is then passed into a Cookware object, which is then added to the list 'cookwares'.
+         * 
+         * @param path String containing path to 'cookwares.csv' within the 'Ingredients' directory.
+         */
+        private static void initCookwares(String path)
+        {
+            // Error trap - If file within given path is empty - exit if empty.
+            if (new FileInfo(path).Length == 0)
+            {
+                return;
+            }
+
+            // File reading variables.
+            StreamReader reader = new StreamReader(path);    // Read from file 'path'.
+            String[] cookware = null;                        // String array containing tokenized Strings from 'line'.
+            String line = null;                              // String containing read in current line from csv.
+
+            // Reading details from 'path'.
+            while (!reader.EndOfStream)
+            {
+                // CSV file format is as follows - Cookware Name, Cookware Tip Name, Cookware Weight.
+                line = reader.ReadLine();
+                cookware = line.Split(',');
+
+                // Create Cookware ingredient object and add it to 
+                Cookware temp = new Cookware(
+                    cookware[0],                      // Name.
+                    cookware[1],                      // Tool Tip Name.
+                    Convert.ToInt32(cookware[2]));    // Weight.
+                cookwares.Add(temp);
             }
             reader.Close();
         }
@@ -149,6 +190,10 @@ namespace RecipeCalCalcV3
             {
                 File.Create(miscPath).Close();
             }
+            if (!File.Exists(cookwaresPath))
+            {
+                File.Create(cookwaresPath).Close();
+            }
         }
 
 
@@ -177,6 +222,14 @@ namespace RecipeCalCalcV3
             initIngredients(veggiePath, "veggie");      // Add 'veggie' type ingredients to List.
             initIngredients(liquidPath, "liquid");      // Add 'liquid' type ingredients to List.
             initIngredients(miscPath, "misc");          // Add 'misc' type ingredients to List.
+        }
+
+        /**
+         * TODO:
+         */
+        public static void resetRebuildCookwares()
+        {
+            // TODO
         }
 
         /**

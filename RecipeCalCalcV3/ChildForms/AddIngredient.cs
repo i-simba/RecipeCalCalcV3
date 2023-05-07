@@ -33,6 +33,12 @@ namespace RecipeCalCalcV3.ChildForms
         private int weight;                   // User entered ingredient weight.
         private int course;                   // User entered ingredient course.
 
+
+        /**********************************************************************************/
+        /*                                  CONSTRUCTOR                                   */
+        /**********************************************************************************/
+
+
         public AddIngredient(BuilderForm b)
         {
             InitializeComponent();

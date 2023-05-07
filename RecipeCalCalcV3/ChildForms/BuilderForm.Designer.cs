@@ -44,6 +44,7 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.saveButton = new System.Windows.Forms.Button();
             this.panel17 = new System.Windows.Forms.Panel();
+            this.cookwareCB = new System.Windows.Forms.ComboBox();
             this.label18 = new System.Windows.Forms.Label();
             this.portionWeightTB = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
@@ -51,6 +52,7 @@
             this.calculateButton = new System.Windows.Forms.Button();
             this.resetButton = new System.Windows.Forms.Button();
             this.totalsPanel = new System.Windows.Forms.Panel();
+            this.logButton = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label16 = new System.Windows.Forms.Label();
             this.portionlAllCalTB = new System.Windows.Forms.TextBox();
@@ -89,7 +91,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.baseIngredientPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.snacksIngredientPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.logButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -270,6 +271,7 @@
             // panel17
             // 
             this.panel17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(241)))), ((int)(((byte)(233)))));
+            this.panel17.Controls.Add(this.cookwareCB);
             this.panel17.Controls.Add(this.label18);
             this.panel17.Controls.Add(this.portionWeightTB);
             this.panel17.Controls.Add(this.label19);
@@ -278,6 +280,15 @@
             this.panel17.Name = "panel17";
             this.panel17.Size = new System.Drawing.Size(415, 40);
             this.panel17.TabIndex = 3;
+            // 
+            // cookwareCB
+            // 
+            this.cookwareCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cookwareCB.FormattingEnabled = true;
+            this.cookwareCB.Location = new System.Drawing.Point(160, 10);
+            this.cookwareCB.Name = "cookwareCB";
+            this.cookwareCB.Size = new System.Drawing.Size(94, 21);
+            this.cookwareCB.TabIndex = 5;
             // 
             // label18
             // 
@@ -293,9 +304,9 @@
             // portionWeightTB
             // 
             this.portionWeightTB.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.portionWeightTB.Location = new System.Drawing.Point(214, 10);
+            this.portionWeightTB.Location = new System.Drawing.Point(259, 10);
             this.portionWeightTB.Name = "portionWeightTB";
-            this.portionWeightTB.Size = new System.Drawing.Size(130, 22);
+            this.portionWeightTB.Size = new System.Drawing.Size(85, 22);
             this.portionWeightTB.TabIndex = 2;
             // 
             // label19
@@ -314,7 +325,7 @@
             this.cookedWeightTB.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cookedWeightTB.Location = new System.Drawing.Point(70, 10);
             this.cookedWeightTB.Name = "cookedWeightTB";
-            this.cookedWeightTB.Size = new System.Drawing.Size(130, 22);
+            this.cookedWeightTB.Size = new System.Drawing.Size(85, 22);
             this.cookedWeightTB.TabIndex = 1;
             // 
             // calculateButton
@@ -363,6 +374,19 @@
             this.totalsPanel.Name = "totalsPanel";
             this.totalsPanel.Size = new System.Drawing.Size(810, 150);
             this.totalsPanel.TabIndex = 14;
+            // 
+            // logButton
+            // 
+            this.logButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(120)))), ((int)(((byte)(116)))));
+            this.logButton.FlatAppearance.BorderSize = 0;
+            this.logButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.logButton.Image = global::RecipeCalCalcV3.Properties.Resources.log_file_format;
+            this.logButton.Location = new System.Drawing.Point(705, 10);
+            this.logButton.Name = "logButton";
+            this.logButton.Size = new System.Drawing.Size(100, 126);
+            this.logButton.TabIndex = 10;
+            this.logButton.UseVisualStyleBackColor = false;
+            this.logButton.Click += new System.EventHandler(this.logButton_Click);
             // 
             // panel6
             // 
@@ -745,19 +769,6 @@
             this.snacksIngredientPanel.Size = new System.Drawing.Size(400, 150);
             this.snacksIngredientPanel.TabIndex = 19;
             // 
-            // logButton
-            // 
-            this.logButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(120)))), ((int)(((byte)(116)))));
-            this.logButton.FlatAppearance.BorderSize = 0;
-            this.logButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.logButton.Image = global::RecipeCalCalcV3.Properties.Resources.log_file_format;
-            this.logButton.Location = new System.Drawing.Point(705, 10);
-            this.logButton.Name = "logButton";
-            this.logButton.Size = new System.Drawing.Size(100, 126);
-            this.logButton.TabIndex = 10;
-            this.logButton.UseVisualStyleBackColor = false;
-            this.logButton.Click += new System.EventHandler(this.logButton_Click);
-            // 
             // BuilderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -882,5 +893,6 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Button logButton;
+        private System.Windows.Forms.ComboBox cookwareCB;
     }
 }

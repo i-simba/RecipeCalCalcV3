@@ -45,6 +45,8 @@ namespace RecipeCalCalcV3.ChildForms
         private double portionCalculatedCal = 0.0;        // The calculated calories of the portion.
         private double portionAllCalories = 0.0;          // The calculated calories of the portion plus snack and base calories.
 
+        private int subtractedWeight = 0;                 // Stores the current subtracted weight. (Entered weight - cookware weight)
+
 
         /**********************************************************************************/
         /*                                  CONSTRUCTOR                                   */
@@ -65,6 +67,7 @@ namespace RecipeCalCalcV3.ChildForms
             basePanels = new List<Panel>();
             snackPanels = new List<Panel>();
             initButtons();
+            initCookwareCombo();
         }
 
 
@@ -248,6 +251,20 @@ namespace RecipeCalCalcV3.ChildForms
             return result;
         }
 
+        /**
+         * initCookwareCombo() function sets 'cookwareCB's DataSource to that of the created 'cookwares'
+         * list found within Program.
+         * The DisplayMember is set to the Cookware object's 'tipName' and
+         * the ValueMember is set to the Cookware object's 'weight'.
+         */
+        private void initCookwareCombo()
+        {
+            cookwareCB.DataSource = Program.cookwares;
+            cookwareCB.DisplayMember = "tipName";
+            cookwareCB.ValueMember = "weight";
+            cookwareCB.SelectedIndex = -1;
+        }
+
 
         /**********************************************************************************/
         /*                                 EXTERNAL USE                                   */
@@ -296,6 +313,8 @@ namespace RecipeCalCalcV3.ChildForms
 
             cookedWeightTB.Text = string.Empty;
             portionWeightTB.Text = string.Empty;
+            cookwareCB.SelectedIndex = -1;
+            subtractedWeight = 0;
 
             // Resets the values of each totals.
             resetValues();
@@ -674,6 +693,18 @@ namespace RecipeCalCalcV3.ChildForms
             {
                 if (!int.TryParse(cookedWeightTB.Text, out cookedWeight))
                     cookedWeight = 0;
+                else
+                {
+                    Console.WriteLine("\n" + cookedWeight + "\n" + subtractedWeight + "\n");
+                    if (subtractedWeight == cookedWeight) return;
+                    if (cookwareCB.SelectedIndex != -1)
+                    {
+                        int tempInt = cookedWeight - (int)cookwareCB.SelectedValue;
+                        cookedWeight = tempInt;
+                        cookedWeightTB.Text = cookedWeight.ToString();
+                        subtractedWeight = cookedWeight;
+                    }
+                }
             }
             else cookedWeight = 0;
             if (portionWeightTB.Text != string.Empty)
