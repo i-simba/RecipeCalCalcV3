@@ -700,6 +700,17 @@ namespace RecipeCalCalcV3.ChildForms
                     if (cookwareCB.SelectedIndex != -1)
                     {
                         int tempInt = cookedWeight - (int)cookwareCB.SelectedValue;
+                        if (tempInt == 0)
+                        {
+                            MessageBox.Show("Cooked weight cannot be ZERO!", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        else if (tempInt < 0)
+                        {
+                            MessageBox.Show("Cooked weight cannot be NEGATIVE!", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+
                         cookedWeight = tempInt;
                         cookedWeightTB.Text = cookedWeight.ToString();
                         subtractedWeight = cookedWeight;
@@ -711,6 +722,11 @@ namespace RecipeCalCalcV3.ChildForms
             {
                 if (!int.TryParse(portionWeightTB.Text, out portionWeight))
                     portionWeight = 0;
+                if (portionWeight > cookedWeight)
+                {
+                    MessageBox.Show("Portion weight cannot be LARGER than cooked weight!", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
             else portionWeight = 0;
             if (cookedWeight == 0 || portionWeight == 0)
