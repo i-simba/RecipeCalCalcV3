@@ -12,6 +12,7 @@ using System.Windows.Forms;
 
 /**
  * TODO ::
+ * #. Add cookware.
  * #. Display tips.
  */
 

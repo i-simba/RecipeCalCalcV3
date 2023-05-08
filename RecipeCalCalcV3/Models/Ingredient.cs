@@ -37,6 +37,12 @@ namespace RecipeCalCalcV3.Models
 
         private Image img;               // Associated image file for ingredient.
 
+
+        /**********************************************************************************/
+        /*                                  CONSTRUCTOR                                   */
+        /**********************************************************************************/
+
+
         /**
          * Constructor - Default.
          */
@@ -75,6 +81,12 @@ namespace RecipeCalCalcV3.Models
             this.enteredWeight = 0;
         }
 
+
+        /**********************************************************************************/
+        /*                                 EXTERNAL USE                                   */
+        /**********************************************************************************/
+
+
         /**
          * toString() function returns the string representation of ingredient object.
          * 
@@ -110,6 +122,12 @@ namespace RecipeCalCalcV3.Models
             this.type = null;
             this.img = null;
         }
+
+
+        /**********************************************************************************/
+        /*                                SETTERS/GETTERS                                 */
+        /**********************************************************************************/
+
 
         /**
          * Getter for 'name'.
