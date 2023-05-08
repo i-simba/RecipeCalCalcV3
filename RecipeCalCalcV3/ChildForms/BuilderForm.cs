@@ -113,6 +113,7 @@ namespace RecipeCalCalcV3.ChildForms
                 temp.Image = ing.getImage();
                 temp.Width = 64;
                 temp.Height = 64;
+                temp.Cursor = Cursors.Hand;
                 temp.Click += new EventHandler(button_Click);
 
                 // ToolTip used to show user the name of the ingredient.
@@ -790,7 +791,14 @@ namespace RecipeCalCalcV3.ChildForms
             // Error trap - Cannot log before calculating.
             if (totalCalTB.Text.Equals(string.Empty) || totalCalTB.Text.Equals("0"))
             {
-                MessageBox.Show("No data to log! Make sure to calculate first!", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error );
+                MessageBox.Show("No data to log! Make sure to CALCULATE first!", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error );
+                return;
+            }
+
+            // Error trap - If no ingredient is present.
+            if (ingPanels.Count == 0)
+            {
+                MessageBox.Show("No data to log! No INGREDIENTS added!", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

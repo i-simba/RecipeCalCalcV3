@@ -225,11 +225,21 @@ namespace RecipeCalCalcV3
         }
 
         /**
-         * TODO:
+         * resetRebuildCookwares() function clears and resets all Cookwares within the 'cookwares' list.
+         * It first calls 'cleanUp()' and assign each Cookware object to null, then calls 'Clear()' on the list.
+         * Lastly, 'initCookwares()' is called to re-add all Cookwares to the list to include newly added cookwares.
          */
         public static void resetRebuildCookwares()
         {
-            // TODO
+            // cleanUp() and assign each element to 'null'.
+            for (int i = 0; i < cookwares.Count; i++)
+            {
+                cookwares[i].cleanUp();
+                cookwares[i] = null;
+            }
+            cookwares.Clear();
+
+            initCookwares(cookwaresPath);    // Add 'Cookwares' to list.
         }
 
         /**

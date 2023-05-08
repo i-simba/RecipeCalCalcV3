@@ -86,6 +86,7 @@
             // loadButton
             // 
             this.loadButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(92)))), ((int)(((byte)(69)))));
+            this.loadButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.loadButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.loadButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loadButton.ForeColor = System.Drawing.SystemColors.Control;

@@ -52,6 +52,7 @@
             // addIngredientButton
             // 
             this.addIngredientButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(92)))), ((int)(((byte)(69)))));
+            this.addIngredientButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.addIngredientButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.addIngredientButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addIngredientButton.ForeColor = System.Drawing.SystemColors.Control;

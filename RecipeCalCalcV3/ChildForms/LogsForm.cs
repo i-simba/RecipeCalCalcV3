@@ -474,6 +474,8 @@ namespace RecipeCalCalcV3.ChildForms
                     FlowLayoutPanel temp = null;
                     logFLP.TryGetValue(button.Text, out temp);
                     ingredientDataPanel.Controls.Add(temp);
+
+                    selected = button.Text;
                 }
                 else
                 {
@@ -516,7 +518,6 @@ namespace RecipeCalCalcV3.ChildForms
             if (logList.TryGetValue(logName, out temp))
             {
                 temp.setIsClicked(true);
-                selected = logName;
             }
 
             rName.Text = temp.getRecipeName();
@@ -742,7 +743,7 @@ namespace RecipeCalCalcV3.ChildForms
             }
 
             // Set main title's Text to recipe name.
-            main.setTitle(rName.Text);
+            main.setTitle(log.getRecipeName());
         }
 
 
