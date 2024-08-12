@@ -696,7 +696,6 @@ namespace RecipeCalCalcV3.ChildForms
                     cookedWeight = 0;
                 else
                 {
-                    Console.WriteLine("\n" + cookedWeight + "\n" + subtractedWeight + "\n");
                     if (subtractedWeight == cookedWeight) return;
                     if (cookwareCB.SelectedIndex != -1)
                     {

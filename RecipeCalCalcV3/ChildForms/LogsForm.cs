@@ -37,7 +37,8 @@ namespace RecipeCalCalcV3.ChildForms
         private MainForm main = null;                                 // MainFrom object.
         private BuilderForm bForm = null;                             // BuilderForm object.
 
-        private Dictionary<String, FlowLayoutPanel> logFLP = null;    // Dictionary of FlowLayoutPanels keyed by their log name. (date)
+        private Dictionary<String, FlowLayoutPanel> logFLP = null;    // Dictionary of FlowLayoutPanels keyed by their log name, used for Calorie Breakdown. (date)
+        private Dictionary<String, FlowLayoutPanel> porFLP = null;    // Dictionary of FlowLayoutPanels keyed by their log name, used for Portioned Ingredients. (date)
         private Dictionary<String, Log> logList = null;               // Dictionary of logs keyed by their log name. (date)
         private String selected = null;                               // String denoting which log is currently selected.
         private List<Button> logButtons = null;                       // List of buttons dynamically created containing logs.
@@ -72,6 +73,7 @@ namespace RecipeCalCalcV3.ChildForms
             basePanels = new List<Panel>();
             snackPanels = new List<Panel>();
             logFLP = new Dictionary<String, FlowLayoutPanel>();
+            porFLP = new Dictionary<string, FlowLayoutPanel>();
 
             // Initialize logs
             initLogs();
@@ -226,6 +228,7 @@ namespace RecipeCalCalcV3.ChildForms
             foreach (String str in logNames)
             {
                 logFLP.Add(str, buildFlowPanel(str));
+                porFLP.Add(str, buildPorPanel(str));
             }
         }
 
@@ -327,7 +330,7 @@ namespace RecipeCalCalcV3.ChildForms
             temp.Cursor = System.Windows.Forms.Cursors.Hand;
             temp.ForeColor = System.Drawing.Color.White;
             temp.Location = new System.Drawing.Point(0);
-            temp.Size = new System.Drawing.Size(304, 50);
+            temp.Size = new System.Drawing.Size(285, 50);
             temp.Dock = DockStyle.Top;
             temp.Text = n;
             temp.Click += new EventHandler(button_Click);
@@ -449,6 +452,7 @@ namespace RecipeCalCalcV3.ChildForms
             basePanels.Clear();
             snackPanels.Clear();
             logFLP.Clear();
+            porFLP.Clear();
             initLogs();
         }
 
@@ -465,6 +469,7 @@ namespace RecipeCalCalcV3.ChildForms
         public void button_Click(object sender, EventArgs e)
         {
             ingredientDataPanel.Controls.Clear();
+            ingredientPortionedPanel.Controls.Clear();
             foreach (Button button in  logButtons)
             {
                 if (sender == button)
@@ -472,9 +477,12 @@ namespace RecipeCalCalcV3.ChildForms
                     // Set selected button's color to a darker shade to denote it is selected.
                     button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(113)))), ((int)(((byte)(108)))));
                     FlowLayoutPanel temp = null;
+                    FlowLayoutPanel por = null;
                     logFLP.TryGetValue(button.Text, out temp);
+                    porFLP.TryGetValue(button.Text, out por);
                     ingredientDataPanel.Controls.Add(temp);
-
+                    ingredientPortionedPanel.Controls.Add(por);
+                    
                     selected = button.Text;
                 }
                 else
@@ -497,10 +505,14 @@ namespace RecipeCalCalcV3.ChildForms
         {
             FlowLayoutPanel flp = new FlowLayoutPanel();
             flp.Size = ingredientDataPanel.Size;
+            flp.AutoScroll = false;
+            flp.HorizontalScroll.Maximum = 0;
+            flp.AutoScroll = false;
+            flp.VerticalScroll.Visible = false;
+            flp.AutoScroll = true;
 
             // Reset.
             ingredientDataPanel.Controls.Clear();
-            ingredientMacroPanel.Controls.Clear();
             initCalorieBreakdown(flp);
             entrePanels.Clear();
             basePanels.Clear();
@@ -519,7 +531,7 @@ namespace RecipeCalCalcV3.ChildForms
             {
                 temp.setIsClicked(true);
             }
-
+            
             rName.Text = temp.getRecipeName();
             eWeight.Text = temp.getTotalIngWeight().ToString() + "g";
             tCal.Text = temp.getTotalCalories().ToString("F2") + " cal";
@@ -676,7 +688,7 @@ namespace RecipeCalCalcV3.ChildForms
                 porSep = initSeparatorPanel(porSep, 5, 20);
 
                 Panel cookedWeight = new Panel();
-                cookedWeight = initIngredientTotals(cookedWeight, "Cooked Weight", temp.getCookedWeight().ToString(), temp.getTotalCalories().ToString("F2"), INGREDIENT);
+                cookedWeight = initIngredientTotals(cookedWeight, "Cooked Weight", temp.getCookedWeight().ToString(), temp.getEntreCalories().ToString("F2"), INGREDIENT);
                 Panel portionWeight = new Panel();
                 portionWeight = initIngredientTotals(portionWeight, "Portion Weight", temp.getPortionWeight().ToString(), temp.getPortionCalories().ToString("F2"), INGREDIENT);
                 Panel portionedPanel = new Panel();
@@ -693,6 +705,151 @@ namespace RecipeCalCalcV3.ChildForms
                 Panel singlePortionPanel = new Panel();
                 singlePortionPanel = initIngredientTotals(singlePortionPanel, "Single Portion Calories", "", temp.getTotalCalories().ToString("F2"), PORTIONED);
                 flp.Controls.Add(singlePortionPanel);
+            }
+
+            return flp;
+        }
+
+        /**
+         * 
+         */
+        private FlowLayoutPanel buildPorPanel(String logName)
+        {
+            FlowLayoutPanel flp = new FlowLayoutPanel();
+            flp.Size = ingredientPortionedPanel.Size;
+            flp.AutoScroll = false;
+            flp.HorizontalScroll.Maximum = 0;
+            flp.AutoScroll = false;
+            flp.VerticalScroll.Visible = false;
+            flp.AutoScroll = true;
+
+            List<Panel> enPane = new List<Panel>();
+            List<Panel> bsPane = new List<Panel>();
+            List<Panel> snPane = new List<Panel>();
+
+            // Reset.
+            ingredientPortionedPanel.Controls.Clear();
+            enPane.Clear();
+            bsPane.Clear();
+            snPane.Clear();
+
+            // Set 'isClicked' values of all logs to 'false'.
+            foreach (KeyValuePair<String, Log> log in logList)
+            {
+                Log foo = log.Value;
+                foo.setIsClicked(false);
+            }
+
+            // Set the selected log's 'isClicked' value to 'true'.
+            Log temp = null;
+            if (logList.TryGetValue(logName, out temp))
+            {
+                temp.setIsClicked(true);
+            }
+            
+            foreach (Ingredient ing in temp.getIngredientList())
+            {
+                double calories = 0.0;
+                double weight = 0.0;
+
+                if (ing.getCourse() == 1)
+                {
+                    calories = (temp.getPortionCalories() * ing.getCalculatedCal()) / temp.getEntreCalories();
+                    weight = (ing.getEnteredWeight() * calories) / ing.getCalculatedCal();
+                }
+                else
+                {
+                    calories = ing.getCalculatedCal();
+                    weight = ing.getEnteredWeight();
+                }
+
+                Panel container = new Panel();
+                container.Margin = new System.Windows.Forms.Padding(40, 3, 3, 3);
+                container.Name = "container";
+                container.Size = new System.Drawing.Size(335, 20);
+
+                Label ingName = new Label();
+                ingName.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                ingName.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+                ingName.Location = new System.Drawing.Point(0, 0);
+                ingName.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+                ingName.Name = "ingName";
+                ingName.Size = new System.Drawing.Size(185, 20);
+                ingName.Text = ing.getTipName();
+                ingName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+
+                Label ingWeight = new Label();
+                ingWeight.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                ingWeight.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+                ingWeight.Location = new System.Drawing.Point(165, 0);
+                ingWeight.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+                ingWeight.Name = "ingWeight";
+                ingWeight.Size = new System.Drawing.Size(70, 20);
+                ingWeight.Text = weight.ToString("F2") + "g";
+                ingWeight.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+
+                Label ingCalories = new Label();
+                ingCalories.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                ingCalories.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+                ingCalories.Location = new System.Drawing.Point(235, 0);
+                ingCalories.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+                ingCalories.Name = "ingCalories";
+                ingCalories.Size = new System.Drawing.Size(90, 20);
+                ingCalories.Text = calories.ToString("F2") + " cal";
+                ingCalories.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+
+                container.Controls.Add(ingName);
+                container.Controls.Add(ingWeight);
+                container.Controls.Add(ingCalories);
+                
+                switch (ing.getCourse())
+                {
+                    case 1:
+                        enPane.Add(container);
+                        break;
+                    case 2:
+                        bsPane.Add(container);
+                        break;
+                    case 3:
+                        snPane.Add(container);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            Label pC = new Label();
+            pC.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            pC.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            pC.Location = new System.Drawing.Point(3, 0);
+            pC.Name = "label2";
+            pC.Size = new System.Drawing.Size(397, 50);
+            pC.TabIndex = 0;
+            pC.Text = "PORTIONED CALORIES";
+            pC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+
+            Panel miniSep = new Panel();
+            miniSep = initSeparatorPanel(miniSep, 5, 3);
+            Panel miniSep2 = new Panel();
+            miniSep2 = initSeparatorPanel(miniSep2, 2, 3);
+            Panel miniSep3 = new Panel();
+            miniSep3 = initSeparatorPanel(miniSep3, 2, 3);
+
+            flp.Controls.Add(pC);
+            flp.Controls.Add(miniSep);
+            foreach (Panel panel in enPane)
+            {
+                flp.Controls.Add(panel);
+            }
+            flp.Controls.Add(miniSep2);
+            foreach (Panel panel in bsPane)
+            {
+                flp.Controls.Add(panel);
+            }
+            flp.Controls.Add(miniSep3);
+            foreach (Panel panel in snPane)
+            {
+                flp.Controls.Add(panel);
             }
 
             return flp;
