@@ -257,6 +257,7 @@
             // saveButton
             // 
             this.saveButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(143)))), ((int)(((byte)(138)))));
+            this.saveButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saveButton.ForeColor = System.Drawing.SystemColors.Control;
@@ -331,6 +332,7 @@
             // calculateButton
             // 
             this.calculateButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(132)))), ((int)(((byte)(89)))));
+            this.calculateButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.calculateButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.calculateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.calculateButton.ForeColor = System.Drawing.SystemColors.Control;
@@ -345,6 +347,7 @@
             // resetButton
             // 
             this.resetButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(82)))), ((int)(((byte)(51)))));
+            this.resetButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.resetButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.resetButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.resetButton.ForeColor = System.Drawing.SystemColors.Control;
@@ -378,6 +381,7 @@
             // logButton
             // 
             this.logButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(120)))), ((int)(((byte)(116)))));
+            this.logButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.logButton.FlatAppearance.BorderSize = 0;
             this.logButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.logButton.Image = global::RecipeCalCalcV3.Properties.Resources.log_file_format;

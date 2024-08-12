@@ -32,7 +32,7 @@ namespace RecipeCalCalcV3
         private const int BUILDER = 2;
 
         // List of buttons dynamically created containing saved recipes.
-        private List<Button> ingButtons = null;
+        private List<Button> savedButtons = null;
 
         // List of ingredients assigned from loaded recipe.
         private List<List<String>> ingLists = null;
@@ -72,7 +72,7 @@ namespace RecipeCalCalcV3
             bForm = (BuilderForm)childForms[BUILDER];
 
             // Initialize buttons list.
-            ingButtons = new List<Button>();
+            savedButtons = new List<Button>();
 
             // Initialize ingredient lists.
             ingLists = new List<List<String>>();
@@ -158,10 +158,11 @@ namespace RecipeCalCalcV3
             temp.Dock = DockStyle.Top;
             temp.Text = n;
             temp.Tag = i;
+            temp.Cursor = Cursors.Hand;
             temp.Click += new EventHandler(button_Click);
 
             savedPanel.Controls.Add(temp);
-            ingButtons.Add(temp);
+            savedButtons.Add(temp);
         }
 
         /**
@@ -188,7 +189,7 @@ namespace RecipeCalCalcV3
 
 
         /**
-         * button_Click() function listens for click events from buttons inside 'ingButtons'.
+         * button_Click() function listens for click events from buttons inside 'savedButtons'.
          * This function utilizes the button list present inside BuilderForm and compare the ingredient name
          * to that list's button name.
          * If the strings match, the matched button will be clicked.
@@ -199,7 +200,7 @@ namespace RecipeCalCalcV3
             List<Button> tempBL = bForm.getIngredientButtons();
             bForm.reset();
 
-            foreach (Button button in ingButtons)
+            foreach (Button button in savedButtons)
             {
                 if (sender != button) continue;
                 titleTextBox.Text = button.Text;
@@ -223,6 +224,8 @@ namespace RecipeCalCalcV3
         {
             titleTextBox.Text = "HOME";
             activateForm(childForms[HOME]);
+            if (isSavedExpanded)
+                savedPanelTimer.Start();
         }
 
         /**
@@ -242,6 +245,8 @@ namespace RecipeCalCalcV3
             }
             titleTextBox.Text = "LOGS";
             activateForm(childForms[LOGS]);
+            if (isSavedExpanded)
+                savedPanelTimer.Start();
         }
 
         /**
@@ -255,6 +260,8 @@ namespace RecipeCalCalcV3
             titleTextBox.Text = "BUILDER";
             bForm.reset();
             activateForm(childForms[BUILDER]);
+            if (isSavedExpanded)
+                savedPanelTimer.Start();
         }
 
         /**
@@ -325,5 +332,6 @@ namespace RecipeCalCalcV3
         {
             titleTextBox.Text = t;
         }
+
     }
 }

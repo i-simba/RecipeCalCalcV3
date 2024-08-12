@@ -37,16 +37,16 @@
             this.viewLogsButton = new System.Windows.Forms.Button();
             this.homeButton = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.titleTextBox = new System.Windows.Forms.Label();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.savedPanelTimer = new System.Windows.Forms.Timer(this.components);
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.mainButtonPanel.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -85,6 +85,7 @@
             // savedButton
             // 
             this.savedButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(85)))), ((int)(((byte)(71)))));
+            this.savedButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.savedButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.savedButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(121)))), ((int)(((byte)(102)))));
             this.savedButton.FlatAppearance.BorderSize = 3;
@@ -102,6 +103,7 @@
             // builderButton
             // 
             this.builderButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(85)))), ((int)(((byte)(71)))));
+            this.builderButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.builderButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.builderButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(121)))), ((int)(((byte)(102)))));
             this.builderButton.FlatAppearance.BorderSize = 3;
@@ -119,6 +121,7 @@
             // viewLogsButton
             // 
             this.viewLogsButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(85)))), ((int)(((byte)(71)))));
+            this.viewLogsButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.viewLogsButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.viewLogsButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(121)))), ((int)(((byte)(102)))));
             this.viewLogsButton.FlatAppearance.BorderSize = 3;
@@ -136,6 +139,7 @@
             // homeButton
             // 
             this.homeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(85)))), ((int)(((byte)(71)))));
+            this.homeButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.homeButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.homeButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(121)))), ((int)(((byte)(102)))));
             this.homeButton.FlatAppearance.BorderSize = 3;
@@ -158,6 +162,15 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(140, 140);
             this.panel3.TabIndex = 0;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::RecipeCalCalcV3.Properties.Resources.calories;
+            this.pictureBox1.Location = new System.Drawing.Point(6, 6);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(128, 128);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // panel2
             // 
@@ -194,15 +207,6 @@
             this.savedPanelTimer.Interval = 10;
             this.savedPanelTimer.Tick += new System.EventHandler(this.savedPanelTimer_Tick);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::RecipeCalCalcV3.Properties.Resources.calories;
-            this.pictureBox1.Location = new System.Drawing.Point(6, 6);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(128, 128);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -221,8 +225,8 @@
             this.panel1.ResumeLayout(false);
             this.mainButtonPanel.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

@@ -41,6 +41,7 @@
             // cancelButton
             // 
             this.cancelButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(91)))), ((int)(((byte)(102)))), ((int)(((byte)(89)))));
+            this.cancelButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelButton.ForeColor = System.Drawing.SystemColors.Control;
@@ -55,6 +56,7 @@
             // okButton
             // 
             this.okButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(131)))), ((int)(((byte)(142)))), ((int)(((byte)(129)))));
+            this.okButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.okButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.okButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.okButton.ForeColor = System.Drawing.SystemColors.Control;
@@ -132,6 +134,7 @@
             // addPicButton
             // 
             this.addPicButton.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.addPicButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.addPicButton.FlatAppearance.BorderSize = 0;
             this.addPicButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.addPicButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -157,7 +160,7 @@
             this.Controls.Add(this.ingNameTB);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.cancelButton);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AddIngredient";

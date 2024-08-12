@@ -32,7 +32,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.ingredientDataPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.ingredientMacroPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.ingredientPortionedPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.loadButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -75,17 +75,18 @@
             this.ingredientDataPanel.Size = new System.Drawing.Size(400, 835);
             this.ingredientDataPanel.TabIndex = 5;
             // 
-            // ingredientMacroPanel
+            // ingredientPortionedPanel
             // 
-            this.ingredientMacroPanel.BackColor = System.Drawing.SystemColors.Control;
-            this.ingredientMacroPanel.Location = new System.Drawing.Point(740, 5);
-            this.ingredientMacroPanel.Name = "ingredientMacroPanel";
-            this.ingredientMacroPanel.Size = new System.Drawing.Size(400, 835);
-            this.ingredientMacroPanel.TabIndex = 6;
+            this.ingredientPortionedPanel.BackColor = System.Drawing.SystemColors.Control;
+            this.ingredientPortionedPanel.Location = new System.Drawing.Point(740, 5);
+            this.ingredientPortionedPanel.Name = "ingredientPortionedPanel";
+            this.ingredientPortionedPanel.Size = new System.Drawing.Size(400, 835);
+            this.ingredientPortionedPanel.TabIndex = 6;
             // 
             // loadButton
             // 
             this.loadButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(92)))), ((int)(((byte)(69)))));
+            this.loadButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.loadButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.loadButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loadButton.ForeColor = System.Drawing.SystemColors.Control;
@@ -104,7 +105,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(221)))), ((int)(((byte)(217)))));
             this.ClientSize = new System.Drawing.Size(1150, 850);
             this.Controls.Add(this.loadButton);
-            this.Controls.Add(this.ingredientMacroPanel);
+            this.Controls.Add(this.ingredientPortionedPanel);
             this.Controls.Add(this.ingredientDataPanel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.logPanel);
@@ -121,7 +122,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FlowLayoutPanel ingredientDataPanel;
-        private System.Windows.Forms.FlowLayoutPanel ingredientMacroPanel;
+        private System.Windows.Forms.FlowLayoutPanel ingredientPortionedPanel;
         private System.Windows.Forms.Button loadButton;
     }
 }
