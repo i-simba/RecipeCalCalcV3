@@ -23,12 +23,15 @@ These include:\
 ## Logs
 View all added logs saved locally, and view the recipe's calorie breakdown.
 If the user enters a portion weight, the log will also display a different breakdown of calories based on the portion size.
+![uno](https://github.com/user-attachments/assets/3e60855e-23af-4272-878e-3013ab556f59)
 
 ## Builder
 This is where the user is able to add ingredients, enter their weight in grams, and calculate the calories.
 Totals will also be calculated and displayed.
 The user also has the option to save the entered recipe, or log the calculated values.
+![dos](https://github.com/user-attachments/assets/f315258b-73b1-4fb5-a163-f7cb28245425)
 
 ## Saved
 Clicking the "SAVED" button will display all saved recipes.
 Clicking on any recipe will open that recipe in builder, where the recipe name is displayed and all ingredients entered.
+![tres](https://github.com/user-attachments/assets/d71083af-a794-443e-9d2e-76eda207983a)
